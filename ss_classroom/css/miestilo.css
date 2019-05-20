@@ -1,0 +1,155 @@
+html,body {
+  height: 100%;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  border-style: none;
+}
+a:link {
+  text-decoration: none;
+}
+body {
+  overflow: hidden;
+}
+/* FONTS */
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('../assets/fonts/Comfortaa-Regular.ttf');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('../assets/fonts/Ubuntu-R.ttf');
+}
+@font-face {
+  font-family: 'Crayon-Hand';
+  src: url('../assets/fonts/CrayonHand.ttf');
+}
+.ubuntu {
+  font-family: 'Ubuntu';
+}
+.comfortaa {
+  font-family: 'Comfortaa';
+}
+.crayon-hand {
+  font-family: 'Crayon-Hand';
+}
+/* COLORES */
+:root {
+  --gray-black: #333;
+  --black-111: #111111;
+  --green-udc: #693;
+  --blue-loco: #00e6e6;
+  --green-loco: #66cc03;
+  --grey-light: rgb(216, 216, 216);
+  --grey-blue: rgb(188, 206, 221);
+}
+#error-login {
+  color:#f00;
+}
+._header {
+  height: 60px;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: fixed;
+  z-index: 10;
+}
+.titulo-crud {
+  color: white;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+.square-form-cx{
+  position: relative;
+  padding: 25px;
+  left: 50%;
+  transform: translate(-50%, 70%);
+  box-shadow: 0 5px 10px #000;
+  border-radius: 5px;
+}
+.form-index {
+  width: 270px;
+  /* height: 280px; */
+  color: white;
+  background-color: var(--black-111);
+}
+.input-form {
+  width: 100%;
+  height: 35px;
+  margin-bottom: .5rem;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.form-index input:focus, .form-registro input:focus {
+  border: 2px solid var(--blue-loco);
+  box-shadow: 0 0 10px var(--blue-loco);
+  outline: 0 none;
+}
+.form-btn-green {
+  margin-top: 20px;
+  color: white;
+  background-color: var(--green-udc);
+  transition: .1s ease-out;
+}
+.form-btn-green:hover {
+  border: 2px solid var(--green-loco);
+  box-shadow: 0 0 25px var(--green-loco);
+}
+.school-bg {
+  background-image: url(../assets/img/01.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+}
+
+[class*="h-mnsj-"] {
+  color: white;
+  position: absolute;
+}
+.h-mnsj-i {
+  top: 100px;
+}
+.form-index span, .form-registro span {
+  font-size: 14px;
+}
+/* CSS REGISTRO.PHP */
+.form-registro {
+  width: 300px;
+  height: 500px;
+  background-color: var(--gray-black);
+  transform: translate(-50%, 20%);
+  color: white;
+}
+.h-mnsj-r {
+  top: 50px;
+}
+
+/* ==== listaAlumnosAdmin.css ==== */
+.p-table-alumnos {
+  position: relative;
+}
+
+.table_d td, .table_d th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 2px solid var(--blue-loco);
+}
+.table-alumnos {
+  position: relative;
+  left: 0;
+  top: 30%;
+  padding: 25px;   
+}
+
+.thead-light_d {
+  background-color: var(--grey-light); 
+  color: var(--grey-black);
+}
+
+.table_d tbody {
+  background-color: var(--grey-light);
+}
