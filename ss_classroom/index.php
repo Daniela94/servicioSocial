@@ -1,7 +1,12 @@
 <?php
-  include_once 'config.php';
-  include_once 'inc/header.php';
+  include_once 'dev/config.path.php';
+  include_once (INC_PATH.'header.php');
 ?>
+<header class="_header flex">
+  <nav class="ubuntu flex center_y">
+    <!-- <h3 class="titulo-crud">CRUD</h3> -->
+  </nav>
+</header>
 
   <!-- SECTION 1 Formulario de ingreso -->
 <section class="school-bg">
@@ -53,5 +58,5 @@
 </script>
 
 <?php
-  include_once 'inc/footer.php';
+  include_once (INC_PATH.'footer.php');
 ?>

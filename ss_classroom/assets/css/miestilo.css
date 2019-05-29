@@ -16,15 +16,19 @@ body {
 /* FONTS */
 @font-face {
   font-family: 'Comfortaa';
-  src: url('../assets/fonts/Comfortaa-Regular.ttf');
+  src: url(../fonts/Comfortaa-Regular.ttf);
 }
 @font-face {
   font-family: 'Ubuntu';
-  src: url('../assets/fonts/Ubuntu-R.ttf');
+  src: url(../fonts/Ubuntu-R.ttf);
 }
 @font-face {
   font-family: 'Crayon-Hand';
-  src: url('../assets/fonts/CrayonHand.ttf');
+  src: url(../fonts/CrayonHand.ttf);
+}
+@font-face {
+  font-family: 'Merge-Pro-Condensed-Bold';
+  src: url(../fonts/Merge-Pro-Condensed-Bold.ttf)
 }
 .ubuntu {
   font-family: 'Ubuntu';
@@ -34,6 +38,9 @@ body {
 }
 .crayon-hand {
   font-family: 'Crayon-Hand';
+}
+.merge-pro-cb {
+  font-family: 'Merge-Pro-Condensed-Bold';
 }
 /* COLORES */
 :root {
@@ -99,7 +106,7 @@ body {
   box-shadow: 0 0 25px var(--green-loco);
 }
 .school-bg {
-  background-image: url(../assets/img/01.jpg);
+  background-image: url(../img/01.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -132,7 +139,6 @@ body {
 .p-table-alumnos {
   position: relative;
 }
-
 .table_d td, .table_d th {
   padding: .75rem;
   vertical-align: top;
@@ -144,12 +150,35 @@ body {
   top: 30%;
   padding: 25px;   
 }
-
 .thead-light_d {
   background-color: var(--grey-light); 
   color: var(--grey-black);
 }
-
 .table_d tbody {
   background-color: var(--grey-light);
+}
+.hw-100 {
+  height: 100%;
+  width: 100%;
+}
+.navbar-light {
+  background-color: var(--grey-light);
+  padding: 5px 10px;
+}
+.navbar-light ul {
+  margin: 0;
+  padding: 0;
+}
+.h-title {
+  font-family: 'Merge-Pro-Condensed-Bold';
+}
+
+/* ==== adminView.php ==== */
+.img-bg-personas {
+  background-image: url(../img/personas.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+  z-index: -10;
 }

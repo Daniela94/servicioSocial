@@ -1,6 +1,12 @@
 <?php
-  include_once 'inc/header.php'
+  include_once 'dev/config.path.php'; //Ruta relativa
+  include_once (INC_PATH.'header.php');
 ?>
+<header class="_header flex">
+  <nav class="ubuntu flex center_y">
+    <!-- <h3 class="titulo-crud">CRUD</h3> -->
+  </nav>
+</header>
 
 <section class="section-form school-bg">
   <div class="flex center_x">
@@ -25,5 +31,6 @@
 </section>
 
 <?php
-  include_once 'inc/footer.php'
+  include_once 'dev/config.path.php'; //Ruta relativa
+  include_once (INC_PATH.'inc/footer.php');
 ?>

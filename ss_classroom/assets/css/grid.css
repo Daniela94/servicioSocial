@@ -7,7 +7,7 @@
 .center_x {
   justify-content: center;
 }
-.center {
+.center_xy {
   align-items: center;
   justify-content: center;
 }
@@ -21,4 +21,8 @@
 }
 .column {
   flex-direction: column;
+}
+.flex-center_x {
+  display: flex;
+  justify-content: center;
 }
