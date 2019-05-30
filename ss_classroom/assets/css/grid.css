@@ -22,7 +22,17 @@
 .column {
   flex-direction: column;
 }
+.left {
+  justify-content: flex-start;
+}
+.right {
+  justify-content: flex-end;
+}
 .flex-center_x {
   display: flex;
   justify-content: center;
+}
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
 }
