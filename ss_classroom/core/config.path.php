@@ -29,13 +29,16 @@ defined('DS') ? NULL : define('DS', DIRECTORY_SEPARATOR);
 defined('SITE_ROOT') ? NULL : define('SITE_ROOT', dirname(dirname(__FILE__)).DS);
 
 // Define absolute path to includes
-defined('INC_PATH') ? NULL : define('INC_PATH', SITE_ROOT.'inc'.DS);
 defined('DEV_PATH') ? NULL : define('DEV_PATH', SITE_ROOT.'dev'.DS);
 defined('MODEL_PATH') ? NULL : define('MODEL_PATH', DEV_PATH.'models'.DS);
-defined('CONTROLLER_PATH') ? NULL : define('CONTROLLER_PATH', DEV_PATH.'controllers'.DS);
 defined('VIEW_PATH') ? NULL : define('VIEW_PATH', DEV_PATH.'views'.DS);
+defined('CONTROLLER_PATH') ? NULL : define('CONTROLLER_PATH', DEV_PATH.'controllers'.DS);
+defined('MODULES_PATH') ? NULL : define('MODULES_PATH',VIEW_PATH.'modules'.DS);
 // echo MODEL_PATH;
 
 // BASE URL
 $dir = "servicioSocial/ss_classroom/";
 $base_url = "http://www.phantom.com/".$dir;
+
+// VIEWS URL
+$dir_views = $base_url."dev/views/";
