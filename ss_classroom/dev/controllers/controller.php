@@ -4,7 +4,10 @@
     
     // LLAMADA A LA PÁGINA LOGIN
     public function loginPage() {
-      include (VIEW_PATH.'login.php'); 
+      include (VIEW_PATH.'login.php');
+      // echo VIEW_PATH;
+      // echo "hola";
+
     }
 
     // INTERACCIÓN DEL ADMIN CON LA PÁGINA

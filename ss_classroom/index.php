@@ -5,5 +5,6 @@
 
   $mvc = new Controller();
   $mvc -> loginPage();
+  // echo $dir_views; 
 
 ?>

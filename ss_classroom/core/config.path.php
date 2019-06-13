@@ -35,10 +35,8 @@ defined('VIEW_PATH') ? NULL : define('VIEW_PATH', DEV_PATH.'views'.DS);
 defined('CONTROLLER_PATH') ? NULL : define('CONTROLLER_PATH', DEV_PATH.'controllers'.DS);
 defined('MODULES_PATH') ? NULL : define('MODULES_PATH',VIEW_PATH.'modules'.DS);
 // echo MODEL_PATH;
+defined('DIR_VIEWS') ? NULL : define('DIR_VIEWS','http://www.phantom.com/servicioSocial/ss_classroom/dev/views'.DS);
 
 // BASE URL
 $dir = "servicioSocial/ss_classroom/";
 $base_url = "http://www.phantom.com/".$dir;
-
-// VIEWS URL
-$dir_views = $base_url."dev/views/";
