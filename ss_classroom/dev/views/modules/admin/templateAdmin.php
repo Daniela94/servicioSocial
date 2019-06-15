@@ -2,7 +2,9 @@
   include_once '../../../../core/config.path.php';
   include_once (MODULES_PATH.'head.php');
   require_once CONTROLLER_PATH.'controller.php';
-  require_once MODEL_PATH.'model.php';
+  require_once MODEL_PATH.'enlacesAdmin.php';
+  require_once MODEL_PATH.'conexion.php';
+  require_once MODEL_PATH.'crud.php';
 ?>
 <div class="img-bg"></div>
 <header class="Header navbar-blue-light">
@@ -16,6 +18,9 @@
     </ul>
   </nav>
   <span class="user-txt">Admin</span>
+  <a href="<?php echo DIR_ROOT.'index.php';?>">
+    <i class="fas fa-sign-out-alt"></i>
+  </a>
 </header>
 
 <section class="container">

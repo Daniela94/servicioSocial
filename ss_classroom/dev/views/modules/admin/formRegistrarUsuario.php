@@ -13,8 +13,18 @@
     </div>
     <div class="row">
       <div class="col">
+        <label for="">Número de cuenta</label>
+        <input type="" name="numero_cuenta" class="input-form">
+      </div>
+      <div class="col">
+        <label for="">Email</label>
+        <input type="email" name="email" class="input-form">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
         <label for="">Contraseña</label>
-        <input type="password" name="password" class="input-form">
+        <input type="password" class="input-form">
       </div>
       <div class="col">
         <label for="">Confirmar contraseña</label>
@@ -23,18 +33,25 @@
     </div>
     <div class="row">
       <div class="col">
-        <label for="">Email</label>
-        <input type="text" name="direccion" class="input-form">
-      </div>
-      <div class="col">
         <label for="">Rol</label>
-        <select name="" id="" class="input-form">Tipo de usuario
-          <option value="">Profesor</option>
-          <option value="">Estudiante</option>
-          <option value="">Administrador</option>
+        <select name="rol" class="input-form">Tipo de usuario
+          <option value="1">Administrador</option>
+          <option value="2">Profesor</option>
+          <option value="3">Estudiante</option>
         </select>
       </div>
     </div>
-    <input type="submit" value="Registrar" class="input-form form-btn-green">
+    <input type="submit" name="enviar" value="Registrar" class="input-form form-btn-green">
   </form>
+
 </div>
+<br>
+<br>
+<br>
+<br>
+
+
+<?php 
+  $registro = new Controller();
+  $registro -> registrarUsuarioController();
+?>

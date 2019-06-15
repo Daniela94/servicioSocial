@@ -29,6 +29,7 @@ defined('DS') ? NULL : define('DS', DIRECTORY_SEPARATOR);
 defined('SITE_ROOT') ? NULL : define('SITE_ROOT', dirname(dirname(__FILE__)).DS);
 
 // Define absolute path to includes
+defined('DIR_ROOT') ? NULL : define('DIR_ROOT','http://www.phantom.com/servicioSocial/ss_classroom'.DS);
 defined('DEV_PATH') ? NULL : define('DEV_PATH', SITE_ROOT.'dev'.DS);
 defined('MODEL_PATH') ? NULL : define('MODEL_PATH', DEV_PATH.'models'.DS);
 defined('VIEW_PATH') ? NULL : define('VIEW_PATH', DEV_PATH.'views'.DS);

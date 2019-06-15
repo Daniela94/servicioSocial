@@ -1,4 +1,6 @@
 <?php
+  # ENLACES TEMPLATE ADMIN
+  # -----------------------------------------
   class EnlacesVistasAdmin {
     public function enlacesVistasAdminModel($enlacesModel) {
       // Vamos a pedirle que valide
