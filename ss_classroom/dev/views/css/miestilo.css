@@ -391,3 +391,7 @@ body {
   font-style: italic;
   color: gray;
 }
+.user-txt {
+  margin-left: 5px;
+  margin-right: 5px;
+}

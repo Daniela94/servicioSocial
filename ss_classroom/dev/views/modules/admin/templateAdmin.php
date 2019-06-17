@@ -17,7 +17,7 @@
       <li><a href="templateAdmin.php?action=formRegistrarUsuario">Agregar usuario</a></li>
     </ul>
   </nav>
-  <span class="user-txt">Admin</span>
+  <span class="user-txt">Admin </span>
   <a href="<?php echo DIR_ROOT.'index.php';?>">
     <i class="fas fa-sign-out-alt"></i>
   </a>
