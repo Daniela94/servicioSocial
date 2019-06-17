@@ -1,4 +1,5 @@
 <div class="hw-1"></div>
+<h4 class="h-subtitle">REGISTRAR USUARIO</h4>
 <div class="square-form-cx form-registro ubuntu">
   <form action="" method="POST">
     <div class="row">

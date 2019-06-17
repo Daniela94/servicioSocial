@@ -32,8 +32,7 @@
     public function registrarUsuarioController() {
 
       if (isset($_POST['enviar'])) {
-
-        // recibir el POST
+        // recibir el POST en un array
         $datosController = array( "nombre"=>$_POST['nombre'],
                                   "apellidos"=>$_POST['apellidos'],
                                   "numero_cuenta"=>$_POST['numero_cuenta'], 
@@ -48,6 +47,27 @@
         echo $respuesta;
         // echo 'Entra';
       }
+    }
+    // Validar login del usuario
+    // -------------------------------------
+    public function validarLoginUsuario() {
+      print_r($_POST);
+      $usuario = $_POST['usuario'];
+      $password = $_POST['password'];
+      $respuesta = Crud::loginUsuario($usuario,$password);
+      if($respuesta !== FALSE) {
+        var_dump($respuesta);
+        if($respuesta['id_rol'] == 1){
+          header('location:'.$base_url.'views/modules/admin/templateAdmin.php');
+        }else if($respuesta['id_rol'] == 2){
+
+        }else if($respuesta['id_rol'] == 3){
+
+        }
+      }else{
+        echo "No existe";  
+      }
+      
     }
   }
 

@@ -12,14 +12,14 @@
   <div class="flex center_x">
     <h2 class="h-mnsj-i crayon-hand">Bienvenido(a) al sistema</h2>
   </div>
-  <div class="square-form-cx form-index ubuntu">
-    <form id="form-login">
+  <div class="square-form-login form-index ubuntu">
+    <form id="form-login" action="./dev/validarLogin.php" method="POST">
       <label for="">Número de cuenta / Correo</label>
       <input type="text" name="usuario" id="" class="input-form">
       <label for="password">Contraseña</label>
       <input type="password" name="password" class="input-form">
       <!-- Botón -->
-      <button type="button" id="btn-login" class="input-form form-btn-green">Iniciar sesión</button>
+      <button type="submit" class="input-form form-btn-green" name="entrar">Iniciar sesión</button>
       <label id="error-login"></label>
       <!-- <span>¿No tienes cuenta? <a href="registro.php">Regístrate aquí</a></span> -->
     </form>
@@ -27,34 +27,7 @@
 </section>
 <!-- / SECTION 1 Formulario de ingreso -->
 
-<script>
-  $("#btn-login").click(function(event) {
-    event.preventDefault();
-    var formulario = document.getElementById("form-login");
-    var formData = new FormData(formulario);
-    var errorLogin = document.getElementById("error-login");
-    console.log(formulario.elements);
-    if (formulario.elements[0].value == ""){
-      errorLogin.innerHTML = "El correo / usuario es requerido";
-      return 0;
-    }
-    if (formulario.elements[1].value == ""){
-      errorLogin.innerHTML = "La contraseña es requerida";
-      return 0;
-    }
 
-    $.ajax({
-      url: 'login.php',
-      data: formData,
-      type: 'POST',
-      contentType: false,
-      processData: false,
-      success: function(ans){
-        console.log(ans);
-      }
-    })
-  })
-</script>
 <?php
   include_once (MODULES_PATH.'footer.php');
 ?>

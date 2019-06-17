@@ -10,9 +10,9 @@
     private $email;
     private $password;
     private $rol;
-    protected $cnx;
 
-    // Registro de usuarios
+    // Constructor
+    // -------------------------------------------------
     public function __construct($datosModel) {
       $this->nombre = $datosModel['nombre'];
       $this->apellidos = $datosModel['apellidos'];
@@ -26,10 +26,11 @@
       $this->rol = $datosModel['rol'];
       parent::conectar();
     }
-    public function conectar() {
-      $this->cnx = parent::conectar();
-    }
+    // Método para agregar usuario
+    // --------------------------------------------
     public function registrarUsuarioModel() {
+      // var_dump(parent::getCnx());
+      // die();
       $sql = "INSERT INTO usuario(id_rol, nombre, apellidos, numero_cuenta, email, password) VALUES ($this->rol,'$this->nombre','$this->apellidos',$this->numero_cuenta,'$this->email','$this->password')";
       $ans = mysqli_query($this->cnx, $sql);
       if ($ans == true) 
@@ -38,8 +39,21 @@
         echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($this->cnx).'<br />'.$sql;
       // return 'variable: '.$this->nombre;
     }
+    // Método para iniciar sesión
+    // --------------------------------------------------------
+    public function loginUsuario($usuario,$password) {
+      $sql = "SELECT * FROM usuario WHERE numero_cuenta = '$usuario' OR email = '$usuario'";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $ans = mysqli_query($cnx->getCnx(), $sql);
+      $num_rows = mysqli_num_rows ($ans);
+      var_dump($num_rows); 
+      if($num_rows == 1){
+        return $ans->fetch_array(MYSQLI_ASSOC);
+      }
+      return false;
+    }
 
-    // INSERT INTO usuario(id_usuario, id_rol, nombre, apellidos, numero_cuenta, password, email) VALUES (:nombre,:apellidos,:password,:numero_cuenta,:email,:rol)
   }
   // $db = new Crud();
   // $db -> registrarUsuarioModel();

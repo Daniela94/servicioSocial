@@ -131,6 +131,14 @@ body {
   position: relative;
   padding: 25px;
   left: 50%;
+  transform: translate(-50%, 10%);
+  box-shadow: 0 5px 10px #000;
+  border-radius: 5px;
+}
+.square-form-login {
+  position: relative;
+  padding: 25px;
+  left: 50%;
   transform: translate(-50%, 70%);
   box-shadow: 0 5px 10px #000;
   border-radius: 5px;
@@ -187,7 +195,7 @@ body {
   width: 50%;
   /* background-color: var(--grey-black); */
   background-color: var(--grey-black-333);
-  transform: translate(-50%, 20%);
+  transform: translate(-50%, 5%);
   color: white;
 }
 .h-mnsj-r {
