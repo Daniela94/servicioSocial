@@ -41,8 +41,8 @@
     }
     // Método para iniciar sesión
     // --------------------------------------------------------
-    public function loginUsuario($usuario,$password) {
-      $sql = "SELECT * FROM usuario WHERE numero_cuenta = '$usuario' OR email = '$usuario'";
+    public function loginUsuarioModel($usuario,$password) {
+      $sql = "SELECT * FROM usuario WHERE numero_cuenta = '$usuario' OR email = '$usuario' AND password = '$password'";
       $cnx = new Conexion();
       $cnx -> conectar();
       $ans = mysqli_query($cnx->getCnx(), $sql);
@@ -55,6 +55,4 @@
     }
 
   }
-  // $db = new Crud();
-  // $db -> registrarUsuarioModel();
 ?>

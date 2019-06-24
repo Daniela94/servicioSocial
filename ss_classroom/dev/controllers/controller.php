@@ -23,7 +23,7 @@
   
         include $respuesta;
       } else {
-        echo "<h2 class='h-title'>Administrador Bienivenido al SISTEMA ssClassroom</h2>";
+        echo "<h2 class='h-title'>Bienvenido al SISTEMA ssClassroom</h2>";
       }
     }
 
@@ -43,29 +43,33 @@
         // $respuesta = Crud::metdodo($datosController); 
         $crud = new Crud($datosController);
         $respuesta = $crud -> registrarUsuarioModel();
-  
         echo $respuesta;
-        // echo 'Entra';
       }
     }
     // Validar login del usuario
     // -------------------------------------
-    public function validarLoginUsuario() {
-      print_r($_POST);
-      $usuario = $_POST['usuario'];
-      $password = $_POST['password'];
-      $respuesta = Crud::loginUsuario($usuario,$password);
-      if($respuesta !== FALSE) {
-        var_dump($respuesta);
-        if($respuesta['id_rol'] == 1){
-          header('location:'.$base_url.'views/modules/admin/templateAdmin.php');
-        }else if($respuesta['id_rol'] == 2){
+    public function loginUsuarioController() {
+      if (isset($_POST['entrar'])) {
 
-        }else if($respuesta['id_rol'] == 3){
-
+        // print_r($_POST);
+        $usuario = $_POST['usuario'];
+        $password = $_POST['password'];
+        $respuesta = Crud::loginUsuarioModel($usuario,$password);
+        if($respuesta !== FALSE) {
+          // echo '<hr>';
+          var_dump($respuesta);
+          // echo '<hr>';
+          if($respuesta['id_rol'] == 1){
+            header('location: '.DIR_MODULES.'admin/templateAdmin.php');
+          }else if($respuesta['id_rol'] == 2){
+  
+          }else if($respuesta['id_rol'] == 3){
+  
+          }
+        }else{
+          header('location:'.DIR_ROOT.'index.php');
+          echo "No existe";  
         }
-      }else{
-        echo "No existe";  
       }
       
     }
