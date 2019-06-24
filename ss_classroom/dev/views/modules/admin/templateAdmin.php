@@ -1,10 +1,10 @@
 <?php
   include_once '../../../../core/config.path.php';
   include_once (MODULES_PATH.'head.php');
-  require_once CONTROLLER_PATH.'controller.php';
-  require_once MODEL_PATH.'enlacesAdmin.php';
-  require_once MODEL_PATH.'conexion.php';
-  require_once MODEL_PATH.'crud.php';
+  require_once CONTROLLER_PATH.'AdminController.php';
+  require_once MODEL_PATH.'EnlacesAdminModel.php';
+  require_once MODEL_PATH.'Conexion.php';
+  require_once MODEL_PATH.'Crud.php';
 ?>
 <div class="img-bg"></div>
 <header class="Header navbar-blue-light">
@@ -26,7 +26,7 @@
 
 <section class="container">
   <?php
-    $mvc = new Controller();
+    $mvc = new AdminController();
     $mvc -> enlacesVistasAdminController();
   ?>
 </section>

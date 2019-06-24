@@ -1,9 +1,12 @@
 <?php
   include_once 'core/config.path.php';
-  require_once CONTROLLER_PATH.'controller.php';
-  require_once MODEL_PATH.'enlacesAdmin.php';
-  require_once MODEL_PATH.'conexion.php';
-  require_once MODEL_PATH.'crud.php';
+  require_once CONTROLLER_PATH.'Controller.php';
+  require_once CONTROLLER_PATH.'AdminController.php';
+  require_once CONTROLLER_PATH.'ProfesorController.php';
+  require_once MODEL_PATH.'EnlacesAdminModel.php';
+  require_once MODEL_PATH.'EnlacesProfesorModel.php';
+  require_once MODEL_PATH.'Conexion.php';
+  require_once MODEL_PATH.'Crud.php';
 
   $mvc = new Controller();
   $mvc -> loginPage();

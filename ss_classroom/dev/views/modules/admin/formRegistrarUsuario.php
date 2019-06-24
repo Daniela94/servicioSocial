@@ -18,7 +18,7 @@
         <input type="" name="numero_cuenta" class="input-form">
       </div>
       <div class="col">
-        <label for="">Email</label>
+        <label for="">Correo electrónico</label>
         <input type="email" name="email" class="input-form">
       </div>
     </div>
@@ -53,6 +53,6 @@
 
 
 <?php 
-  $registro = new Controller();
+  $registro = new AdminController();
   $registro -> registrarUsuarioController();
 ?>

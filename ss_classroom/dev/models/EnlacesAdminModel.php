@@ -1,7 +1,7 @@
 <?php
   # ENLACES TEMPLATE ADMIN
   # -----------------------------------------
-  class EnlacesVistasAdmin {
+  class EnlacesAdminModel {
     public function enlacesVistasAdminModel($enlacesModel) {
       // Vamos a pedirle que valide
       if ($enlacesModel == "listaProfesores" ||
