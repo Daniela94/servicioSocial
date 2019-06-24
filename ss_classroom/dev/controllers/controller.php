@@ -56,9 +56,7 @@
         $password = $_POST['password'];
         $respuesta = Crud::loginUsuarioModel($usuario,$password);
         if($respuesta !== FALSE) {
-          // echo '<hr>';
           var_dump($respuesta);
-          // echo '<hr>';
           if($respuesta['id_rol'] == 1){
             header('location: '.DIR_MODULES.'admin/templateAdmin.php');
           }else if($respuesta['id_rol'] == 2){

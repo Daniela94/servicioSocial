@@ -11,9 +11,10 @@
   <a class="a-logo" href="templateAdmin.php"><li class="logo"></li></a>
   <nav class="Nav">
     <ul>
-      <li><a href="templateAdmin.php?action=listaProfesores">Lista de profesores</a></li>
-      <li><a href="templateAdmin.php?action=listaAlumnos">Lista de alumnos</a></li>
-      <li><a href="templateAdmin.php?action=listaTareas">Lista de tareas</a></li>
+      <li><a href="templateAdmin.php?action=listaProfesores">Profesores</a></li>
+      <li><a href="templateAdmin.php?action=listaAlumnos">Alumnos</a></li>
+      <li><a href="templateAdmin.php?action=listaTareas">Tareas</a></li>
+      <li><a href="templateAdmin.php?action=listaAdmin">Administradores</a></li>
       <li><a href="templateAdmin.php?action=formRegistrarUsuario">Agregar usuario</a></li>
     </ul>
   </nav>

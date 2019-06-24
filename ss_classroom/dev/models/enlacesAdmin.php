@@ -7,6 +7,7 @@
       if ($enlacesModel == "listaProfesores" ||
           $enlacesModel == "listaAlumnos" ||
           $enlacesModel == "listaTareas" ||
+          $enlacesModel == "listaAdmin" ||
           $enlacesModel == "formRegistrarUsuario") {
           
           $module = MODULES_PATH."admin/".$enlacesModel.".php";

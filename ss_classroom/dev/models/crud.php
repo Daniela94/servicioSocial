@@ -11,8 +11,8 @@
     private $password;
     private $rol;
 
-    // Constructor
-    // -------------------------------------------------
+    # Constructor
+    # -------------------------------------------------
     public function __construct($datosModel) {
       $this->nombre = $datosModel['nombre'];
       $this->apellidos = $datosModel['apellidos'];
@@ -26,8 +26,8 @@
       $this->rol = $datosModel['rol'];
       parent::conectar();
     }
-    // Método para agregar usuario
-    // --------------------------------------------
+    # Método para agregar usuario
+    # --------------------------------------------
     public function registrarUsuarioModel() {
       // var_dump(parent::getCnx());
       // die();
@@ -39,8 +39,8 @@
         echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($this->cnx).'<br />'.$sql;
       // return 'variable: '.$this->nombre;
     }
-    // Método para iniciar sesión
-    // --------------------------------------------------------
+    # Método para iniciar sesión
+    # --------------------------------------------------------
     public function loginUsuarioModel($usuario,$password) {
       $sql = "SELECT * FROM usuario WHERE numero_cuenta = '$usuario' OR email = '$usuario' AND password = '$password'";
       $cnx = new Conexion();
