@@ -22,6 +22,9 @@
           <i class="fas fa-trash-alt"></i>
         </a>
       </td>
+      <?php
+        
+      ?>
     </tr>
   </tbody>
 </table>

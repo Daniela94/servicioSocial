@@ -53,6 +53,32 @@
       }
       return false;
     }
+    # Mostrar lista de profesores
+    # --------------------------------------------
+    public function listaProfesoresModel() {
+      $sql = "SELECT * FROM usuario WHERE id_rol = 2";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $ans = mysqli_query($cnx->getCnx(), $sql);
+      if (!$ans)
+        echo "Error: ".mysqli_error($cnx->getCnx());
+      return $ans;
+
+      // echo 'No hay profesores registrados';
+    }
+    # Mostrar lista de alumnos
+    # --------------------------------------------
+    public function listaAlumnosModel() {
+      $sql = "SELECT * FROM usuario WHERE id_rol = 3";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $ans = mysqli_query($cnx->getCnx(), $sql);
+      if (!$ans)
+        echo "Error: ".mysqli_error($cnx->getCnx());
+      return $ans;
+
+      // echo 'No hay profesores registrados';
+    }
 
   }
 ?>

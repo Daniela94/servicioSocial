@@ -24,14 +24,8 @@
       $this->cnx = mysqli_connect($this->dbhost, $this->dbuser, $this->dbpass, $this->dbname);
       if (mysqli_connect_error())
       die('Error al intentar conectar con la base de dato. Error'.mysqli_connect_error());
-      // else echo "Conexión exitosa"."<br />";
-      // var_dump($this->cnx);
-      // echo "Data base: ".DATABASE_HOST;
-      // return $this->cnx; # La mandamos a la clase crud.
       $this->cnx->set_charset("utf8");
     }
+    
   }
-
-  // $db = new Conexion();
-  // $db -> conectar();
 ?>

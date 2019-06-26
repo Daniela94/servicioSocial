@@ -10,18 +10,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Florence</td>
-      <td>Welch</td>
-      <td>fwelch@gmail.com</td>
-      <td>
-        <a href="">
-          <i class="fas fa-edit"></i>
-        </a>
-        <a href="">
-          <i class="fas fa-trash-alt"></i>
-        </a>
-      </td>
-    </tr>
+    <?php
+      $listaProfesores = new AdminController();
+      $listaProfesores -> listaProfesoresController();
+    ?>
   </tbody>
 </table>

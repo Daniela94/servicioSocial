@@ -36,6 +36,66 @@
         echo $respuesta;
       }
     }
-  }
+    # Mostrar lista de profesores 
+    # ----------------------------------------------------------
+    public function listaProfesoresController() {
+      $respuesta = Crud::listaProfesoresModel();
+      // echo 'res';
+      // var_dump($respuesta);
+      // die();
+      while ($fila = mysqli_fetch_object($respuesta)) {
+        $nombre = $fila->nombre;
+        $apellidos = $fila->apellidos;
+        $email = $fila->email;
 
+        echo "
+          <tr>
+            <td>".$nombre."</td>
+            <td>".$apellidos."</td>
+            <td>".$email."</td>
+            <td>
+              <a href=''>
+                <i class='fas fa-edit'></i>
+              </a>
+              <a href=''>
+                <i class='fas fa-trash-alt'></i>
+              </a>
+            </td>
+          </tr>
+        ";
+      }
+    }
+    # Mostrar lista de alumnos 
+    # ----------------------------------------------------------
+    public function listaAlumnosController() {
+      $respuesta = Crud::listaAlumnosModel();
+      // echo 'res';
+      // var_dump($respuesta);
+      // die();
+      while ($fila = mysqli_fetch_object($respuesta)) {
+        $nombre = $fila->nombre;
+        $apellidos = $fila->apellidos;
+        $email = $fila->email;
+        $numero_cuenta = $fila->numero_cuenta;
+
+        echo "
+          <tr>
+            <td>".$nombre."</td>
+            <td>".$apellidos."</td>
+            <td>".$email."</td>
+            <td>".$numero_cuenta."</td>
+            <td>
+              <a href=''>
+                <i class='fas fa-edit'></i>
+              </a>
+              <a href=''>
+                <i class='fas fa-trash-alt'></i>
+              </a>
+            </td>
+          </tr>
+        ";
+      }
+    }
+
+  }
 ?>
