@@ -1,5 +1,5 @@
 <?php
-  # ENLACES TEMPLATE ADMIN
+  # Enlaces template Profesor
   # -----------------------------------------
   class EnlacesProfesorModel {
     public function enlacesVistasProfesorModel($enlacesModel) {
@@ -9,7 +9,10 @@
 					$enlacesModel == "tareasAlumnos") {
           
           $module = MODULES_PATH."profesor/".$enlacesModel.".php";
-        }
+      }
+      else if ($enlacesModel == "cerrarSesion") {
+        $module = MODULES_PATH.$enlacesModel.".php";
+      }
       return $module;
     }
   }

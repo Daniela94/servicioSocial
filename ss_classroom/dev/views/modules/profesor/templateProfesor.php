@@ -7,6 +7,10 @@
   require_once MODEL_PATH.'EnlacesProfesorModel.php';
   require_once MODEL_PATH.'Conexion.php';
   require_once MODEL_PATH.'Crud.php';
+  session_start();
+  if (!$_SESSION['validar']) {
+    header("location:".DIR_ROOT."index.php");
+  }
 ?>
 <div class="img-bg"></div>
 <header class="Header navbar-blue-light">
@@ -17,8 +21,8 @@
 			<li><a href="templateProfesor.php?action=formRegistrarTarea">Agregar tarea</a></li>
     </ul>
   </nav>
-  <span class="user-txt">Profesor(a) </span>
-  <a href="<?php echo DIR_ROOT.'index.php';?>">
+  <span class="user-txt">Profesor(a) <?php echo $_SESSION['usuario'];?></span>
+  <a href="templateProfesor.php?action=cerrarSesion">
     <i class="fas fa-sign-out-alt"></i>
   </a>
 </header>

@@ -1,10 +1,15 @@
 <?php
   include_once '../../../../core/config.path.php';
   include_once (MODULES_PATH.'head.php');
+  require_once CONTROLLER_PATH.'Controller.php';
   require_once CONTROLLER_PATH.'AdminController.php';
   require_once MODEL_PATH.'EnlacesAdminModel.php';
   require_once MODEL_PATH.'Conexion.php';
   require_once MODEL_PATH.'Crud.php';
+  session_start();
+  if (!$_SESSION['validar']) {
+    header("location:".DIR_ROOT."index.php");
+  }
 ?>
 <div class="img-bg"></div>
 <header class="Header navbar-blue-light">
@@ -18,8 +23,8 @@
       <li><a href="templateAdmin.php?action=formRegistrarUsuario">Agregar usuario</a></li>
     </ul>
   </nav>
-  <span class="user-txt">Admin </span>
-  <a href="<?php echo DIR_ROOT.'index.php';?>">
+  <span class="user-txt">Administrador(a) <?php echo $_SESSION['usuario'];?></span>
+  <a href="templateAdmin.php?action=cerrarSesion">
     <i class="fas fa-sign-out-alt"></i>
   </a>
 </header>

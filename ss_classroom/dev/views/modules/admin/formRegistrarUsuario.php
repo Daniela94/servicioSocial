@@ -55,4 +55,13 @@
 <?php 
   $registro = new AdminController();
   $registro -> registrarUsuarioController();
+
+  if (isset($_GET['action'])) {
+    if($_GET['action'] == "ok") {
+      echo "Registro exitoso";
+    }
+    else {
+      echo "Registro no exitoso ;( ";
+    }
+  }
 ?>

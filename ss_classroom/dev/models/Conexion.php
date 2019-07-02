@@ -2,7 +2,7 @@
 
   class Conexion {
     // Atributos
-    protected $cnx;
+    private $cnx;
     private $dbhost = DATABASE_HOST;
     private $dbuser = DATABASE_USER;
     private $dbpass = DATABASE_PASSWORD;
@@ -12,10 +12,10 @@
     // public function __construct() {
     //   $this->conectar();
     // }
-    public function __destruct() {
-      echo "me muero ;(";
-      mysqli_close($this->cnx);
-    }
+    // public function __destruct() {
+    //   echo "me muero ;(";
+    //   mysqli_close($this->cnx);
+    // }
     // Métodos
     public function getCnx(){
       return $this->cnx;

@@ -3,7 +3,6 @@
   
   class Crud extends Conexion {
     // Atributos
-    private $idUsuario;
     private $nombre;
     private $apellidos;
     private $numero_cuenta;
@@ -24,7 +23,7 @@
       $this->email = $datosModel['email'];
       $this->password = $datosModel['password'];
       $this->rol = $datosModel['rol'];
-      parent::conectar();
+      // parent::__construct();
     }
     # Método para agregar usuario
     # --------------------------------------------
@@ -32,11 +31,15 @@
       // var_dump(parent::getCnx());
       // die();
       $sql = "INSERT INTO usuario(id_rol, nombre, apellidos, numero_cuenta, email, password) VALUES ($this->rol,'$this->nombre','$this->apellidos',$this->numero_cuenta,'$this->email','$this->password')";
-      $ans = mysqli_query($this->cnx, $sql);
-      if ($ans == true) 
-        echo "Registro exitoso, como usted.";
-      else
-        echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($this->cnx).'<br />'.$sql;
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if ($query == true) {
+        // header('Location: '.DIR_MODULES.'admin/templateAdmin.php?action=formRegistrarUsuario');
+        // echo "Registro exitoso, como usted.";
+        return "success";
+      } else
+        echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx).'<br />'.$sql;
       // return 'variable: '.$this->nombre;
     }
     # Método para iniciar sesión
@@ -45,13 +48,14 @@
       $sql = "SELECT * FROM usuario WHERE numero_cuenta = '$usuario' OR email = '$usuario' AND password = '$password'";
       $cnx = new Conexion();
       $cnx -> conectar();
-      $ans = mysqli_query($cnx->getCnx(), $sql);
-      $num_rows = mysqli_num_rows ($ans);
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      $num_rows = mysqli_num_rows ($query);
       var_dump($num_rows); 
       if($num_rows == 1){
-        return $ans->fetch_array(MYSQLI_ASSOC);
-      }
+        return $query->fetch_array(MYSQLI_ASSOC);
+      } 
       return false;
+      mysqli_close($query);
     }
     # Mostrar lista de profesores
     # --------------------------------------------
@@ -59,10 +63,10 @@
       $sql = "SELECT * FROM usuario WHERE id_rol = 2";
       $cnx = new Conexion();
       $cnx -> conectar();
-      $ans = mysqli_query($cnx->getCnx(), $sql);
-      if (!$ans)
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if (!$query)
         echo "Error: ".mysqli_error($cnx->getCnx());
-      return $ans;
+      return $query;
 
       // echo 'No hay profesores registrados';
     }
@@ -72,10 +76,10 @@
       $sql = "SELECT * FROM usuario WHERE id_rol = 3";
       $cnx = new Conexion();
       $cnx -> conectar();
-      $ans = mysqli_query($cnx->getCnx(), $sql);
-      if (!$ans)
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if (!$query)
         echo "Error: ".mysqli_error($cnx->getCnx());
-      return $ans;
+      return $query;
 
       // echo 'No hay profesores registrados';
     }

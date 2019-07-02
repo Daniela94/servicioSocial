@@ -33,7 +33,11 @@
         // $respuesta = Crud::metdodo($datosController); 
         $crud = new Crud($datosController);
         $respuesta = $crud -> registrarUsuarioModel();
-        echo $respuesta;
+        if ($respuesta == "success") {
+          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=ok");
+        } else {
+          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formRegistrarUsuario");
+        }
       }
     }
     # Mostrar lista de profesores 
