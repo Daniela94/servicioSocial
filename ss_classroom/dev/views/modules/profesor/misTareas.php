@@ -11,22 +11,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Resumen: "Historia de la informática"</td>
-      <td>Realizar un resumen de máximo 2 cuartillas, y mínimo 1. En la libreta, a mano.</td>
-      <td>10/05/2019</td>
-      <td>20/05/2019</td>
-      <td>
-        <a href="templateProfesor.php?action=tareasAlumnos">
-            <i class="fas fa-external-link-alt"></i>
-        </a>
-        <a href="">
-          <i class="fas fa-edit"></i>
-        </a>
-        <a href="">
-          <i class="fas fa-trash-alt"></i>
-        </a>
-      </td>
-    </tr>
+    <?php
+      $listaTareas = new ProfesorController();
+      $listaTareas -> listaProfesorTareasController();
+    ?>
   </tbody>
 </table>

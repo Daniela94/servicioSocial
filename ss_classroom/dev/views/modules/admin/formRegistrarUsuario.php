@@ -60,8 +60,5 @@
     if($_GET['action'] == "ok") {
       echo "Registro exitoso";
     }
-    else {
-      echo "Registro no exitoso ;( ";
-    }
   }
 ?>

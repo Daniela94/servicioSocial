@@ -1,14 +1,15 @@
 <?php
 
   class Conexion {
-    // Atributos
+    // ATRIBUTOS
     private $cnx;
     private $dbhost = DATABASE_HOST;
     private $dbuser = DATABASE_USER;
     private $dbpass = DATABASE_PASSWORD;
     private $dbname = DATABASE_NAME;
    
-    // Método constructor
+    # Constructor
+    # ----------------------------------------------------------------
     // public function __construct() {
     //   $this->conectar();
     // }
@@ -16,7 +17,11 @@
     //   echo "me muero ;(";
     //   mysqli_close($this->cnx);
     // }
-    // Métodos
+
+    // MÉTODOS
+
+    # Método para hacer la conexión con la base de datos
+    # -----------------------------------------------------------------
     public function getCnx(){
       return $this->cnx;
     }

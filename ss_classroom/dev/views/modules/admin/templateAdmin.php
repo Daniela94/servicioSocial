@@ -6,6 +6,8 @@
   require_once MODEL_PATH.'EnlacesAdminModel.php';
   require_once MODEL_PATH.'Conexion.php';
   require_once MODEL_PATH.'Crud.php';
+  require_once MODEL_PATH.'CrudAdminModel.php';
+  require_once MODEL_PATH.'CrudProfesorModel.php';
   session_start();
   if (!$_SESSION['validar']) {
     header("location:".DIR_ROOT."index.php");

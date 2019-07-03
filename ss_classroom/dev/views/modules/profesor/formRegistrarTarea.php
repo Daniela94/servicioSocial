@@ -37,5 +37,10 @@
 
 <?php 
   $registro = new ProfesorController();
-//   $registro -> registrarUsuarioController();
+  $registro -> registrarTareaController();
+  if (isset($_GET['action'])) {
+    if($_GET['action'] == "ok") {
+      echo "Registro exitoso";
+    }
+  }
 ?>

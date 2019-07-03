@@ -29,9 +29,8 @@
                                   "email"=>$_POST['email'],
                                   "password"=>$_POST['password'],
                                   "rol"=>$_POST['rol']);
-        #que me traiga la información que está en el modelo
-        // $respuesta = Crud::metdodo($datosController); 
-        $crud = new Crud($datosController);
+        // que me traiga la información que está en el modelo
+        $crud = new CrudAdminModel($datosController);
         $respuesta = $crud -> registrarUsuarioModel();
         if ($respuesta == "success") {
           header("location: ".DIR_MODULES."admin/templateAdmin.php?action=ok");
@@ -43,7 +42,7 @@
     # Mostrar lista de profesores 
     # ----------------------------------------------------------
     public function listaProfesoresController() {
-      $respuesta = Crud::listaProfesoresModel();
+      $respuesta = CrudAdminModel::listaProfesoresModel();
       // echo 'res';
       // var_dump($respuesta);
       // die();
@@ -72,7 +71,7 @@
     # Mostrar lista de alumnos 
     # ----------------------------------------------------------
     public function listaAlumnosController() {
-      $respuesta = Crud::listaAlumnosModel();
+      $respuesta = CrudAdminModel::listaAlumnosModel();
       // echo 'res';
       // var_dump($respuesta);
       // die();
