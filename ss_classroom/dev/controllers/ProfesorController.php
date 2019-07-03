@@ -49,25 +49,25 @@ require_once MODEL_PATH.'CrudProfesorModel.php';
         $descripcion = $fila->descripcion;
         $fecha_publicacion = $fila->fecha_publicacion;
         $fecha_entrega = $fila->fecha_entrega;
-      }
-      echo "
-        <tr>
-        <td>".$titulo."</td>
-        <td>".$descripcion."</td>
-        <td>".$fecha_publicacion."</td>
-        <td>".$fecha_entrega."</td>
-        <td>
-          <a href='templateProfesor.php?action=tareasAlumnos'>
+        echo "
+          <tr>
+          <td>".$titulo."</td>
+          <td>".$descripcion."</td>
+          <td>".$fecha_publicacion."</td>
+          <td>".$fecha_entrega."</td>
+          <td>
+            <a href='templateProfesor.php?action=tareasAlumnos'>
               <i class='fas fa-external-link-alt'></i>
-          </a>
-          <a href=''>
-            <i class='fas fa-edit'></i>
-          </a>
-          <a href=''>
-            <i class='fas fa-trash-alt'></i>
-          </a>
-        </td>
-      </tr>";
+            </a>
+            <a href=''>
+              <i class='fas fa-edit'></i>
+            </a>
+            <a href=''>
+              <i class='fas fa-trash-alt'></i>
+            </a>
+          </td>
+        </tr>";
+      }
     }
 
   }
