@@ -1,5 +1,5 @@
 <?php
-require_once MODEL_PATH.'CrudProfesorModel.php';
+  // require_once MODEL_PATH.'CrudProfesorModel.php';
 
   class ProfesorController {
     # Interacción del profesor con los enlaces de la página
@@ -23,12 +23,12 @@ require_once MODEL_PATH.'CrudProfesorModel.php';
     public function registrarTareaController() {
       if (isset($_POST['enviar'])) {
         // recibir el POST en un array
-        $datosController = array( "titulo"=>$_POST['titulo'],
+        $datosController = array( "id_usuario"=>$_SESSION['id_usuario'],
+                                  "titulo"=>$_POST['titulo'],
                                   "descripcion"=>$_POST['descripcion'],
                                   "fecha_publicacion"=>$_POST['fecha_publicacion'],
                                   "fecha_entrega"=>$_POST['fecha_entrega']);
-        // var_dump($datosController);
-        // die();
+        var_dump($datosController);
         // var_dump($datosController);
         // echo "entra <br />";
         $crud = new CrudProfesorModel($datosController);

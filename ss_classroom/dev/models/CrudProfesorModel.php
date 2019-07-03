@@ -3,6 +3,7 @@
 
   class CrudProfesorModel {
     // ATRIBUTOS
+    private $idUsuario;
     private $titulo;
     private $descripcion;
     private $fecha_publicacion;
@@ -11,6 +12,7 @@
     # Constructor
     # ------------------------------------------
     public function __construct($datosModel) {
+      $this->idUsuario = $datosModel['id_usuario'];
       $this->titulo = $datosModel['titulo'];
       $this->descripcion = $datosModel['descripcion'];
       $this->fecha_publicacion = $datosModel['fecha_publicacion'];
@@ -19,7 +21,7 @@
     # Registrar tarea 
     # ----------------------------------------------
     public function registrarTareaModel() {
-      $sql = "INSERT INTO tarea(titulo, descripcion, fecha_publicacion, fecha_entrega) VALUES ('$this->titulo','$this->descripcion','$this->fecha_publicacion','$this->fecha_entrega')";
+      $sql = "INSERT INTO tarea(id_usuario,titulo, descripcion, fecha_publicacion, fecha_entrega) VALUES ($this->idUsuario,'$this->titulo','$this->descripcion','$this->fecha_publicacion','$this->fecha_entrega')";
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
@@ -27,6 +29,8 @@
         return "success";
       else
         echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx).'<br />'.$sql;
+      mysqli_close($query);
+
     }
     # Mostrar lista de tareas
     # ------------------------------------------------------------
