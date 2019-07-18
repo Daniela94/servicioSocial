@@ -60,5 +60,18 @@
       return $query;
       mysqli_close($query);
     }
+    #Editar usuario 
+    # ----------------------------------------------
+    public function editarUsuarioModel($datosModel) {
+      $sql = "SELECT * FROM usuario WHERE id_usuario = $datosModel";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      $row = mysqli_fetch_array($query);
+      if (!$query)
+      echo "Error: ".mysqli_error($cnx->getCnx());
+      return $row;
+      mysqli_close($query);
+    }
   }
 ?>

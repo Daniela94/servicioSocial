@@ -8,6 +8,7 @@
           $enlacesModel == "listaAlumnos" ||
           $enlacesModel == "listaTareas" ||
           $enlacesModel == "listaAdmin" ||
+          $enlacesModel == "editarUsuario" ||
           $enlacesModel == "formRegistrarUsuario") {
           
           $module = MODULES_PATH."admin/".$enlacesModel.".php";
