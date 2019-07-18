@@ -93,6 +93,7 @@ body {
   --grey-blue: #bccedd;
   --shadow-light: #b3b3b3;
   --red: #D11010;
+  --red-loco: #df130c;
   --blue: #106ad1;
   --blue-sky: #5db2cc;
   --grey-black-t: rgba(51, 51, 51,0.5);
@@ -161,6 +162,17 @@ body {
   border: 2px solid var(--blue-loco);
   box-shadow: 0 0 10px var(--blue-loco);
   outline: 0 none;
+}
+.form-btn-red {
+  margin-top: 20px;
+  color: white;
+  background-color: var(--red);
+  transition: .1s ease-out;
+}
+.form-btn-red:hover {
+  border-color: var(--red-loco);
+  color: white;
+  box-shadow: 0 0 25px var(--red-loco);
 }
 .form-btn-green {
   margin-top: 20px;
