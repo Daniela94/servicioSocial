@@ -16,3 +16,11 @@
     ?>
   </tbody>
 </table>
+
+<?php
+  if (isset($_GET['action'])) {
+    if($_GET['action'] == "actualizacion") {
+      echo "Actualización exitosa";
+    }
+  }
+?>

@@ -102,7 +102,7 @@
         ";
       }
     }
-    #Editar usuario 
+    # Editar usuario 
     # ----------------------------------------------------------
     public function editarUsuarioController() {
       $datosController = $_GET["id"];
@@ -113,6 +113,7 @@
       <form method='POST'>
         <div class='row'>
           <div class='col'>
+            <input type='hidden' value='".$respuesta['id_usuario']."' name='id_usuario'>
             <label for=''>Nombre</label>
             <input type='text' value='".$respuesta['nombre']."' name='nombre' class='input-form'>
           </div>
@@ -156,10 +157,40 @@
             <a href='templateAdmin.php?action=listaProfesores' class='input-form btn form-btn-red'>Cancelar</a>
           </div>
           <div class='col'>
-            <input type='submit' value='Actualizar' class='input-form form-btn-green'>
+            <input type='submit' value='Actualizar' name='editarUsuario' class='input-form form-btn-green'>
           </div>  
         </div>
       </form>";
+    }
+    # Actualizar usuario
+    # -----------------------------------------------------
+    public function actualizarUsuarioController() {
+      if (isset($_POST["editarUsuario"])) {
+        // print_r($_POST);
+        $datosController = array( "id_usuario"=>$_POST["id_usuario"],
+                                  "nombre"=>$_POST["nombre"],
+                                  "apellidos"=>$_POST["apellidos"],
+                                  "numero_cuenta"=>$_POST["numero_cuenta"],
+                                  "email"=>$_POST["email"],
+                                  "password"=>$_POST["password"],
+                                  "rol"=>$_POST["rol"]);
+        // print_r($datosController);
+        // die();
+        $actualizar = new CrudAdminModel($datosController);
+        $respuesta = $actualizar -> actualizarUsuarioModel();
+        // echo $respuesta;
+        // die();
+        if ($respuesta == "success") {
+          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacion");
+        } else {
+          echo "Error al intentar actualizar el usuario";
+          }
+        } 
+    }
+    # Eliminar usuario
+    # -------------------------------------------------------------------------------------------
+    public function eliminarUsuarioController() {
+
     }
 
   }

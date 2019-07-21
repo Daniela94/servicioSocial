@@ -11,6 +11,7 @@
   session_start();
   if (!$_SESSION['validar']) {
     header("location:".DIR_ROOT."index.php");
+    exit();
   }
 ?>
 <div class="img-bg"></div>

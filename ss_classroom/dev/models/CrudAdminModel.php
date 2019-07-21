@@ -3,6 +3,7 @@
   
   class CrudAdminModel {
     // Atributos
+    private $id_usuario;
     private $nombre;
     private $apellidos;
     private $numero_cuenta;
@@ -13,6 +14,7 @@
     # Constructor
     # -------------------------------------------------
     public function __construct($datosModel) {
+      $this->id_usuario = $datosModel['id_usuario'];
       $this->nombre = $datosModel['nombre'];
       $this->apellidos = $datosModel['apellidos'];
       if ($datosModel['numero_cuenta'] == "") {
@@ -35,6 +37,7 @@
         return "success";
       } else
         echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx).'<br />'.$sql;
+      mysqli_close($query);
     }
     # Mostrar lista de profesores
     # --------------------------------------------
@@ -60,7 +63,7 @@
       return $query;
       mysqli_close($query);
     }
-    #Editar usuario 
+    # Editar usuario 
     # ----------------------------------------------
     public function editarUsuarioModel($datosModel) {
       $sql = "SELECT * FROM usuario WHERE id_usuario = $datosModel";
@@ -72,6 +75,26 @@
       echo "Error: ".mysqli_error($cnx->getCnx());
       return $row;
       mysqli_close($query);
+    }
+    # Actualizar usuario
+    # -----------------------------------------------
+    public function actualizarUsuarioModel() {
+      $sql = "UPDATE usuario SET id_rol = $this->rol, nombre = '$this->nombre', apellidos = '$this->apellidos', numero_cuenta = $this->numero_cuenta, email = '$this->email', password = '$this->password' WHERE id_usuario = $this->id_usuario";
+      // print_r($sql);
+      // die();
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if ($query == true) {
+        return "success";
+      } else
+        echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+      mysqli_close($query);
+    }
+    # Eliminar usuario
+    # -------------------------------------------------------------------------------------------
+    public function eliminarUsuarioModel() {
+
     }
   }
 ?>
