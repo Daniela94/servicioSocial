@@ -9,7 +9,8 @@
           $enlacesModel == "listaTareas" ||
           $enlacesModel == "listaAdmin" ||
           $enlacesModel == "editarUsuario" ||
-          $enlacesModel == "formRegistrarUsuario") {
+          $enlacesModel == "formRegistrarUsuario" ||
+          $enlacesModel == "formEditarUsuario") {
           
           $module = MODULES_PATH."admin/".$enlacesModel.".php";
       }

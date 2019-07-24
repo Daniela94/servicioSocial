@@ -60,7 +60,7 @@
             <td>".$apellidos."</td>
             <td>".$email."</td>
             <td>
-              <a href='templateAdmin.php?action=editarUsuario&id=".$id_usuario."'>
+              <a href='templateAdmin.php?action=formEditarUsuario&id=".$id_usuario."'>
                 <i class='fas fa-edit'></i>
               </a>
               <a href=''>
@@ -184,6 +184,7 @@
           header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacion");
         } else {
           echo "Error al intentar actualizar el usuario";
+          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario.php");
           }
         } 
     }
