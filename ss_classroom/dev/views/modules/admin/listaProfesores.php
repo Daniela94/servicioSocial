@@ -13,6 +13,7 @@
     <?php
       $listaProfesores = new AdminController();
       $listaProfesores -> listaProfesoresController();
+      $listaProfesores -> eliminarProfesorController();
     ?>
   </tbody>
 </table>

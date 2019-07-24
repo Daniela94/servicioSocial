@@ -63,7 +63,7 @@
               <a href='templateAdmin.php?action=formEditarUsuario&id=".$id_usuario."'>
                 <i class='fas fa-edit'></i>
               </a>
-              <a href=''>
+              <a href='templateAdmin.php?action=listaProfesores&idBorrar=".$id_usuario."'>
                 <i class='fas fa-trash-alt'></i>
               </a>
             </td>
@@ -190,8 +190,16 @@
     }
     # Eliminar usuario
     # -------------------------------------------------------------------------------------------
-    public function eliminarUsuarioController() {
+    public function eliminarProfesorController() {
+      if (isset($_GET['idBorrar'])) {
+        $datosController = $_GET['idBorrar'];
 
+        $respuesta = CrudAdminModel::eliminarProfesorModel($datosController);
+
+        if ($respuesta == "success") {
+          header("location:".DIR_MODULES."admin/templateAdmin.php?action=listaProfesores");
+        }
+      }
     }
 
   }

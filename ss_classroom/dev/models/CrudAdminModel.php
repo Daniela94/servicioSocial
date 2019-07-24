@@ -91,10 +91,18 @@
         echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
       mysqli_close($query);
     }
-    # Eliminar usuario
+    # Eliminar profesor
     # -------------------------------------------------------------------------------------------
-    public function eliminarUsuarioModel() {
-
+    public function eliminarProfesorModel($datosModel) {
+      $sql = "DELETE FROM usuario WHERE id_usuario = $datosModel";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if ($query == true) {
+        return "success";
+      } else
+        echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+      mysqli_close($query);
     }
   }
 ?>
