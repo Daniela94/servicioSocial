@@ -197,7 +197,7 @@
         $respuesta = CrudAdminModel::eliminarProfesorModel($datosController);
 
         if ($respuesta == "success") {
-          header("location:".DIR_MODULES."admin/templateAdmin.php?action=listaProfesores");
+          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacion");
         }
       }
     }

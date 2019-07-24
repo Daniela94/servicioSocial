@@ -20,8 +20,13 @@
 
 <?php
   if (isset($_GET['action'])) {
+    # MENSAJE ACTUALIZACIÓN EXITOSA
     if($_GET['action'] == "actualizacion") {
       echo "Actualización exitosa";
+    }
+    # MENSAJE ELIMINACIÓN EXITOSA
+    if($_GET['action'] == "eliminacion") {
+      echo "Eliminación exitosa";
     }
   }
 ?>

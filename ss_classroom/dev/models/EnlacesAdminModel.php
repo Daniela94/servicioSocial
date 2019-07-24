@@ -20,6 +20,9 @@
       else if ($enlacesModel == "actualizacion") {
         $module = MODULES_PATH."admin/listaProfesores.php";
       }
+      else if ($enlacesModel == "eliminacion") {
+        $module = MODULES_PATH."admin/listaProfesores.php";
+      }
       else if ($enlacesModel == "cerrarSesion") {
         $module = MODULES_PATH.$enlacesModel.".php";
       }
