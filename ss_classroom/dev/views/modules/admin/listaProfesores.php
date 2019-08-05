@@ -13,7 +13,7 @@
     <?php
       $listaProfesores = new AdminController();
       $listaProfesores -> listaProfesoresController();
-      $listaProfesores -> eliminarProfesorController();
+      $listaProfesores -> eliminarUsuarioController();
     ?>
   </tbody>
 </table>
@@ -21,11 +21,11 @@
 <?php
   if (isset($_GET['action'])) {
     # MENSAJE ACTUALIZACIÓN EXITOSA
-    if($_GET['action'] == "actualizacion") {
+    if($_GET['action'] == "actualizacionProfesor") {
       echo "Actualización exitosa";
     }
     # MENSAJE ELIMINACIÓN EXITOSA
-    if($_GET['action'] == "eliminacion") {
+    if($_GET['action'] == "eliminacionProfesor") {
       echo "Eliminación exitosa";
     }
   }

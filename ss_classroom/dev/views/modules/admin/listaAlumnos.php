@@ -16,3 +16,15 @@
   ?>
   </tbody>
 </table>
+<?php
+  if (isset($_GET['action'])) {
+    # MENSAJE ACTUALIZACIÓN EXITOSA
+    if($_GET['action'] == "actualizacionAlumno") {
+      echo "Actualización exitosa";
+    }
+    # MENSAJE ELIMINACIÓN EXITOSA
+    if($_GET['action'] == "eliminacionAlumno") {
+      echo "Eliminación exitosa";
+    }
+  }
+?>

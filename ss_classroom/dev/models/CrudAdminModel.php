@@ -79,6 +79,7 @@
     # Actualizar usuario
     # -----------------------------------------------
     public function actualizarUsuarioModel() {
+      $id_rol = $this->rol;
       $sql = "UPDATE usuario SET id_rol = $this->rol, nombre = '$this->nombre', apellidos = '$this->apellidos', numero_cuenta = $this->numero_cuenta, email = '$this->email', password = '$this->password' WHERE id_usuario = $this->id_usuario";
       // print_r($sql);
       // die();
@@ -86,20 +87,22 @@
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if ($query == true) {
-        return "success";
+        return "success".$id_rol;
       } else
         echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
       mysqli_close($query);
     }
     # Eliminar profesor
-    # -------------------------------------------------------------------------------------------
-    public function eliminarProfesorModel($datosModel) {
-      $sql = "DELETE FROM usuario WHERE id_usuario = $datosModel";
+    # ----------------------------------------------------------------
+    public function eliminarUsuarioModel($datosModel) {
+      $id_rol = $datosModel['id_rol'];
+      $id_usuario = $datosModel['id_usuario'];
+      $sql = "DELETE FROM usuario WHERE id_usuario = $id_usuario";
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if ($query == true) {
-        return "success";
+        return "success".$id_rol;
       } else
         echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
       mysqli_close($query);

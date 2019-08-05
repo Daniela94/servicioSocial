@@ -48,6 +48,7 @@
       // die();
       while ($fila = mysqli_fetch_object($respuesta)) {
         $id_usuario = $fila->id_usuario;
+        $id_rol = $fila->id_rol;
         $nombre = $fila->nombre;
         $apellidos = $fila->apellidos;
         $email = $fila->email;
@@ -63,7 +64,7 @@
               <a href='templateAdmin.php?action=formEditarUsuario&id=".$id_usuario."'>
                 <i class='fas fa-edit'></i>
               </a>
-              <a href='templateAdmin.php?action=listaProfesores&idBorrar=".$id_usuario."'>
+              <a href='templateAdmin.php?action=listaProfesores&idBorrar=".$id_usuario."&idRol=".$id_rol."'>
                 <i class='fas fa-trash-alt'></i>
               </a>
             </td>
@@ -78,7 +79,9 @@
       // echo 'res';
       // var_dump($respuesta);
       // die();
-      while ($fila = mysqli_fetch_object($respuesta)) {      
+      while ($fila = mysqli_fetch_object($respuesta)) {
+        $id_usuario = $fila->id_usuario;
+        $id_rol = $fila->id_rol;      
         $nombre = $fila->nombre;
         $apellidos = $fila->apellidos;
         $email = $fila->email;
@@ -91,10 +94,10 @@
             <td>".$email."</td>
             <td>".$numero_cuenta."</td>
             <td>
-              <a href=''>
+            <a href='templateAdmin.php?action=formEditarUsuario&id=".$id_usuario."'>
                 <i class='fas fa-edit'></i>
               </a>
-              <a href=''>
+              <a href='templateAdmin.php?action=listaProfesores&idBorrar=".$id_usuario."&idRol=".$id_rol."'>
                 <i class='fas fa-trash-alt'></i>
               </a>
             </td>
@@ -180,24 +183,31 @@
         $respuesta = $actualizar -> actualizarUsuarioModel();
         // echo $respuesta;
         // die();
-        if ($respuesta == "success") {
-          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacion");
-        } else {
+        if ($respuesta == "success2") {
+          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
+        }
+        else if ($respuesta == "success3") {
+          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionAlumno");
+        } 
+        else {
           echo "Error al intentar actualizar el usuario";
           header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario.php");
           }
         } 
     }
     # Eliminar usuario
-    # -------------------------------------------------------------------------------------------
-    public function eliminarProfesorController() {
+    # ------------------------------------------------------------------
+    public function eliminarUsuarioController() {
       if (isset($_GET['idBorrar'])) {
-        $datosController = $_GET['idBorrar'];
+        $datosController = array( "id_usuario" => $_GET['idBorrar'],
+                                  "id_rol" => $_GET['idRol']);
+        $respuesta = CrudAdminModel::eliminarUsuarioModel($datosController);
 
-        $respuesta = CrudAdminModel::eliminarProfesorModel($datosController);
-
-        if ($respuesta == "success") {
-          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacion");
+        if ($respuesta == "success2") {
+          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionProfesor");
+        }
+        else if ($respuesta == "success3") {
+          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAlumno");
         }
       }
     }
