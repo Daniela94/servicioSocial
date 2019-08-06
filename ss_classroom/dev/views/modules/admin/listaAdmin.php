@@ -10,21 +10,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Daniela</td>
-      <td>Rodríguez</td>
-      <td>daniela@gmail.com</td>
-      <td>
-        <a href="">
-          <i class="fas fa-edit"></i>
-        </a>
-        <a href="">
-          <i class="fas fa-trash-alt"></i>
-        </a>
-      </td>
-      <?php
-        
-      ?>
-    </tr>
+    <?php
+      $listaAdmin = new AdminController();
+      $listaAdmin -> listaAdminController();
+      $listaAdmin -> eliminarUsuarioController();
+    ?>
   </tbody>
 </table>
+<?php
+  if (isset($_GET['action'])) {
+    # MENSAJE ELIMINACIÓN EXITOSA
+    if($_GET['action'] == "eliminacionAdmin") {
+      echo "Eliminación exitosa";
+    }
+  }
+?>

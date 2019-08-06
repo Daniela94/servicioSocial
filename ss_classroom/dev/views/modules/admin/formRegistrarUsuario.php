@@ -42,7 +42,14 @@
         </select>
       </div>
     </div>
-    <input type="submit" name="enviar" value="Registrar" class="input-form form-btn-green">
+    <div class="row">
+      <div class="col">
+        <a href="templateAdmin.php" class="input-form btn form-btn-red">Cancelar</a>
+      </div>
+      <div class="col">
+        <input type="submit" name="enviar" value="Registrar" class="input-form form-btn-green">
+      </div>
+    </div>
   </form>
 
 </div>

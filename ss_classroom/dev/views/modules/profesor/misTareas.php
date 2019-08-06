@@ -13,7 +13,16 @@
   <tbody>
     <?php
       $listaTareas = new ProfesorController();
-      $listaTareas -> listaProfesorTareasController();
+      $listaTareas -> listaTareasProfesorController();
+      $listaTareas -> eliminarTareaProfesorController();
     ?>
   </tbody>
 </table>
+<?php
+  if (isset($_GET['action'])) {
+    # MENSAJE ELIMINACIÓN EXITOSA
+    if ($_GET['action'] == "eliminacionTarea") {
+      echo "Eliminación exitosa";
+    }
+  }
+?>

@@ -13,6 +13,7 @@
   <?php
     $listaAlumnos = new AdminController();
     $listaAlumnos -> listaAlumnosController();
+    $listaAlumnos -> eliminarUsuarioController();
   ?>
   </tbody>
 </table>

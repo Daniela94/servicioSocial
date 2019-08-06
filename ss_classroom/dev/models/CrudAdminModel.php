@@ -63,6 +63,18 @@
       return $query;
       mysqli_close($query);
     }
+    # Mostrar lista de administradores
+    # --------------------------------------------
+    public function listaAdminModel() {
+      $sql = "SELECT * FROM usuario WHERE id_rol = 1";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if (!$query)
+        echo "Error: ".mysqli_error($cnx->getCnx());
+      return $query;
+      mysqli_close($query);
+    }
     # Editar usuario 
     # ----------------------------------------------
     public function editarUsuarioModel($datosModel) {
@@ -92,7 +104,7 @@
         echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
       mysqli_close($query);
     }
-    # Eliminar profesor
+    # Eliminar usuario
     # ----------------------------------------------------------------
     public function eliminarUsuarioModel($datosModel) {
       $id_rol = $datosModel['id_rol'];

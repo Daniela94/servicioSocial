@@ -13,6 +13,9 @@
       else if ($enlacesModel == "ok") {
         $module = MODULES_PATH."profesor/formRegistrarTarea.php";
       }
+      else if ($enlacesModel == "eliminacionTarea") {
+        $module = MODULES_PATH."profesor/misTareas.php";
+      }
       else if ($enlacesModel == "cerrarSesion") {
         $module = MODULES_PATH.$enlacesModel.".php";
       }

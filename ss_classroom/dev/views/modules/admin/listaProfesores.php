@@ -17,7 +17,6 @@
     ?>
   </tbody>
 </table>
-
 <?php
   if (isset($_GET['action'])) {
     # MENSAJE ACTUALIZACIÓN EXITOSA

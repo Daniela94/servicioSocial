@@ -94,15 +94,58 @@
             <td>".$email."</td>
             <td>".$numero_cuenta."</td>
             <td>
-            <a href='templateAdmin.php?action=formEditarUsuario&id=".$id_usuario."'>
+              <a href='templateAdmin.php?action=formEditarUsuario&id=".$id_usuario."'>
                 <i class='fas fa-edit'></i>
               </a>
-              <a href='templateAdmin.php?action=listaProfesores&idBorrar=".$id_usuario."&idRol=".$id_rol."'>
+              <a href='templateAdmin.php?action=listaAlumnos&idBorrar=".$id_usuario."&idRol=".$id_rol."'>
                 <i class='fas fa-trash-alt'></i>
               </a>
             </td>
           </tr>
         ";
+      }
+    }
+    # Mostrar lista de administradores 
+    # ----------------------------------------------------------
+    public function listaAdminController() {
+      $respuesta = CrudAdminModel::listaAdminModel();
+      // echo 'res';
+      // var_dump($respuesta);
+      // die();
+      while ($fila = mysqli_fetch_object($respuesta)) {
+        $id_usuario = $fila->id_usuario;
+        $id_rol = $fila->id_rol;      
+        $nombre = $fila->nombre;
+        $apellidos = $fila->apellidos;
+        $email = $fila->email;
+        
+        if ($email == "drodriguez@email.com") {
+          echo "
+          <tr>
+            <td>".$nombre."</td>
+            <td>".$apellidos."</td>
+            <td>".$email."</td>
+            <td>
+                <i class='fas fa-trash-alt disabled-color'></i>
+              </a>
+            </td>
+          </tr>
+        ";
+        } 
+        else {
+          echo "
+            <tr>
+              <td>".$nombre."</td>
+              <td>".$apellidos."</td>
+              <td>".$email."</td>
+              <td>
+                <a href='templateAdmin.php?action=listaAdmin&idBorrar=".$id_usuario."&idRol=".$id_rol."'>
+                  <i class='fas fa-trash-alt'></i>
+                </a>
+              </td>
+            </tr>
+          ";
+        }
       }
     }
     # Editar usuario 
@@ -157,7 +200,7 @@
         </div>
         <div class='row'>
           <div class='col'>
-            <a href='templateAdmin.php?action=listaProfesores' class='input-form btn form-btn-red'>Cancelar</a>
+            <a href='templateAdmin.php' class='input-form btn form-btn-red'>Cancelar</a>
           </div>
           <div class='col'>
             <input type='submit' value='Actualizar' name='editarUsuario' class='input-form form-btn-green'>
@@ -203,14 +246,16 @@
                                   "id_rol" => $_GET['idRol']);
         $respuesta = CrudAdminModel::eliminarUsuarioModel($datosController);
 
+        if ($respuesta == "success1") {
+          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAdmin");
+        }
         if ($respuesta == "success2") {
           header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionProfesor");
         }
-        else if ($respuesta == "success3") {
+        if ($respuesta == "success3") {
           header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAlumno");
         }
       }
     }
-
   }
 ?>

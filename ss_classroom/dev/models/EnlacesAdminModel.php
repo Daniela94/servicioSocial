@@ -23,6 +23,9 @@
       else if ($enlacesModel == "actualizacionAlumno") {
         $module = MODULES_PATH."admin/listaAlumnos.php";
       }
+      else if ($enlacesModel == "eliminacionAdmin") {
+        $module = MODULES_PATH."admin/listaAdmin.php";
+      }
       else if ($enlacesModel == "eliminacionProfesor") {
         $module = MODULES_PATH."admin/listaProfesores.php";
       }

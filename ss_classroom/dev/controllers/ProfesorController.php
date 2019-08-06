@@ -42,9 +42,10 @@
     }
     # Mostrar lista de tareas
     # ---------------------------------------------------------------
-    public function listaProfesorTareasController() {
-      $respuesta = CrudProfesorModel::listaProfesorTareasModel();
+    public function listaTareasProfesorController() {
+      $respuesta = CrudProfesorModel::listaTareasProfesorModel();
       while ($fila = mysqli_fetch_object($respuesta)) {
+        $id_tarea = $fila->id_tarea;
         $titulo = $fila->titulo;
         $descripcion = $fila->descripcion;
         $fecha_publicacion = $fila->fecha_publicacion;
@@ -62,11 +63,24 @@
             <a href=''>
               <i class='fas fa-edit'></i>
             </a>
-            <a href=''>
+            <a href='templateProfesor.php?action=misTareas&idBorrar=".$id_tarea."'>
               <i class='fas fa-trash-alt'></i>
             </a>
           </td>
         </tr>";
+      }
+    }
+    # Eliminar tareas 
+    # -----------------------------------------------------------------------
+    public function eliminarTareaProfesorController() {
+      if (isset($_GET['idBorrar'])) {
+        $datosController = $_GET['idBorrar'];
+        $respuesta = CrudProfesorModel::eliminarTareaProfesorModel($datosController);
+
+        if ($respuesta == "success") {
+          header("location:".DIR_MODULES."profesor/templateProfesor.php?action=eliminacionTarea");
+        }
+
       }
     }
 
