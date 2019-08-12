@@ -10,19 +10,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Daniela</td>
-      <td>Maravilla</td>
-      <td>resumen.pdf</td>
-      <td>No entregado</td>
-      <td>
-        <a href="">
-          Calificar
-        </a>
-        <a href="">
-          Rechazar
-        </a>
-      </td>
-    </tr>
+    <?php
+      $tareasAlumnos = new ProfesorController();
+      $tareasAlumnos -> listaTareasAlumnosProfesorController();
+    ?>  
   </tbody>
 </table>

@@ -11,12 +11,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Resumen: "Historia de la informática"</td>
-      <td>Realizar un resumen de máximo 2 cuartillas, y mínimo 1. En la libreta, a mano.</td>
-      <td>10/05/2019</td>
-      <td>20/05/2019</td>
-      <td>Florence Welch</td>
-    </tr>
+    <?php
+      $listaTareas = new AdminController();
+      $listaTareas -> listaTareasController();
+    ?>
   </tbody>
 </table>

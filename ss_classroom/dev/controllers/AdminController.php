@@ -148,6 +148,30 @@
         }
       }
     }
+    # Mostrar lista de tareas
+    # ----------------------------------------------------------
+    public function listaTareasController() {
+      $respuesta = CrudAdminModel::listaTareasModel();
+      
+      while ($fila = mysqli_fetch_object($respuesta)) {
+        $titulo = $fila->titulo;
+        $descripcion = $fila->descripcion;      
+        $fecha_publicacion = $fila->fecha_publicacion;
+        $fecha_entrega = $fila->fecha_entrega;
+        $profesor = $fila->nombre.' '.$fila->apellidos;
+
+        echo "
+        <tr>
+          <td>".$titulo."</td>
+          <td>".$descripcion."</td>
+          <td>".$fecha_publicacion."</td>
+          <td>".$fecha_entrega."</td>
+          <td>".$profesor."</td>
+        </tr>
+        ";
+      }
+    }
+    
     # Editar usuario 
     # ----------------------------------------------------------
     public function editarUsuarioController() {

@@ -63,6 +63,18 @@
       return $query;
       mysqli_close($query);
     }
+    # Mostrar lista tareas
+    # -----------------------------------
+    public function listaTareasModel() {
+      $sql = "SELECT tarea.*, usuario.id_usuario,usuario.nombre,usuario.apellidos FROM tarea INNER JOIN usuario ON tarea.id_usuario = usuario.id_usuario";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if (!$query)
+        echo "Error: ".mysqli_error($cnx->getCnx());
+      return $query;
+      mysqli_close($query);
+    }
     # Mostrar lista de administradores
     # --------------------------------------------
     public function listaAdminModel() {

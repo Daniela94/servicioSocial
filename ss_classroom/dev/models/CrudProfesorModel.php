@@ -37,7 +37,8 @@
     # Mostrar lista de tareas
     # ------------------------------------------------------------
     public function listaTareasProfesorModel() {
-      $sql = "SELECT * FROM tarea";
+      $id_usuario = $_SESSION['id_usuario'];
+      $sql = "SELECT * FROM tarea WHERE id_usuario = $id_usuario";
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
@@ -59,5 +60,18 @@
         echo "Error al intentar eliminar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
       mysqli_close($query);
     }
+    # Mostrar lista de status de tareas de los alumnos
+    # ------------------------------------------------
+    public function listaTareasAlumnoProfesorModel() {
+      $sql = "SELECT usuario.id_usuario, usuario.nombre, usuario.apellidos, alumno_tareas.archivo, alumno_tareas.status FROM alumno_tareas INNER JOIN usuario ON alumno_tareas.id_usuario = usuario.id_usuario WHERE id_rol = 3";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if (!$query)
+        echo "Error: ".mysqli_error($cnx->getCnx());
+      return $query;
+      mysqli_close($query);
+    }
+
   }
 ?>

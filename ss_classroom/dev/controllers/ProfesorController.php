@@ -83,6 +83,34 @@
 
       }
     }
+    # Mostrar lista de status de tareas de los alumnos
+    # ----------------------------------------------------------------
+    public function listaTareasAlumnosProfesorController() {
+      $respuesta = CrudProfesorModel::listaTareasAlumnoProfesorModel();
+      while ($fila = mysqli_fetch_object($respuesta)) {
+        $nombre = $fila->nombre;
+        $apellidos = $fila->apellidos;
+        $archivo = $fila->archivo;
+        $status = $fila->status;
+
+        echo "
+        <tr>
+          <td>".$nombre."</td>
+          <td>".$apellidos."</td>
+          <td>".$archivo."</td>
+          <td>".$status."</td>
+          <td>
+            <a href='templateProfesor.php?action=formCalificarTarea'>
+              Calificar
+            </a>
+            <a href=''>
+              Rechazar
+            </a>
+          </td>
+        </tr>
+        ";
+      }
+    }
 
   }
 ?>

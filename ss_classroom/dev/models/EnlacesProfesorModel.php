@@ -6,7 +6,8 @@
       // Vamos a pedirle que valide
       if ($enlacesModel == "misTareas" ||
 					$enlacesModel == "formRegistrarTarea" ||
-					$enlacesModel == "tareasAlumnos") {
+          $enlacesModel == "tareasAlumnos" ||
+          $enlacesModel == "formCalificarTarea") {
           
           $module = MODULES_PATH."profesor/".$enlacesModel.".php";
       }

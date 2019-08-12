@@ -419,3 +419,17 @@ body {
   margin-left: 5px;
   margin-right: 5px;
 }
+
+/* templateProfesor */
+.form-calificar {
+  position: relative;
+  padding: 25px;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  box-shadow: 0 5px 10px #000;
+  border-radius: 5px;
+  max-width: 500px;
+}
+.form-calificar input[type="number"] {
+  border: 1px solid var(--grey-blue);
+}
