@@ -433,3 +433,7 @@ body {
 .form-calificar input[type="number"] {
   border: 1px solid var(--grey-blue);
 }
+.status {
+  color: var(--grey-black-t);
+  font-style: italic;
+}

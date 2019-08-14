@@ -5,7 +5,7 @@
       <th>Nombre</th>
       <th>Apellidos</th>
       <th>Entregable</th>
-      <th>Status</th>
+      <th>Status / Calificación</th>
       <th>Acciones</th>
     </tr>
   </thead>

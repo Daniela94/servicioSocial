@@ -63,7 +63,7 @@
     # Mostrar lista de status de tareas de los alumnos
     # ------------------------------------------------
     public function listaTareasAlumnoProfesorModel() {
-      $sql = "SELECT usuario.id_usuario, usuario.nombre, usuario.apellidos, alumno_tareas.archivo, alumno_tareas.status FROM alumno_tareas INNER JOIN usuario ON alumno_tareas.id_usuario = usuario.id_usuario WHERE id_rol = 3";
+      $sql = "SELECT usuario.id_usuario, usuario.nombre, usuario.apellidos, alumno_tareas.archivo, alumno_tareas.calificacion, alumno_tareas.status FROM usuario LEFT JOIN alumno_tareas ON usuario.id_usuario = alumno_tareas.id_usuario WHERE id_rol = 3";
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
@@ -72,6 +72,7 @@
       return $query;
       mysqli_close($query);
     }
+    // SELECT usuario.id_usuario, usuario.nombre, usuario.apellidos, alumno_tareas.archivo, alumno_tareas.calificacion, alumno_tareas.status FROM alumno_tareas INNER JOIN usuario ON alumno_tareas.id_usuario = usuario.id_usuario WHERE id_rol = 3
 
   }
 ?>

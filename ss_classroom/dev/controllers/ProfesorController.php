@@ -91,24 +91,59 @@
         $nombre = $fila->nombre;
         $apellidos = $fila->apellidos;
         $archivo = $fila->archivo;
+        $calificacion = $fila->calificacion;
         $status = $fila->status;
-
-        echo "
-        <tr>
-          <td>".$nombre."</td>
-          <td>".$apellidos."</td>
-          <td>".$archivo."</td>
-          <td>".$status."</td>
-          <td>
-            <a href='templateProfesor.php?action=formCalificarTarea'>
-              Calificar
-            </a>
-            <a href=''>
-              Rechazar
-            </a>
-          </td>
-        </tr>
+ 
+        if ($status == 0 || $archivo == "") {
+          $status = "No entregado";
+          $archivo = "Vacío";
+          echo "
+          <tr>
+            <td>".$nombre."</td>
+            <td>".$apellidos."</td>
+            <td class='disabled-color'>".$archivo."</td>
+            <td class='status'>".$status."</td>
+            <td class='disabled-color'>Calificar | Rechazar
+            </td>
+          </tr>
         ";
+        }
+        if ($status == 1) {
+          $status = "No calificado";
+          echo "
+          <tr>
+            <td>".$nombre."</td>
+            <td>".$apellidos."</td>
+            <td>".$archivo."</td>
+            <td>".$status."</td>
+            <td>
+              <a href='templateProfesor.php?action=formCalificarTarea'>
+                Calificar
+              </a>
+              <a href=''>
+                Rechazar
+            </td>
+          </tr>
+        ";
+        }
+        if ($status == 2) {
+          $status = $calificacion;
+          echo "
+          <tr>
+            <td>".$nombre."</td>
+            <td>".$apellidos."</td>
+            <td>".$archivo."</td>
+            <td>".$status."</td>
+            <td>
+              <a href='templateProfesor.php?action=formCalificarTarea'>
+                Editar |
+              </a>
+              <a href=''>
+                Rechazar
+            </td>
+          </tr>
+        ";
+        }   
       }
     }
 
