@@ -9,6 +9,7 @@
   require_once CONTROLLER_PATH.'Controller.php';
   require_once CONTROLLER_PATH.'AdminController.php';
   require_once CONTROLLER_PATH.'ProfesorController.php';
+  require_once CONTROLLER_PATH.'AlumnoController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

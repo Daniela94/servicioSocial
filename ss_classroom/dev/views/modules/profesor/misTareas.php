@@ -20,6 +20,10 @@
 </table>
 <?php
   if (isset($_GET['action'])) {
+    # MENSAJE ACTUALIZACIÓN EXITOSA
+    if ($_GET['action'] == "actualizacionTarea") {
+      echo "Actualizacion exitosa";
+    }
     # MENSAJE ELIMINACIÓN EXITOSA
     if ($_GET['action'] == "eliminacionTarea") {
       echo "Eliminación exitosa";

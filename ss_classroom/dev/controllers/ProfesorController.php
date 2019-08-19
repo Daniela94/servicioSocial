@@ -60,7 +60,7 @@
             <a href='templateProfesor.php?action=tareasAlumnos'>
               <i class='fas fa-external-link-alt'></i>
             </a>
-            <a href=''>
+            <a href='templateProfesor.php?action=formEditarTarea&idEditar=".$id_tarea."'>
               <i class='fas fa-edit'></i>
             </a>
             <a href='templateProfesor.php?action=misTareas&idBorrar=".$id_tarea."'>
@@ -69,6 +69,74 @@
           </td>
         </tr>";
       }
+    }
+    # Editar tarea
+    # -----------------------------------------------------
+    public function editarTareaProfesorController() {
+      $datosController = $_GET['idEditar'];
+      $respuesta = CrudProfesorModel::editarTareaProfesorModel($datosController);
+      // echo $respuesta[4];
+      $fecha_inicio = $respuesta['fecha_publicacion'];
+      $fecha_inicio = strtotime("$fecha_inicio");
+      $fecha_publicacion = date("Y-m-d", $fecha_inicio);
+
+      $fecha_fin = $respuesta['fecha_entrega'];
+      $fecha_fin = strtotime("$fecha_fin");
+      $fecha_entrega = date("Y-m-d", $fecha_fin);
+      echo "
+      <form action='' method='POST'>
+        <div class='row'>
+          <div class='col'>
+            <label for=''>Título</label>
+            <input type='hidden' value='".$respuesta['id_tarea']."' name='id_tarea'>
+            <input type='text' value='".$respuesta['titulo']."' name='titulo' class='input-form'>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col'>
+            <label for=''>Descripción</label>
+            <textarea rows='4' cols='50' name='descripcion' class='input-form'>".$respuesta['descripcion']."</textarea>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col'>
+            <label for=''>Fecha de publicación</label>
+            <input type='date' value='".$fecha_publicacion."' name='fecha_publicacion' class='input-form'>
+          </div>
+          <div class='col'>
+            <label for=''>Fecha de entrega</label>
+            <input type='date' name='fecha_entrega' value='".$fecha_entrega."' class='input-form'>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col'>
+            <a href='templateProfesor.php' class='input-form btn form-btn-red'>Cancelar</a>
+          </div>
+          <div class='col'>
+            <input type='submit' name='editarTarea' value='Actualizar' class='input-form form-btn-green'>
+          </div>
+        </div>
+      </form>
+      ";
+    }
+    # Actualizar tarea
+    # --------------------------------------------------------------
+    public function actualizarTareaProfesorController() {
+      if (isset($_POST['editarTarea'])) {
+        $datosController = array( "id_usuario"=>$_SESSION['id_usuario'],
+                                  "id_tarea"=>$_POST['id_tarea'],
+                                  "titulo"=>$_POST['titulo'],
+                                  "descripcion"=>$_POST['descripcion'],
+                                  "fecha_publicacion"=>$_POST['fecha_publicacion'],
+                                  "fecha_entrega"=>$_POST['fecha_entrega']);
+                                  $actualizar = new CrudProfesorModel($datosController);
+        $respuesta = $actualizar -> actualizarTareaProfesorModel();
+  
+        if ($respuesta == "success") {
+          header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=actualizacionTarea");
+        }
+      }
+
     }
     # Eliminar tareas 
     # -----------------------------------------------------------------------

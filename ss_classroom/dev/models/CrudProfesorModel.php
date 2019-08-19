@@ -47,6 +47,34 @@
       return $query;
       mysqli_close($query);
     }
+    # Editar tarea
+    # ----------------------------------------------------
+    public function editarTareaProfesorModel($datosModel) {
+      $sql = "SELECT * FROM tarea WHERE id_tarea = $datosModel";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      $row = mysqli_fetch_array($query);
+      if (!$query)
+      echo "Error: ".mysqli_error($cnx->getCnx());
+      return $row;
+      mysqli_close($query);
+    }
+    # Actualizar tarea
+    # ---------------------------------------------------------
+    public function actualizarTareaProfesorModel() {
+      $sql = "UPDATE tarea SET titulo = '$this->titulo', descripcion = '$this->descripcion', fecha_publicacion = '$this->fecha_publicacion', fecha_entrega = '$this->fecha_entrega' WHERE id_tarea = $this->id_tarea";
+      // print_r($sql);
+      // die();
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if ($query == true) {
+        return "success";
+      } else
+        echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+      mysqli_close($query);
+    }
     # Eliminar tarea
     # -----------------------------------
     public function eliminarTareaProfesorModel($datosModel) {

@@ -7,12 +7,16 @@
       if ($enlacesModel == "misTareas" ||
 					$enlacesModel == "formRegistrarTarea" ||
           $enlacesModel == "tareasAlumnos" ||
-          $enlacesModel == "formCalificarTarea") {
+          $enlacesModel == "formCalificarTarea" ||
+          $enlacesModel == "formEditarTarea") {
           
           $module = MODULES_PATH."profesor/".$enlacesModel.".php";
       }
       else if ($enlacesModel == "ok") {
         $module = MODULES_PATH."profesor/formRegistrarTarea.php";
+      }
+      else if ($enlacesModel == "actualizacionTarea") {
+        $module = MODULES_PATH."profesor/misTareas.php";
       }
       else if ($enlacesModel == "eliminacionTarea") {
         $module = MODULES_PATH."profesor/misTareas.php";

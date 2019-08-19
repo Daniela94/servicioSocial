@@ -23,6 +23,7 @@
             session_start();
 
             $_SESSION['validar'] = true;
+            $_SESSION['id_usuario'] = $respuesta['id_usuario'];
             $_SESSION['usuario'] = $respuesta['nombre'];
 
             header('location: '.DIR_MODULES.'admin/templateAdmin.php');
@@ -42,6 +43,7 @@
             session_start();
             
             $_SESSION['validar'] = true;
+            $_SESSION['id_usuario'] = $respuesta['id_usuario'];
             $_SESSION['usuario'] = $respuesta['nombre'];
 
             header('location: '.DIR_MODULES.'alumno/templateAlumno.php');

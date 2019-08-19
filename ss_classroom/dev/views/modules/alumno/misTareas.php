@@ -15,7 +15,7 @@
   <tbody>
     <?php
       $listaTareas = new AlumnoController();
-      $listaTareas -> listaAlumnoTareasController();
+      $listaTareas -> listaTareasAlumnoController();
     ?>
   </tbody>
 </table>

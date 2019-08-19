@@ -16,8 +16,10 @@
     }
     # Mostrar lista de tareas
     # ---------------------------------------------------------------
-    public function listaAlumnoTareasController() {
-      $respuesta = CrudAlumnoModel::listaAlumnoTareasModel();
+    public function listaTareasAlumnoController() {
+      // print_r($_SESSION);
+      $id_usuario = $_SESSION['id_usuario'];
+      $respuesta = CrudAlumnoModel::listaTareasAlumnoModel($id_usuario);
       while ($fila = mysqli_fetch_object($respuesta)) {
         // var_dump($fila);
         // die();
@@ -25,7 +27,14 @@
         $descripcion = $fila->descripcion;
         $fecha_publicacion = $fila->fecha_publicacion;
         $fecha_entrega = $fila->fecha_entrega;
+        $status = $fila->status;
+        if ($status == 0) {
+          $status = "No entregado";
+        } else {
+          $status = "Entregado";
+        }
         $profesor = $fila->nombre.' '.$fila->apellidos;
+        // $profesor = $fila->id_usuario;
         echo "
           <tr>
           <td>".$titulo."</td>
@@ -33,7 +42,7 @@
           <td>".$fecha_publicacion."</td>
           <td>".$fecha_entrega."</td>
           <td>".$profesor."</td>
-          <td></td>
+          <td class='".(($status == 'Entregado') ? 'status entregado' : 'status no-entregado')."'>".$status."</td>
           <td>
             <a href=''>
               <i class='fas fa-file-upload'></i>

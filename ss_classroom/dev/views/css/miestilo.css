@@ -87,12 +87,14 @@ body {
   --black-343: #343a40;
   --black-111: #111111;
   --green-udc: #693;
+  --green-2: #457713;
   --blue-loco: #00e6e6;
   --green-loco: #66cc03;
   --grey-light: #dee2e6;
   --grey-blue: #bccedd;
   --shadow-light: #b3b3b3;
   --red: #D11010;
+  --red-2: #b10000;
   --red-loco: #df130c;
   --blue: #106ad1;
   --blue-sky: #5db2cc;
@@ -433,7 +435,14 @@ body {
 .form-calificar input[type="number"] {
   border: 1px solid var(--grey-blue);
 }
-.status {
-  color: var(--grey-black-t);
+.status, .entregado, .no-entregado {
   font-style: italic;
+  opacity: 0.5;
+  font-weight: 550;
+}
+.entregado {
+  color: var(--green-2);
+}
+.no-entregado {
+  color: var(--red-2);
 }
