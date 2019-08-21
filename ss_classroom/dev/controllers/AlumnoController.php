@@ -19,13 +19,14 @@
     public function listaTareasAlumnoController() {
       // print_r($_SESSION);
       $id_usuario = $_SESSION['id_usuario'];
+      // var_dump($id_usuario);
       $respuesta = CrudAlumnoModel::listaTareasAlumnoModel($id_usuario);
       while ($fila = mysqli_fetch_object($respuesta)) {
         // var_dump($fila);
         // die();
-        $id_usuario = $fila ->id_usuario;
+        // $id_usuario = $fila->id_usuario;
         $id_tarea = $fila->id_tarea;
-
+        
         $titulo = $fila->titulo;
         $descripcion = $fila->descripcion;
         $fecha_publicacion = $fila->fecha_publicacion;
@@ -39,71 +40,66 @@
         $profesor = $fila->nombre.' '.$fila->apellidos;
         // $profesor = $fila->id_usuario;
         echo "
-          <tr>
-          <td>".$titulo."</td>
-          <td>".$descripcion."</td>
-          <td>".$fecha_publicacion."</td>
-          <td>".$fecha_entrega."</td>
-          <td>".$profesor."</td>
-          <td class='".(($status == 'Entregado') ? 'status entregado' : 'status no-entregado')."'>".$status."</td>
-          <td>
-            <a href='templateAlumno.php?action=formSubirTarea&titulo=".$titulo."&idUsuario=".$id_usuario."&idTarea=".$id_tarea."'>
-              <i class='fas fa-file-upload'></i>
-            </a>
-          </td>
+        <tr>
+        <td>".$titulo."</td>
+        <td>".$descripcion."</td>
+        <td>".$fecha_publicacion."</td>
+        <td>".$fecha_entrega."</td>
+        <td>".$profesor."</td>
+        <td class='".(($status == 'Entregado') ? 'status entregado' : 'status no-entregado')."'>".$status."</td>
+        <td>
+        <a href='templateAlumno.php?action=formSubirTarea&titulo=".$titulo."&idUsuario=".$id_usuario."&idTarea=".$id_tarea."'>
+        <i class='fas fa-file-upload'></i>
+        </a>
+        </td>
         </tr>";
       }
+      // var_dump($id_usuario);
+      // var_dump($_SESSION['id_usuario']);
     }
     # Subir tarea
     # ----------------------------------------------------------------
     public function subirTareaAlumnoController() {
-      $titulo = $_GET['titulo'];
+      // $titulo = $_POST['titulo'];
       if (isset($_POST['enviarTarea'])) {
-        print_r($_FILES);
+        // print_r($_FILES);
+        // echo "<hr>";
         $archivoNombre = $_FILES['archivo']['name'];
         $archivoGuardado = $_FILES['archivo']['tmp_name'];
-        if (!file_exists(VIEW_PATH.'assets/tareas')) {
-          mkdir(VIEW_PATH.'assets/tareas', 0777, true);
-          if (file_exists(VIEW_PATH.'assets/tareas')) {
-            if(move_uploaded_file($archivoGuardado, VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
+        $extension = explode(".", $archivoNombre)[1];
+        $allowedfileExtensions = array('jpg', 'png', 'pdf', 'zip', 'txt', 'docs', 'docx');
+        if (in_array($extension, $allowedfileExtensions)) {
+          if (!file_exists(VIEW_PATH.'assets/tareas')) {
+            mkdir(VIEW_PATH.'assets/tareas', 0777, true);
+            if (file_exists(VIEW_PATH.'assets/tareas')) {
+              if(move_uploaded_file($archivoGuardado, VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
+                echo "Tarea subida con éxito";
+              } else {
+                echo "No se subió";
+              }
+            }
+          } else {
+            if(move_uploaded_file($archivoGuardado,VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
               echo "Tarea subida con éxito";
             } else {
               echo "No se subió";
             }
           }
-        } else {
-          if(move_uploaded_file($archivoGuardado,VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
-            echo "Tarea subida con éxito";
+          $datosController = array( "id_usuario"=>$_POST['idUsuario'],
+                                    "id_tarea"=>$_POST['idTarea'],
+                                    "archivo"=>$archivoNombre);
+          //echo "<hr>";
+          //print_r($datosController);
+          // die();
+          $respuesta = CrudAlumnoModel::subirTareaAlumnoModel($datosController);
+          if ($respuesta == "success") {
+            header("location: ".DIR_MODULES."alumno/templateAlumno.php?action=envioExitoso");
           } else {
-            echo "No se subió";
+            echo "Error al intentar subir la tarea.";
           }
+        } else {
+          echo "No puedes subir archivos con esa extensión.";
         }
-        die();
-        // $datosController = array( "id_usuario"=>$_GET['id_usuario'],
-        //                           "id_tarea"=>$_GET['id_tarea'],
-        //                           "archivo"=>$_FILES['archivo']);
-        // if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
-        //   // obtener detalles del archivo cargado
-        //   $fileTmpPath = $_FILES['archivo']['tmp_name'];
-        //   $fileName = $_FILES['archivo']['name'];
-        //   $fileSize = $_FILES['archivo']['size'];
-        //   $fileType = $_FILES['archivo']['type'];
-        //   $fileNameCmps = explode(".", $fileName);
-        //   $fileExtension = strtolower(end($fileNameCmps));
-        //   // eliminar espacios y caracteres especiales del archivo
-        //   $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-        //   $allowedfileExtensions = array('jpg', 'png', 'zip', 'txt', 'xls', 'doc', 'pdf', 'docx', 'pptx');
-        //   if (in_array($fileExtension, $allowedfileExtensions)) {
-        //     $subirTarea = new CrudAlumnoModel();
-        //     $respuesta = $subirTarea -> subirTareaAlumnoModel($datosController);
-        //     if ($respuesta == "success") {
-        //       header("location: ".DIR_MODULES."alumno/templateAlumno.php?action=envioExitoso&titulo='.$titulo.'");
-        //     } else {
-        //       header("location: ".DIR_MODULES."alumno/templateAlumno.php?action=formSubirTarea&titulo='.$titulo.'");
-        //     }
-        //   }
-        // }  
-        
       }
     }
   }

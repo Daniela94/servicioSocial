@@ -19,3 +19,10 @@
     ?>
   </tbody>
 </table>
+<?php
+  if (isset($_GET['action'])) {
+    if($_GET['action'] == "envioExitoso") {
+      echo "Se subió la tarea con éxito";
+    }
+  }
+?>

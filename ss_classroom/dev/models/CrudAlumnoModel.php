@@ -18,18 +18,17 @@
     # Subir tarea
     # ---------------------------------------------
     public function subirTareaAlumnoModel($datosModel) {
+      // var_dump($datosModel);
+      // $titulo = $datosModel['titulo'];
       $id_usuario = $datosModel['id_usuario'];
       $id_tarea = $datosModel['id_tarea'];
-      $ruta = $_SERVER['DIR_VIEWS']."/assets/tareas/";
       $archivo = $datosModel['archivo'];
-      move_uploaded_file($archivo['tmp_name'], $ruta.$archivo);
-      $sql = "INSERT INTO alumno_tareas (id_usuario,id_tarea,archivo,status) VALUES ($id_usuario,$id_tarea,$archivo,1) ";
-      echo $sql.'<br />';
-      die();
+      $sql = "INSERT INTO alumno_tareas(id_usuario,id_tarea,calificacion,archivo,status) VALUES ($id_usuario,$id_tarea,0,'$archivo',1) ";
+      // echo $sql.'<br />';
+      //  die();
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
-
       if ($query == true)
         return "success";
       else

@@ -10,7 +10,7 @@
           $module = MODULES_PATH."alumno/".$enlacesModel.".php";
       }
       else if ($enlacesModel == "envioExitoso") {
-        $module = MODULES_PATH."alumno/formSubirTarea.php";
+        $module = MODULES_PATH."alumno/misTareas.php";
       }
       else if ($enlacesModel == "cerrarSesion") {
         $module = MODULES_PATH.$enlacesModel.".php";

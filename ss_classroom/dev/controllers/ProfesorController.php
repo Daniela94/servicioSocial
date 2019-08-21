@@ -154,6 +154,7 @@
     # Mostrar lista de status de tareas de los alumnos
     # ----------------------------------------------------------------
     public function listaTareasAlumnosProfesorController() {
+      // var_dump($_SERVER['DOCUMENT_ROOT']);
       $respuesta = CrudProfesorModel::listaTareasAlumnoProfesorModel();
       while ($fila = mysqli_fetch_object($respuesta)) {
         $nombre = $fila->nombre;
@@ -169,6 +170,7 @@
           <tr>
             <td>".$nombre."</td>
             <td>".$apellidos."</td>
+            
             <td class='disabled-color'>".$archivo."</td>
             <td class='status'>".$status."</td>
             <td class='disabled-color'>Calificar | Rechazar
@@ -178,15 +180,17 @@
         }
         if ($status == 1) {
           $status = "No calificado";
+          // echo $archivo;
+          // die();
           echo "
           <tr>
             <td>".$nombre."</td>
             <td>".$apellidos."</td>
-            <td>".$archivo."</td>
+            <td><a href='".DIR_VIEWS."assets/tareas/".$archivo."' target='_blank'><i class='fas fa-file-pdf'></a></i></td>
             <td>".$status."</td>
             <td>
               <a href='templateProfesor.php?action=formCalificarTarea'>
-                Calificar
+                Calificar |
               </a>
               <a href=''>
                 Rechazar

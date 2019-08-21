@@ -5,7 +5,11 @@
     <div class="row">
       <div class="col">
         <?php
-          $titulo = $_GET['titulo'];
+          if (isset($_GET['titulo'])) {
+            $id_usuario = $_GET['idUsuario'];
+            $id_tarea = $_GET['idTarea'];
+            $titulo = $_GET['titulo'];
+          }
         ?>
         <label for=""><span class="disabled-color">Tarea:</span> <?=$titulo?></label>
         <input type="file" name="archivo" size="" class="input-form">
@@ -16,6 +20,9 @@
         <a href="templateAlumno.php?action=misTareas" class="input-form btn form-btn-red">Cancelar</a>
       </div>
       <div class="col">
+        <input type="hidden" value="<?=$id_usuario?>" name="idUsuario" class="input-form form-btn-green">
+        <input type="hidden" value="<?=$id_tarea?>" name="idTarea" class="input-form form-btn-green">
+        <!-- <input type="hidden" value="<?=$titulo?>" name="titulo"> -->
         <input type="submit" value="Subir tarea" name="enviarTarea" class="input-form form-btn-green">
       </div>
     </div>
@@ -25,10 +32,4 @@
 <?php 
   $subirTarea = new AlumnoController();
   $subirTarea -> subirTareaAlumnoController();
-
-  if (isset($_GET['action'])) {
-    if($_GET['action'] == "envioExitoso") {
-      echo "Se subió la tarea con éxito";
-    }
-  }
 ?>
