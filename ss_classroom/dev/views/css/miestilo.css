@@ -87,7 +87,7 @@ body {
   --black-343: #343a40;
   --black-111: #111111;
   --green-udc: #693;
-  --green-2: #457713;
+  --green-2: #0d771c;
   --blue-loco: #00e6e6;
   --green-loco: #66cc03;
   --grey-light: #dee2e6;
@@ -197,7 +197,6 @@ body {
   background-position: center;
   height: 100%;
 }
-
 [class*="h-mnsj-"] {
   color: white;
   position: absolute;
@@ -207,6 +206,17 @@ body {
 }
 .form-index span, .form-registro span {
   font-size: 14px;
+}
+.status, .entregado, .no-entregado {
+  font-style: italic;
+  opacity: 0.6;
+  font-weight: 550;
+}
+.entregado {
+  color: var(--green-2);
+}
+.no-entregado {
+  color: var(--red-2);
 }
 /* CSS REGISTRO.PHP */
 .form-registro {
@@ -430,19 +440,13 @@ body {
   transform: translate(-50%, 10%);
   box-shadow: 0 5px 10px #000;
   border-radius: 5px;
-  max-width: 500px;
+  max-width: 450px;
 }
 .form-calificar input[type="number"] {
   border: 1px solid var(--grey-blue);
 }
-.status, .entregado, .no-entregado {
-  font-style: italic;
-  opacity: 0.5;
-  font-weight: 550;
-}
-.entregado {
-  color: var(--green-2);
-}
-.no-entregado {
-  color: var(--red-2);
+.form-calificar p {
+  display: flex;
+  justify-content: center;
+  color: var(--grey-black-t);
 }

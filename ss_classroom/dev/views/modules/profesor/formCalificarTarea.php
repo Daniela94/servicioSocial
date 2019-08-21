@@ -7,9 +7,16 @@
         <label for="">"Nombre de la tarea"</label>
       </div>
       <div class="col">
-        <input type="number" class="input-form">
+        <input type="number" class="input-form" placeholder="10.0">
       </div>
-      <input type="submit" value="Calificar" class="input-form form-btn-green">
+    </div>
+    <div class="row">
+      <div class="col">
+        <a href="templateProfesor.php" class="input-form btn form-btn-red">Cancelar</a>
+      </div>
+      <div class="col">
+        <input type="submit" value="Calificar" class="input-form form-btn-green">
+      </div>
     </div>
   </form>
 </div>
