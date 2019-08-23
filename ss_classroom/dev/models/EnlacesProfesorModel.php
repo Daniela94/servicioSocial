@@ -8,7 +8,8 @@
 					$enlacesModel == "formRegistrarTarea" ||
           $enlacesModel == "tareasAlumnos" ||
           $enlacesModel == "formCalificarTarea" ||
-          $enlacesModel == "formEditarTarea") {
+          $enlacesModel == "formEditarTarea" || 
+          $enlacesModel == "formEditarCalificacionTarea") {
           
           $module = MODULES_PATH."profesor/".$enlacesModel.".php";
       }
@@ -20,6 +21,15 @@
       }
       else if ($enlacesModel == "eliminacionTarea") {
         $module = MODULES_PATH."profesor/misTareas.php";
+      }
+      else if ($enlacesModel == "tareaCalificada") {
+        $module = MODULES_PATH."profesor/tareasAlumnos.php";
+      }
+      else if ($enlacesModel == "calificacionActualizada") {
+        $module = MODULES_PATH."profesor/tareasAlumnos.php";
+      }
+      else if ($enlacesModel == "tareaRechazada") {
+        $module = MODULES_PATH."profesor/tareasAlumnos.php";
       }
       else if ($enlacesModel == "cerrarSesion") {
         $module = MODULES_PATH.$enlacesModel.".php";

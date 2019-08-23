@@ -50,14 +50,21 @@
         $descripcion = $fila->descripcion;
         $fecha_publicacion = $fila->fecha_publicacion;
         $fecha_entrega = $fila->fecha_entrega;
+
+        // $_SESSION['idTarea'] = $id_tarea;
+
+        // $query_string = 'foo=' . urlencode($foo) . '&bar=' . urlencode($bar);
+        // echo '<a href="mycgi?' . htmlentities($url_string) . '">';
+        $url_string_link = 'action=tareasAlumnos&titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea);
+        
         echo "
-          <tr>
-          <td>".$titulo."</td>
-          <td>".$descripcion."</td>
-          <td>".$fecha_publicacion."</td>
+        <tr>
+        <td>".$titulo."</td>
+        <td>".$descripcion."</td>
+        <td>".$fecha_publicacion."</td>
           <td>".$fecha_entrega."</td>
           <td>
-            <a href='templateProfesor.php?action=tareasAlumnos'>
+            <a href='templateProfesor.php?".htmlentities($url_string_link)."'>
               <i class='fas fa-external-link-alt'></i>
             </a>
             <a href='templateProfesor.php?action=formEditarTarea&idEditar=".$id_tarea."'>
@@ -68,6 +75,11 @@
             </a>
           </td>
         </tr>";
+
+        $_SESSION['titulo'] = $titulo;
+        
+        // var_dump($id_tarea);
+        // die();
       }
     }
     # Editar tarea
@@ -110,7 +122,7 @@
         </div>
         <div class='row'>
           <div class='col'>
-            <a href='templateProfesor.php' class='input-form btn form-btn-red'>Cancelar</a>
+            <a href='templateProfesor.php?action=tareasAlumnos' class='input-form btn form-btn-red'>Cancelar</a>
           </div>
           <div class='col'>
             <input type='submit' name='editarTarea' value='Actualizar' class='input-form form-btn-green'>
@@ -129,14 +141,13 @@
                                   "descripcion"=>$_POST['descripcion'],
                                   "fecha_publicacion"=>$_POST['fecha_publicacion'],
                                   "fecha_entrega"=>$_POST['fecha_entrega']);
-                                  $actualizar = new CrudProfesorModel($datosController);
+        $actualizar = new CrudProfesorModel($datosController);
         $respuesta = $actualizar -> actualizarTareaProfesorModel();
   
         if ($respuesta == "success") {
           header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=actualizacionTarea");
         }
       }
-
     }
     # Eliminar tareas 
     # -----------------------------------------------------------------------
@@ -155,69 +166,155 @@
     # ----------------------------------------------------------------
     public function listaTareasAlumnosProfesorController() {
       // var_dump($_SERVER['DOCUMENT_ROOT']);
-      $respuesta = CrudProfesorModel::listaTareasAlumnoProfesorModel();
+      if (isset($_GET['idTarea'])) {
+        $id_tarea = $_GET['idTarea'];
+        // var_dump($id_tarea);
+        // die();
+      }
+      // $id_tarea = $_SESSION['idTarea'];
+      $respuesta = CrudProfesorModel::listaTareasAlumnosProfesorModel($id_tarea);
+      if (isset($_GET['titulo'])) {
+        $titulo = $_GET['titulo'];
+      }
+      echo "Tarea: ".$titulo;
+      // var_dump($titulo);
+      // die();
       while ($fila = mysqli_fetch_object($respuesta)) {
+
+        $id_alumno_tareas = $fila->id_alumno_tareas;
         $nombre = $fila->nombre;
         $apellidos = $fila->apellidos;
         $archivo = $fila->archivo;
         $calificacion = $fila->calificacion;
         $status = $fila->status;
- 
-        if ($status == 0 || $archivo == "") {
-          $status = "No entregado";
-          $archivo = "Vacío";
+
+        $url_string_E = 'action=formCalificarTarea&titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea);
+        $url_string_R = 'action=tareasAlumnos&rechazarTarea&titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea);
+        $url_string_C = 'action=formEditarCalificacionTarea&titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea);
+
+        $accionesNE = "Calificar | Rechazar";
+        $accionesE = "<a href='templateProfesor.php?".htmlentities($url_string_E)."'> 
+        Calificar | 
+        </a>
+        <a href='templateProfesor.php?".htmlentities($url_string_R)."'>
+          Rechazar
+        </a>";
+        $accionesC = "<a href='templateProfesor.php?".htmlentities($url_string_C)."'>
+          Editar |
+        </a>
+        <a href='templateProfesor.php?".htmlentities($url_string_R)."'>
+          Rechazar
+        </a>";
+
           echo "
           <tr>
             <td>".$nombre."</td>
-            <td>".$apellidos."</td>
-            
-            <td class='disabled-color'>".$archivo."</td>
-            <td class='status'>".$status."</td>
-            <td class='disabled-color'>Calificar | Rechazar
-            </td>
-          </tr>
-        ";
-        }
-        if ($status == 1) {
-          $status = "No calificado";
-          // echo $archivo;
-          // die();
-          echo "
-          <tr>
-            <td>".$nombre."</td>
-            <td>".$apellidos."</td>
-            <td><a href='".DIR_VIEWS."assets/tareas/".$archivo."' target='_blank'><i class='fas fa-file-pdf'></a></i></td>
-            <td>".$status."</td>
-            <td>
-              <a href='templateProfesor.php?action=formCalificarTarea'>
-                Calificar |
-              </a>
-              <a href=''>
-                Rechazar
-            </td>
-          </tr>
-        ";
-        }
-        if ($status == 2) {
-          $status = $calificacion;
-          echo "
-          <tr>
-            <td>".$nombre."</td>
-            <td>".$apellidos."</td>
-            <td>".$archivo."</td>
-            <td>".$status."</td>
-            <td>
-              <a href='templateProfesor.php?action=formCalificarTarea'>
-                Editar |
-              </a>
-              <a href=''>
-                Rechazar
-            </td>
-          </tr>
-        ";
-        }   
+            <td>".$apellidos."</td><td";
+            if($archivo=="") echo " class='disabled-color'> Vacío"; else echo "><a href='".DIR_VIEWS."assets/tareas/".$archivo."' target='_blank'><i class='fas fa-file-pdf'></a>";
+            echo "</td><td";
+
+            if($status==0) echo " class='status'>No entregada";
+            if($status==1) echo " class='status'>No calificada";
+            if($status==2) echo ">" .$calificacion;
+            if($status==3) echo " class='status no-entregado'>Rechazada";
+            echo "</td>
+            <td";
+            if($status==0) echo " class='disabled-color'>".$accionesNE;
+            if($status==1) echo ">".$accionesE;
+            if($status==2) echo ">".$accionesC;
+            if($status==3) echo " class='disabled-color'>".$accionesNE;
+            echo "</td>
+          </tr>";
       }
     }
+    # Calificar tarea 
+    # -------------------------------------------------------------------------
+    public function calificarTareaAlumnoProfesorController() {
+      if (isset($_GET['idTarea'])) $id_tarea = $_GET['idTarea'];
+      if (isset($_GET['titulo'])) $titulo = $_GET['titulo'];
 
+      if (isset($_POST['calificar'])) {
+        $datosController = array( "id_tarea" => $_POST['idTarea'],  
+                                  "calificacion" => $_POST['calificacion']);
+        // var_dump($datosController);
+        // die();
+        $respuesta = CrudProfesorModel::calificarTareaAlumnoProfesorModel($datosController);
+
+        if ($respuesta == "success") {
+          header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=tareaCalificada");
+        } else {
+          header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=formCalificarTarea");
+        }
+      }
+    }
+    # Cambiar calificación
+    # --------------------------------------------------------------------------
+    public function editarCalificacionAlumnoProfesorController() {
+      // if (isset($_POST['actualizarCalificacion'])) {
+        $datosController = $_GET['idTarea'];
+        $respuesta = CrudProfesorModel::editarCalificacionAlumnoProfesorModel($datosController);
+      // }
+      
+      // $titulo = $respuesta['titulo'];
+      $calificacion = $respuesta['calificacion'];
+      $titulo = $_GET['titulo'];
+      $id_tarea = $_GET['idTarea'];
+      
+      $url_string_cancelar = 'titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea).'&action=tareasAlumnos';
+
+      echo "
+      <p>Del 1 al 10 donde 10 es el 100% del valor de la tarea.</p>
+      <form method='POST'>
+        <div class='row'>
+          <div class='col'>
+            <label for=''>".$titulo."</label>
+          </div>
+          <div class='col'>
+            <input type='hidden' class='input-form' value=".$id_tarea." name='idTarea'>
+            <input type='hidden' class='input-form' value=".$titulo." name='titulo'>
+            <input type='number' step='any' min='0' max='10' class='input-form' value=".$calificacion." name='calificacion'>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col'>
+            <a href='templateProfesor.php?".htmlentities($url_string_cancelar)."' class='input-form btn form-btn-red'>Cancelar</a>
+          </div>
+          <div class='col'>
+            <input type='submit' value='Calificar' name='actualizarCalificacion' class='input-form form-btn-green'>
+          </div>
+        </div>
+      </form>
+      ";
+    }
+    # Actualizar calificación
+    # -----------------------------------------------------------------------------
+    public function actualizarCalificacionAlumnoProfesorController() {
+      if (isset($_POST['actualizarCalificacion'])) {
+        $titulo = $_POST['titulo'];
+        $id_tarea = $_POST['idTarea'];
+        $datosController = array( "id_tarea" => $id_tarea,
+                                  "calificacion" => $_POST['calificacion']);
+        $respuesta = CrudProfesorModel::actualizarCalificacionAlumnoProfesorModel($datosController);
+  
+        if ($respuesta == "success") {
+          header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=calificacionActualizada");
+        }
+      }
+    }
+    # Rechazar tarea
+    # ---------------------------------------------------------
+    public function rechazarTareaAlumnoProfesorController() {
+      if (isset($_GET['rechazarTarea'])) {
+        if (isset($_GET['titulo'])) {
+          $titulo = $_GET['titulo'];
+        }
+        $id_tarea = $_GET['idTarea'];
+        $respuesta = CrudProfesorModel::rechazarTareaAlumnoProfesorModel($id_tarea);
+
+        if($respuesta == "success") {
+          header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=tareaRechazada");
+        }
+      }
+    }
   }
 ?>

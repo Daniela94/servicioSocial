@@ -31,27 +31,40 @@
         $descripcion = $fila->descripcion;
         $fecha_publicacion = $fila->fecha_publicacion;
         $fecha_entrega = $fila->fecha_entrega;
+        $calificacion = $fila->calificacion;
         $status = $fila->status;
-        if ($status == 0) {
-          $status = "No entregado";
-        } else {
-          $status = "Entregado";
-        }
+        if ($status == 0) $status = "No entregado";
+        if ($status == 1) $status = "Entregado";
+        if ($status == 2) $status = "Calificado: ".$calificacion;
+        if ($status == 3) $status = "Rechazado";
         $profesor = $fila->nombre.' '.$fila->apellidos;
         // $profesor = $fila->id_usuario;
         echo "
         <tr>
-        <td>".$titulo."</td>
-        <td>".$descripcion."</td>
-        <td>".$fecha_publicacion."</td>
-        <td>".$fecha_entrega."</td>
-        <td>".$profesor."</td>
-        <td class='".(($status == 'Entregado') ? 'status entregado' : 'status no-entregado')."'>".$status."</td>
-        <td>
-        <a href='templateAlumno.php?action=formSubirTarea&titulo=".$titulo."&idUsuario=".$id_usuario."&idTarea=".$id_tarea."'>
-        <i class='fas fa-file-upload'></i>
-        </a>
-        </td>
+          <td>".$titulo."</td>
+          <td>".$descripcion."</td>
+          <td>".$fecha_publicacion."</td>
+          <td>".$fecha_entrega."</td>
+          <td>".$profesor."</td>
+          <td class='
+        ";
+          if ($status == "Entregado") echo 'status entregado';
+          if ($status == "Calificado: ".$calificacion) echo 'status calificado';
+          if ($status == "No entregado") echo 'status disabled-color';
+          if ($status == "Rechazado") echo 'status no-entregado'; 
+          echo "'>"; 
+          if ($status == "Entregado") echo "<i class='fas fa-check'></i> ";
+          else if ($status == "Calificado: ".$calificacion) echo "<i class='fas fa-check-double'></i>"; 
+          else if ($status == "Rechazado") echo "<i class='fas fa-times'></i> "; echo $status."</td>
+          <td";
+            if ($status == "Calificado: ".$calificacion) echo " class='disabled-color'><i class='fas fa-file-upload'> Subir</i>";
+              else 
+                echo ">
+                  <a href='templateAlumno.php?action=formSubirTarea&titulo=".$titulo."&idUsuario=".$id_usuario."&idTarea=".$id_tarea."'>
+                    <i class='fas fa-file-upload'> Subir</i>
+                  </a>";
+            echo "
+          </td>
         </tr>";
       }
       // var_dump($id_usuario);
@@ -67,7 +80,7 @@
         $archivoNombre = $_FILES['archivo']['name'];
         $archivoGuardado = $_FILES['archivo']['tmp_name'];
         $extension = explode(".", $archivoNombre)[1];
-        $allowedfileExtensions = array('jpg', 'png', 'pdf', 'zip', 'txt', 'docs', 'docx');
+        $allowedfileExtensions = array('jpg', 'jpeg', 'png', 'pdf', 'zip', 'txt', 'docs', 'docx');
         if (in_array($extension, $allowedfileExtensions)) {
           if (!file_exists(VIEW_PATH.'assets/tareas')) {
             mkdir(VIEW_PATH.'assets/tareas', 0777, true);

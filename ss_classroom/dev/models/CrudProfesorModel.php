@@ -90,17 +90,82 @@
     }
     # Mostrar lista de status de tareas de los alumnos
     # ------------------------------------------------
-    public function listaTareasAlumnoProfesorModel() {
-      $sql = "SELECT usuario.id_usuario, usuario.nombre, usuario.apellidos, alumno_tareas.archivo, alumno_tareas.calificacion, alumno_tareas.status FROM usuario LEFT JOIN alumno_tareas ON usuario.id_usuario = alumno_tareas.id_usuario WHERE id_rol = 3";
+    public function listaTareasAlumnosProfesorModel($id_tarea) {
+      $sql = "SELECT usuario.id_usuario, usuario.nombre, usuario.apellidos, alumno_tareas.id_alumno_tareas, alumno_tareas.id_tarea, alumno_tareas.archivo, alumno_tareas.calificacion, alumno_tareas.status FROM usuario LEFT JOIN alumno_tareas ON usuario.id_usuario = alumno_tareas.id_usuario AND alumno_tareas.id_tarea = $id_tarea WHERE id_rol = 3";
+      // echo $sql;
+      // die();
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if (!$query)
-        echo "Error: ".mysqli_error($cnx->getCnx());
+      echo "Error: ".mysqli_error($cnx->getCnx());
+      // var_dump($query);
+      // die();
       return $query;
       mysqli_close($query);
     }
-    // SELECT usuario.id_usuario, usuario.nombre, usuario.apellidos, alumno_tareas.archivo, alumno_tareas.calificacion, alumno_tareas.status FROM alumno_tareas INNER JOIN usuario ON alumno_tareas.id_usuario = usuario.id_usuario WHERE id_rol = 3
-
+    # Calificar tarea
+    # ------------------------------------------------------
+    public function calificarTareaAlumnoProfesorModel($datosModel) {
+      $id_tarea = $datosModel['id_tarea'];
+      $calificacion = $datosModel['calificacion'];
+      $sql = "UPDATE alumno_tareas SET calificacion = $calificacion, status = 2 WHERE id_tarea = $id_tarea";
+      // echo $sql;
+      // die();
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if ($query == true) {
+        return "success";
+      } else
+        echo "Error al intentar eliminar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+      mysqli_close($query);
+    }
+    # Cambiar calificación -----------------------------------
+    # --------------------------------------------------------
+    public function editarCalificacionAlumnoProfesorModel($datosModel) {
+      // var_dump($datosModel);
+      // die();
+      $sql = "SELECT calificacion FROM alumno_tareas WHERE id_tarea = $datosModel";
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      $row = mysqli_fetch_array($query);
+      if (!$query)
+      echo "Error: ".mysqli_error($cnx->getCnx());
+      return $row;
+      mysqli_close($query);
+    }
+    # Actualizar calificación
+    public function actualizarCalificacionAlumnoProfesorModel($datosModel) {
+      $calificacion = $datosModel['calificacion'];
+      $id_tarea = $datosModel['id_tarea'];
+      $sql = "UPDATE alumno_tareas SET calificacion = $calificacion, status = 2 WHERE id_tarea = $id_tarea";
+      // var_dump($datosModel);
+      // die();
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if ($query == true) {
+        return "success";
+      } else
+        echo "Error al intentar eliminar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+      mysqli_close($query);
+    }
+    # Rechazar tarea
+    # ---------------------------------------------------------
+    public function rechazarTareaAlumnoProfesorModel($id_tarea) {
+      $sql = "UPDATE alumno_tareas SET status = 3 WHERE id_tarea = $id_tarea";
+      // var_dump($sql);
+      // die();
+      $cnx = new Conexion();
+      $cnx -> conectar();
+      $query = mysqli_query($cnx->getCnx(), $sql);
+      if ($query == true) {
+        return "success";
+      } else
+        echo "Error al intentar eliminar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+      mysqli_close($query);
+    }
   }
 ?>
