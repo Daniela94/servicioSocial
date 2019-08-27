@@ -224,7 +224,7 @@
         </div>
         <div class='row'>
           <div class='col'>
-            <a href='templateAdmin.php' class='input-form btn form-btn-red'>Cancelar</a>
+            <a href='templateAdmin.php?action=listaProfesores' class='input-form btn form-btn-red'>Cancelar</a>
           </div>
           <div class='col'>
             <input type='submit' value='Actualizar' name='editarUsuario' class='input-form form-btn-green'>

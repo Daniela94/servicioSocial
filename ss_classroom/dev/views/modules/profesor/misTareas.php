@@ -15,7 +15,7 @@
       $listaTareas = new ProfesorController();
       $listaTareas -> listaTareasProfesorController();
       $listaTareas -> eliminarTareaProfesorController();
-    ?>
+      ?>
   </tbody>
 </table>
 <?php
@@ -24,7 +24,7 @@
     if ($_GET['action'] == "actualizacionTarea") {
       echo "Actualizacion exitosa";
     }
-    # MENSAJE ELIMINACIÓN EXITOSA
+    # MENSAJE ACTUALIZACIÓN EXITOSA
     if ($_GET['action'] == "eliminacionTarea") {
       echo "Eliminación exitosa";
     }

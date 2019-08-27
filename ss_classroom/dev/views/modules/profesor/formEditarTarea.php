@@ -4,6 +4,7 @@
   <?php
     $editarTarea = new ProfesorController();
     $editarTarea -> editarTareaProfesorController();
-    ?>
+    $editarTarea -> actualizarTareaProfesorController();
+  ?>
 </div>
 <br /><br /><br />

@@ -24,6 +24,8 @@
     # ----------------------------------------------
     public function registrarTareaModel() {
       $sql = "INSERT INTO tarea(id_usuario,titulo, descripcion, fecha_publicacion, fecha_entrega) VALUES ($this->id_usuario,'$this->titulo','$this->descripcion','$this->fecha_publicacion','$this->fecha_entrega')";
+      // echo $sql;
+      // die();
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);

@@ -4,9 +4,9 @@
 <?php 
   $editarUsuario = new AdminController();
   $editarUsuario -> editarUsuarioController();  
+  $editarUsuario -> actualizarUsuarioController();
 ?>
 </div>
 <?php
   echo "<br /><br /><br />";
-  $editarUsuario -> actualizarUsuarioController();
 ?>

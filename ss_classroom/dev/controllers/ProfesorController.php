@@ -28,7 +28,8 @@
                                   "descripcion"=>$_POST['descripcion'],
                                   "fecha_publicacion"=>$_POST['fecha_publicacion'],
                                   "fecha_entrega"=>$_POST['fecha_entrega']);
-        var_dump($datosController);
+        // var_dump($datosController);
+        // die();
         // var_dump($datosController);
         // echo "entra <br />";
         $crud = new CrudProfesorModel($datosController);
@@ -37,6 +38,7 @@
           header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=ok");
         } else { 
           header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=formRegistrarTarea");
+          echo "Error";
         }
       }
     }
@@ -51,7 +53,19 @@
         $fecha_publicacion = $fila->fecha_publicacion;
         $fecha_entrega = $fila->fecha_entrega;
 
-        // $_SESSION['idTarea'] = $id_tarea;
+        // echo $fecha_publicacion.'<hr>';
+        // die();
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        // date_default_timezone_set('America/Mexico_City');
+        $fecha = $fecha_publicacion;
+        $fecha = str_replace("/", "-", $fecha);			
+        $newDate = date("Y-m-d H:i", strtotime($fecha));				
+        $fecha_publicacion = strftime("%a %b, %Y a las %H:%M", strtotime($newDate));
+        $fechaEntrega = $fecha_entrega;
+        $fechaEntrega = str_replace("/", "-", $fechaEntrega);			
+        $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));				
+        $fecha_entrega = strftime("%a %b, %Y a las %H:%M", strtotime($newDate2));
+        
 
         // $query_string = 'foo=' . urlencode($foo) . '&bar=' . urlencode($bar);
         // echo '<a href="mycgi?' . htmlentities($url_string) . '">';
@@ -61,8 +75,8 @@
         <tr>
         <td>".$titulo."</td>
         <td>".$descripcion."</td>
-        <td>".$fecha_publicacion."</td>
-          <td>".$fecha_entrega."</td>
+        <td class='date'>".$fecha_publicacion."</td>
+          <td class='date'>".$fecha_entrega."</td>
           <td>
             <a href='templateProfesor.php?".htmlentities($url_string_link)."'>
               <i class='fas fa-external-link-alt'></i>
@@ -88,15 +102,21 @@
       $datosController = $_GET['idEditar'];
       $respuesta = CrudProfesorModel::editarTareaProfesorModel($datosController);
       // echo $respuesta[4];
+      
+      setlocale(LC_TIME, 'es_ES.UTF-8');
+      // date_default_timezone_set('America/Mexico_City');
       $fecha_inicio = $respuesta['fecha_publicacion'];
-      $fecha_inicio = strtotime("$fecha_inicio");
-      $fecha_publicacion = date("Y-m-d", $fecha_inicio);
+      echo $fecha_inicio;
 
+      $fecha = $fecha_inicio;
+      $fecha = str_replace("/", "-", $fecha);			
+      $newDate = date("Y-m-d H:i", strtotime($fecha));				
+      $fecha_publicacion = strftime("%a %d %b, %Y a las %H:%M", strtotime($newDate));
       $fecha_fin = $respuesta['fecha_entrega'];
       $fecha_fin = strtotime("$fecha_fin");
-      $fecha_entrega = date("Y-m-d", $fecha_fin);
+      $fecha_entrega = date("Y-m-d H:i", $fecha_fin);
       echo "
-      <form action='' method='POST'>
+      <form method='POST'>
         <div class='row'>
           <div class='col'>
             <label for=''>Título</label>
@@ -113,16 +133,17 @@
         <div class='row'>
           <div class='col'>
             <label for=''>Fecha de publicación</label>
-            <input type='date' value='".$fecha_publicacion."' name='fecha_publicacion' class='input-form'>
+            <p>$fecha_publicacion</p>
+            <input type='hidden' name='fecha_publicacion' value='".$fecha_inicio."'>
           </div>
           <div class='col'>
             <label for=''>Fecha de entrega</label>
-            <input type='date' name='fecha_entrega' value='".$fecha_entrega."' class='input-form'>
+            <input type='datetime' name='fecha_entrega' value='".$fecha_entrega."' class='input-form'>
           </div>
         </div>
         <div class='row'>
           <div class='col'>
-            <a href='templateProfesor.php?action=tareasAlumnos' class='input-form btn form-btn-red'>Cancelar</a>
+            <a href='templateProfesor.php?action=misTareas' class='input-form btn form-btn-red'>Cancelar</a>
           </div>
           <div class='col'>
             <input type='submit' name='editarTarea' value='Actualizar' class='input-form form-btn-green'>
@@ -141,6 +162,8 @@
                                   "descripcion"=>$_POST['descripcion'],
                                   "fecha_publicacion"=>$_POST['fecha_publicacion'],
                                   "fecha_entrega"=>$_POST['fecha_entrega']);
+        // var_dump($datosController);
+        // die();
         $actualizar = new CrudProfesorModel($datosController);
         $respuesta = $actualizar -> actualizarTareaProfesorModel();
   

@@ -104,6 +104,7 @@ body {
   --entregado: #ecaf2c; 
   --no-entregado: #c53023;
   --calificado: #3c874c;
+  --date:#677583;
 
 }
 .red {
@@ -123,6 +124,7 @@ body {
 }
 #error-login {
   color:#ff0000;
+  display: block;
 }
 ._header {
   height: 60px;
@@ -147,7 +149,7 @@ body {
 }
 .square-form-login {
   position: relative;
-  padding: 25px;
+  padding: 20px;
   left: 50%;
   transform: translate(-50%, 70%);
   box-shadow: 0 5px 10px #000;
@@ -156,16 +158,23 @@ body {
 .form-index {
   width: 270px;
   /* height: 280px; */
-  color: white;
-  background-color: var(--black-111);
+  color: var(--black-343);
+  background-color: var(--white-gray);
+}
+.form-index label {
+  margin-bottom: .25rem;
 }
 .input-form {
   width: 100%;
-  min-height: 35px;
+  min-height: 33px;
   margin-bottom: .5rem;
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
+  border: 1px solid var(--grey-light);
+}
+::-webkit-input-placeholder {
+  font-size: .85rem;
 }
 .form-index input:focus, .form-registro input:focus {
   border: 2px solid var(--blue-loco);
@@ -173,7 +182,7 @@ body {
   outline: 0 none;
 }
 .form-btn-red {
-  margin-top: 20px;
+  margin-top: 10px;
   color: white;
   background-color: var(--red);
   transition: .1s ease-out;
@@ -184,7 +193,7 @@ body {
   box-shadow: 0 0 25px var(--red-loco);
 }
 .form-btn-green {
-  margin-top: 20px;
+  margin-top: 10px;
   color: white;
   background-color: var(--green-udc);
   transition: .1s ease-out;
@@ -455,4 +464,8 @@ body {
   display: flex;
   justify-content: center;
   color: var(--grey-black-t);
+}
+.date {
+  font-size: 14px;
+  color: var(--date);
 }

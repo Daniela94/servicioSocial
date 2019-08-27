@@ -13,22 +13,22 @@
     <h2 class="h-mnsj-i crayon-hand">Bienvenido(a) al sistema</h2>
   </div>
   <div class="square-form-login form-index ubuntu">
-    <form id="form-login" method="POST">
-      <label for="">Número de cuenta / Correo</label>
-      <input type="text" name="usuario" class="input-form">
+    <form id="form-login" method="POST" onsubmit="return validarLogin()">
+      <label for="usuario">Número de cuenta / Correo</label>
+      <input type="text" name="usuario" class="input-form" id="usuario" placeholder="Ingrese su no. de cuenta o correo" required>
       <label for="password">Contraseña</label>
-      <input type="password" name="password" class="input-form">
-      <!-- Botón -->
-      <button type="submit" class="input-form form-btn-green" name="entrar">Iniciar sesión</button>
-      <label id="error-login"></label>
+      <input type="password" name="password" class="input-form" id="password" placeholder="Ingresa tu contraseña" required>
+      <!-- Botón envío-->
+      <?php
+        $login = new Controller();
+        $login -> loginUsuarioController();
+      ?>
+      <!-- <button type="submit" class="input-form form-btn-green" name="entrar">Iniciar sesión</button> -->
+      <input type="submit" class="input-form form-btn-green" name="entrar" value="Iniciar Sesión">
     </form>
   </div>
 </section>
 <!-- / SECTION 1 Formulario de ingreso -->
-
 <?php
-  $login = new Controller();
-  $login -> loginUsuarioController();
-
   include_once (MODULES_PATH.'footer.php');
 ?>

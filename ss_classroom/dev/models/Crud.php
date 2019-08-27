@@ -1,5 +1,5 @@
 <?php 
- require_once 'Conexion.php';
+  require_once 'Conexion.php';
  
   class Crud {
     // ATRIBUTOS
@@ -22,17 +22,21 @@
       $this->email = $datosModel['email'];
       $this->password = $datosModel['password'];
       $this->rol = $datosModel['rol'];
-      // parent::__construct();
     }
     # Método para iniciar sesión según el rol de cada usuario
     # --------------------------------------------------------
     public function loginUsuarioModel($usuario,$password) {
-      $sql = "SELECT * FROM usuario WHERE numero_cuenta = '$usuario' OR email = '$usuario' AND password = '$password'";
       $cnx = new Conexion();
       $cnx -> conectar();
+      $usuario = mysqli_real_escape_string($cnx->getCnx(), $usuario);
+      $password = mysqli_real_escape_string($cnx->getCnx(), $password);
+      $sql = "SELECT * FROM usuario WHERE numero_cuenta = '$usuario' AND password = '$password' OR email = '$usuario' AND password = '$password'";
+      // echo $sql;
+      // die();
       $query = mysqli_query($cnx->getCnx(), $sql);
-      $num_rows = mysqli_num_rows ($query);
-      var_dump($num_rows); 
+      $num_rows = mysqli_num_rows($query);
+      // var_dump($num_rows);
+      // die(); 
       if($num_rows == 1){
         return $query->fetch_array(MYSQLI_ASSOC);
       } 
