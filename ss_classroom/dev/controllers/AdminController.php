@@ -160,12 +160,23 @@
         $fecha_entrega = $fila->fecha_entrega;
         $profesor = $fila->nombre.' '.$fila->apellidos;
 
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        // date_default_timezone_set('America/Mexico_City');
+        $fecha = $fecha_publicacion;
+        $fecha = str_replace("/", "-", $fecha);			
+        $newDate = date("Y-m-d H:i", strtotime($fecha));				
+        $fecha_publicacion = strftime("%a %b, %Y a las %H:%M", strtotime($newDate));
+        $fechaEntrega = $fecha_entrega;
+        $fechaEntrega = str_replace("/", "-", $fechaEntrega);			
+        $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));				
+        $fecha_entrega = strftime("%a %b, %Y a las %H:%M", strtotime($newDate2));
+
         echo "
         <tr>
           <td>".$titulo."</td>
           <td>".$descripcion."</td>
-          <td>".$fecha_publicacion."</td>
-          <td>".$fecha_entrega."</td>
+          <td class='date'>".$fecha_publicacion."</td>
+          <td class='date'>".$fecha_entrega."</td>
           <td>".$profesor."</td>
         </tr>
         ";
