@@ -5,16 +5,22 @@ function validarLogin() {
   /* ==== validar caracteres especiales | expresiones regulares ==== */
 
   // var expresion = /^[a-zA-Z0-9]*$/;
-  var expresionLogin = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  var expresionCorreo = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  var expresionNoCuenta = /^[0-9]*$/;
+  var expresionPassword = /^[a-zA-Z0-9]*$/;
 
-  if(!expresionLogin.test($("#usuario").val()))
-    expresionLogin = false;
+  if(!expresionCorreo.test($("#usuario").val()))
+    expresionCorreo = false;
+  else
+    expresionCorreo = false;
+  if(!expresionNoCuenta.test($("#usuario").val()))
+    expresionNoCuenta = false;
+  else  
+    expresionNoCuenta = true;
+  if(!expresionPassword.test($("#password").val()))
+    expresionPassword = false;
   else 
-    expresionLogin = true;
-  if(!expresionLogin.test($("#password").val()))
-    expresionLogin = false;
-  else 
-    expresionLogin = true;
+    expresionPassword = true;
 
   // return true;
 }
