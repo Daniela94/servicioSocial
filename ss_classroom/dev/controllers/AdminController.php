@@ -162,14 +162,23 @@
 
         setlocale(LC_TIME, 'es_ES.UTF-8');
         // date_default_timezone_set('America/Mexico_City');
+        // $hoy = date("Y-m-d");
+        // echo $hoy;
+        // die();
+
         $fecha = $fecha_publicacion;
         $fecha = str_replace("/", "-", $fecha);			
-        $newDate = date("Y-m-d H:i", strtotime($fecha));				
-        $fecha_publicacion = strftime("%a %b, %Y a las %H:%M", strtotime($newDate));
+        $newDate = date("Y-m-d H:i", strtotime($fecha));			
+        $conector = " a las ";
+        $fechaFormato = ucfirst("%a %b, %Y");
+        $horaFormato = "%H:%M";
+        $strFecha = $fechaFormato.$conector.$horaFormato;
+        $fecha_publicacion = ucfirst(strftime($strFecha, strtotime($newDate)));
+
         $fechaEntrega = $fecha_entrega;
         $fechaEntrega = str_replace("/", "-", $fechaEntrega);			
         $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));				
-        $fecha_entrega = strftime("%a %b, %Y a las %H:%M", strtotime($newDate2));
+        $fecha_entrega =ucfirst(strftime($strFecha, strtotime($newDate2)));
 
         echo "
         <tr>
