@@ -21,11 +21,34 @@
   <link rel="stylesheet" href="<?php echo DIR_VIEWS;?>assets/fonts/fontawesome/css/all.min.css">
   <!-- BOOTSTRAP css -->
   <link rel="stylesheet" href="<?php echo DIR_VIEWS;?>assets/bootstrap/css/bootstrap.min.css">
+  <!-- Sweetalert -->
+  <!-- <link rel="stylesheet" href="<?php echo DIR_VIEWS;?>assets/sweetalert2.min.css"> -->
+  <!-- DataTables -->
+  <link rel="stylesheet" type="text/css" href="<?php echo DIR_VIEWS;?>assets/dataTables/jquery.dataTables.min.css"/>
   <!-- Mi css -->
   <link rel="stylesheet" href="<?php echo DIR_VIEWS;?>css/grid.css">
   <link rel="stylesheet" href="<?php echo DIR_VIEWS;?>css/miestilo.css">
   <link rel="shortcut icon" href="<?php echo DIR_VIEWS;?>assets/img/crud-logo.png" type="image/x-icon">
+  <!-- jQuery -->
   <script src="<?php echo DIR_VIEWS;?>assets/js/jquery-3.4.1.min.js"></script>
+  <!-- DataTables JS -->
+  <script type="text/javascript" src="<?php echo DIR_VIEWS;?>assets/dataTables/jquery.dataTables.min.js"></script>
+  <script>
+    $('[data-dt-idx="2"]').trigger('click');
+    var url_string = window.location;
+    var url = new URL(url_string);
+    var btnpg = url.searchParams.get("btnpg");
+    //if(btnpg!=null) 
+      //console.log($('[data-dt-idx="'+btnpg+'"]'));
+    $(window).on('load', function () {
+      $('#table_id').dataTable({
+        "language": {
+          "url": "<?php echo DIR_VIEWS;?>assets/dataTables/Spanish.json"
+        }
+      });
+      //$('[data-dt-idx="'+btnpg+'"]').trigger('click');
+    });
+  </script>
 
   <title>ssClassroom</title>
 </head>

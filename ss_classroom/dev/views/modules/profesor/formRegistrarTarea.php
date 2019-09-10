@@ -1,3 +1,15 @@
+<?php 
+  $registro = new ProfesorController();
+  $registro -> registrarTareaController();
+  if (isset($_GET['action'])) {
+    if($_GET['action'] == "ok") {
+      echo "<br><br><div class='alert alert-success' role='alert'>Registro exitoso.</div>";
+    }
+    if($_GET['action'] == "error") {
+      echo "<br><br><div class='alert alert-danger' role='alert'>No se hizo el registro :(</div>";
+    }
+  }
+?>
 <div class="hw-1"></div>
 <h4 class="h-subtitle">REGISTRAR TAREA</h4>
 <div class="square-form-cx form-registro ubuntu">
@@ -47,17 +59,4 @@
       </div>
     </div>
   </form>
-
 </div>
-<br>
-<br>
-<br>
-<?php 
-  $registro = new ProfesorController();
-  $registro -> registrarTareaController();
-  if (isset($_GET['action'])) {
-    if($_GET['action'] == "ok") {
-      echo "Registro exitoso";
-    }
-  }
-?>

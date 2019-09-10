@@ -16,27 +16,98 @@
         echo "<h2 class='h-title'>Bienvenido al SISTEMA ssClassroom</h2>";
       }
     }
+    # Checar si ya existe ----------------------------------
+    public function verificarRegistroUsuarioController() {
+      if (isset($_POST['enviar'])) {
 
+        if (isset($_POST['nombre']) &&
+            isset($_POST['apellidos']) &&
+            isset($_POST['numero_cuenta']) &&
+            isset($_POST['email']) &&
+            isset($_POST['password']) &&
+            isset($_POST['rol'])) {
+
+          if (empty($_POST['nombre']) ||
+              empty($_POST['apellidos']) ||
+              empty($_POST['numero_cuenta']) ||
+              empty($_POST['email']) ||
+              empty($_POST['password'])) {
+                echo "<br><div class='alert alert-warning' role='alert'>Conteste todos los campos.</div>";
+          }
+          else {
+            $expresionNombre = '/^[a-zA-Z]*$/';
+            $expresionApellidos = '/^[a-zA-Z]*$/';
+            $expresionNoCuenta = '/^[0-9]*$/';
+            $expresionCorreo = '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/';
+            $expresionPassword = '/^[a-zA-Z0-9]*$/';
+
+            if (preg_match($expresionNombre, $_POST['nombre']) != 0 &&
+                preg_match($expresionApellidos, $_POST['apellidos']) != 0 &&
+                preg_match($expresionNoCuenta, $_POST['numero_cuenta']) != 0 &&
+                preg_match($expresionCorreo, $_POST['email']) != 0 &&
+                preg_match($expresionPassword, $_POST['password']) != 0) {
+
+                $datosController = array( "nombre"=>$_POST['nombre'],
+                                          "apellidos"=>$_POST['apellidos'],
+                                          "numero_cuenta"=>$_POST['numero_cuenta'], 
+                                          "email"=>$_POST['email'],
+                                          "password"=>$_POST['password'],
+                                          "rol"=>$_POST['rol']);
+                $verificar = new CrudAdminModel($datosController);
+                $respuesta = $verificar -> verificarRegistroUsuarioModel($datosController);
+                if ($respuesta == NULL) {
+                  // echo "No existe";
+                  $insertar = $verificar -> registrarUsuarioModel($datosController);
+                  if ($insertar == "success") {
+                    header("location: ".DIR_MODULES."admin/templateAdmin.php?action=usuarioRegistrado");
+                  }
+                  else {
+                    echo "<br><div class='alert alert-danger' role='alert'>No se pudo registrar ;(</div>";
+                  }
+                }
+                else {
+                  echo "<br><div class='alert alert-danger' role='alert'>Este usuario ya existe</div>";
+                }
+            }
+            else {
+              echo "<br><div class='alert alert-danger' role='alert'>Caracteres especiales no válidos.</div>";
+            } 
+          }
+        }
+        else {
+          echo "<br><div class='alert alert-warning' role='alert'>Debe enviar todos los campos.</div>";
+        }
+      }
+
+    }
     # Registro de usuarios
     # -----------------------------------------
     public function registrarUsuarioController() {
 
       if (isset($_POST['enviar'])) {
-        // recibir el POST en un array
-        $datosController = array( "nombre"=>$_POST['nombre'],
-                                  "apellidos"=>$_POST['apellidos'],
-                                  "numero_cuenta"=>$_POST['numero_cuenta'], 
-                                  "email"=>$_POST['email'],
-                                  "password"=>$_POST['password'],
-                                  "rol"=>$_POST['rol']);
-        // que me traiga la información que está en el modelo
-        $crud = new CrudAdminModel($datosController);
-        $respuesta = $crud -> registrarUsuarioModel();
-        if ($respuesta == "success") {
-          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=ok");
-        } else {
-          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formRegistrarUsuario");
-        }
+
+          // recibir el POST en un array
+          $datosController = array( "nombre"=>$_POST['nombre'],
+                                    "apellidos"=>$_POST['apellidos'],
+                                    "numero_cuenta"=>$_POST['numero_cuenta'], 
+                                    "email"=>$_POST['email'],
+                                    "password"=>$_POST['password'],
+                                    "rol"=>$_POST['rol']);
+          // que me traiga la información que está en el modelo
+          // var_dump($datosController);
+          // die();
+          $crud = new CrudAdminModel($datosController);
+          $respuesta = $crud -> registrarUsuarioModel($datosController);
+          var_dump($respuesta);
+          if ($respuesta == "success") {
+            header("location: ".DIR_MODULES."admin/templateAdmin.php?action=usuarioRegistrado");
+          } 
+          else {
+            // echo "<script>alert('lol')</script>";
+            header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formRegistrarUsuario");
+            // echo "Error";
+          }
+        
       }
     }
     # Mostrar lista de profesores 
@@ -64,7 +135,7 @@
               <a href='templateAdmin.php?action=formEditarUsuario&id=".$id_usuario."'>
                 <i class='fas fa-edit'></i>
               </a>
-              <a href='templateAdmin.php?action=listaProfesores&idBorrar=".$id_usuario."&idRol=".$id_rol."'>
+              <a href='#' data-toggle='modal' data-target='#exampleModal' class='borrar' idusuario='".$id_usuario."' idrol='".$id_rol."'>
                 <i class='fas fa-trash-alt'></i>
               </a>
             </td>
@@ -288,18 +359,31 @@
       if (isset($_GET['idBorrar'])) {
         $datosController = array( "id_usuario" => $_GET['idBorrar'],
                                   "id_rol" => $_GET['idRol']);
+        // print_r($datosController);
+        // die();
+        $id_btnPg = $_GET['btnpg'];
+        // print_r($id_btnPg);
+        // die();
         $respuesta = CrudAdminModel::eliminarUsuarioModel($datosController);
 
         if ($respuesta == "success1") {
           header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAdmin");
         }
         if ($respuesta == "success2") {
-          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionProfesor");
+          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionProfesor&btnpg=".$id_btnPg);
         }
         if ($respuesta == "success3") {
           header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAlumno");
         }
       }
     }
+    # VALIDAR USUARIO EXISTENTE
+    # -------------------------------------------------------------
+    // public function validarNombreRegistroController($validarNombre) {
+    //   $datosController = $validarNombre;
+
+    //   $respuesta = CrudAdminModel::validarNombreRegistroModel($datosController);
+
+    // }
   }
 ?>

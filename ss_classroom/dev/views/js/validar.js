@@ -24,17 +24,20 @@ function validarLogin() {
 
   // return true;
 }
-/* VALIDAR REGISTRO DE USUARIOS */
-/* ------------------------------------------------------------------------- */
-function validarRegistro() {
-  // var usuario = document.querySelector("#usuarioLogin").val  ;
-  // // Mostrar el value del input: console.log('usuario', usuario);
-  // var password = document.querySelector("#passwordLogin").value;
+// function validarRegistro() {
 
-  /* ==== validar extensión de caracteres ==== */
-  // var caracteres = usuario.length;
-  // if(caracteres > 6) {
-  //   document.querySelector("label[for='usuarioLogin']".innerHTML += "<br>No se permiten más de 6 caracteres.")
-  //   return false;
-  // }
-}
+//   var expresionCorreo = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+//   var expresionNoCuenta = /^[0-9]*$/;
+//   var expresionPassword = /^[a-zA-Z0-9]*$/;
+
+//   var usuario = document.querySelector("#usuarioLogin").val  ;
+//   // Mostrar el value del input: console.log('usuario', usuario);
+//   var password = document.querySelector("#passwordLogin").value;
+
+//   /* ==== validar extensión de caracteres ==== */
+//   var caracteres = usuario.length;
+//   if(caracteres > 8) {
+//   document.querySelector("label[for='usuarioLogin']".innerHTML += "<br>No se permiten más de 6 caracteres.")
+//   return false;
+//   }
+// }

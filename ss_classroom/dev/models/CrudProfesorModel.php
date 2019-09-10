@@ -28,13 +28,12 @@
       // die();
       $cnx = new Conexion();
       $cnx -> conectar();
-      $query = mysqli_query($cnx->getCnx(), $sql);
+      $query =mysqli_query($cnx->getCnx(), $sql);
       if ($query == true) 
         return "success";
       else
         echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx).'<br />'.$sql;
       mysqli_close($query);
-
     }
     # Mostrar lista de tareas
     # ------------------------------------------------------------
@@ -157,7 +156,7 @@
     # Rechazar tarea
     # ---------------------------------------------------------
     public function rechazarTareaAlumnoProfesorModel($id_tarea) {
-      $sql = "UPDATE alumno_tareas SET status = 3 WHERE id_tarea = $id_tarea";
+      $sql = "UPDATE alumno_tareas SET status = 3, calificacion = 0 WHERE id_tarea = $id_tarea";
       // var_dump($sql);
       // die();
       $cnx = new Conexion();

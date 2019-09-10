@@ -1,6 +1,6 @@
 <h4 class="h-subtitle">LISTA DE TAREAS REGISTRADAS</h4>
 
-<table class="table table-lista">
+<table id="table_id" class="table table-lista">
   <thead>
     <tr>
       <th>Título</th>

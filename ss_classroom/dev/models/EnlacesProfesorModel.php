@@ -16,6 +16,9 @@
       else if ($enlacesModel == "ok") {
         $module = MODULES_PATH."profesor/formRegistrarTarea.php";
       }
+      else if ($enlacesModel == "error") {
+        $module = MODULES_PATH."profesor/formRegistrarTarea.php";
+      }
       else if ($enlacesModel == "actualizacionTarea") {
         $module = MODULES_PATH."profesor/misTareas.php";
       }

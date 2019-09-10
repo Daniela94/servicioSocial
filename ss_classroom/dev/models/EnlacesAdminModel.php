@@ -14,7 +14,7 @@
           
           $module = MODULES_PATH."admin/".$enlacesModel.".php";
       }
-      else if ($enlacesModel == "ok") {
+      else if ($enlacesModel == "usuarioRegistrado") {
         $module = MODULES_PATH."admin/formRegistrarUsuario.php";
       }
       else if ($enlacesModel == "actualizacionProfesor") {

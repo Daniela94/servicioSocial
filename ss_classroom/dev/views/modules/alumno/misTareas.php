@@ -1,6 +1,12 @@
 <h4 class="h-subtitle">TAREAS ASIGNADAS</h4>
-
-<table class="table table-lista">
+<?php
+  if (isset($_GET['action'])) {
+    if($_GET['action'] == "envioExitoso") {
+      echo "<div class='alert alert-success' role='alert'>Se subió la tarea con éxito</div>";
+    }
+  }
+?>
+<table id="table_id" class="table table-lista">
   <thead>
     <tr>
       <th>Título</th>
@@ -19,10 +25,8 @@
     ?>
   </tbody>
 </table>
-<?php
-  if (isset($_GET['action'])) {
-    if($_GET['action'] == "envioExitoso") {
-      echo "Se subió la tarea con éxito";
-    }
-  }
-?>
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable();
+  });
+</script>

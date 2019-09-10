@@ -39,12 +39,29 @@
         if ($status == 3) $status = "Rechazado";
         $profesor = $fila->nombre.' '.$fila->apellidos;
         // $profesor = $fila->id_usuario;
+
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        // date_default_timezone_set('America/Mexico_City');
+        $fecha = $fecha_publicacion;
+        $fecha = str_replace("/", "-", $fecha);			
+        $newDate = date("Y-m-d H:i", strtotime($fecha));			
+        $conector = " a las ";
+        $fechaFormato = ucfirst("%a %b, %Y");
+        $horaFormato = "%H:%M";
+        $strFecha = $fechaFormato.$conector.$horaFormato;
+        $fecha_publicacion = ucfirst(strftime($strFecha, strtotime($newDate)));
+
+        $fechaEntrega = $fecha_entrega;
+        $fechaEntrega = str_replace("/", "-", $fechaEntrega);			
+        $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));				
+        $fecha_entrega =ucfirst(strftime($strFecha, strtotime($newDate2)));
+
         echo "
         <tr>
           <td>".$titulo."</td>
           <td>".$descripcion."</td>
-          <td>".$fecha_publicacion."</td>
-          <td>".$fecha_entrega."</td>
+          <td class='date'>".$fecha_publicacion."</td>
+          <td class='date'>".$fecha_entrega."</td>
           <td>".$profesor."</td>
           <td class='
         ";
@@ -57,11 +74,11 @@
           else if ($status == "Calificado: ".$calificacion) echo "<i class='fas fa-check-double'></i>"; 
           else if ($status == "Rechazado") echo "<i class='fas fa-times'></i> "; echo $status."</td>
           <td";
-            if ($status == "Calificado: ".$calificacion) echo " class='disabled-color'><i class='fas fa-file-upload'> Subir</i>";
+            if ($status == "Calificado: ".$calificacion) echo " class='disabled-color'><i class='fas fa-file-upload'></i> Subir";
               else 
                 echo ">
                   <a href='templateAlumno.php?action=formSubirTarea&titulo=".$titulo."&idUsuario=".$id_usuario."&idTarea=".$id_tarea."'>
-                    <i class='fas fa-file-upload'> Subir</i>
+                    <i class='fas fa-file-upload'></i> Subir
                   </a>";
             echo "
           </td>
@@ -86,25 +103,27 @@
             mkdir(VIEW_PATH.'assets/tareas', 0777, true);
             if (file_exists(VIEW_PATH.'assets/tareas')) {
               if(move_uploaded_file($archivoGuardado, VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
-                echo "Tarea subida con éxito";
+                echo "Tarea almacenada con éxito";
               } else {
-                echo "No se subió";
+                echo "No se almacenó.";
               }
             }
           } else {
             if(move_uploaded_file($archivoGuardado,VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
-              echo "Tarea subida con éxito";
+              echo "Tarea almacenada con éxito.";
             } else {
-              echo "No se subió";
+              echo "No se almacenó.";
             }
           }
           $datosController = array( "id_usuario"=>$_POST['idUsuario'],
                                     "id_tarea"=>$_POST['idTarea'],
                                     "archivo"=>$archivoNombre);
-          //echo "<hr>";
-          //print_r($datosController);
+          echo "<hr>";
+          print_r($datosController);
           // die();
           $respuesta = CrudAlumnoModel::subirTareaAlumnoModel($datosController);
+          // print_r($respuesta);
+          // die();
           if ($respuesta == "success") {
             header("location: ".DIR_MODULES."alumno/templateAlumno.php?action=envioExitoso");
           } else {

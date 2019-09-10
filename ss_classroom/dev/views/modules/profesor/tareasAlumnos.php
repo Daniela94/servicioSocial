@@ -1,5 +1,21 @@
 <h4 class="h-subtitle">Tarea de los alumnos</h4>
-<table class="table table-lista">
+<?php
+  if (isset($_GET['action'])) {
+    # MENSAJE CALIFICACIÓN EXITOSA
+    if ($_GET['action'] == "tareaCalificada") {
+      echo "<div class='alert alert-success' role='alert'>Tarea calificada con exito</div>";
+    }
+    # MENSAJE ACTUALIZACIÓN EXITOSA
+    if ($_GET['action'] == "tareaActualizada") {
+      echo "<div class='alert alert-success' role='alert'>Calificación actualizada con exito</div>";
+    }
+    # MENSAJE TAREA RECHAZADA
+    if ($_GET['action'] == "tareaRechazada") {
+      echo "<div class='alert alert-danger' role='alert'>Tarea rechazada</div>";
+    }
+  }
+?>
+<table id="table_id" class="table table-lista">
   <thead>
     <tr>
       <th>Nombre</th>
@@ -23,19 +39,3 @@
     ?>  
   </tbody>
 </table>
-<?php
-  if (isset($_GET['action'])) {
-    # MENSAJE CALIFICACIÓN EXITOSA
-    if ($_GET['action'] == "tareaCalificada") {
-      echo "Tarea calificada con exito";
-    }
-    # MENSAJE ACTUALIZACIÓN EXITOSA
-    if ($_GET['action'] == "tareaActualizada") {
-      echo "Calificación actualizada con exito";
-    }
-    # MENSAJE TAREA RECHAZADA
-    if ($_GET['action'] == "tareaRechazada") {
-      echo "Tarea rechazada";
-    }
-  }
-?>

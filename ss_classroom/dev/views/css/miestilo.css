@@ -93,8 +93,9 @@ body {
   --grey-blue: #bccedd;
   --shadow-light: #b3b3b3;
   --red: #D11010;
-  --red-loco: #df130c;
+  --red-loco: #ff3e3e;
   --blue: #106ad1;
+  --blue-loco-2: #2dc3ff;
   --blue-sky: #5db2cc;
   --grey-black-t: rgba(51, 51, 51,0.5);
   --blue-light: #e3f2fd;
@@ -105,7 +106,9 @@ body {
   --no-entregado: #c53023;
   --calificado: #3c874c;
   --date:#677583;
-
+  --white-eee: #eee;
+  --box-shadow: 0 5px 15px #1b1b1b;
+  --gray-1: rgba(145, 145, 145,0.5);
 }
 .red {
   color: var(--red);
@@ -181,14 +184,25 @@ body {
   box-shadow: 0 0 10px var(--blue-loco);
   outline: 0 none;
 }
-.form-btn-red {
+.form-btn-red, .form-btn-blue {
   margin-top: 10px;
+  transition: .1s ease-out;  
+}
+.form-btn-blue {
+  color: white;
+  background-color: var(--blue);
+}
+.form-btn-blue:hover {
+  border: 1px solid var(--blue-loco-2);
+  color: white;
+  box-shadow: 0 0 25px var(--blue-loco-2);
+}
+.form-btn-red {
   color: white;
   background-color: var(--red);
-  transition: .1s ease-out;
 }
 .form-btn-red:hover {
-  border-color: var(--red-loco);
+  border: 1px solid var(--red-loco);
   color: white;
   box-shadow: 0 0 25px var(--red-loco);
 }
@@ -243,6 +257,32 @@ body {
 }
 .h-mnsj-r {
   top: 50px;
+}
+.Modal {
+  background-color: var(--gray-1);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.Modal-box {
+  background-color: var(--white-eee);
+  box-shadow: var(--box-shadow);
+  color: var(--grey-black-333);
+  width: 50%;
+  height: 50vh;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Modal:target {
+  display: flex;
 }
 
 /* ==== listaAlumnosAdmin.css ==== */

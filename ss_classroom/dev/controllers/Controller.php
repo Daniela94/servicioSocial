@@ -20,8 +20,8 @@
           }
           else {
             $expresionCorreo = '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/';
-            $expresionNoCuenta = '/^[0-9]*$/';
-            $expresionPassword = '/^[a-zA-Z0-9]*$/';
+            $expresionNoCuenta = '/^[0-9]{8}*$/';
+            $expresionPassword = '/^[a-zA-Z0-9]{1-8}*$/';
             // echo preg_match($expresionPassword, $_POST['password']);
             // die();
             if (preg_match($expresionCorreo, $_POST['usuario']) != 0 || 
@@ -68,6 +68,9 @@
       
                   header('location: '.DIR_MODULES.'alumno/templateAlumno.php');
                 }
+              }
+              else {
+                echo "<span id='error-login'>Usuario y/o contraseña no válidos.</span>";
               }
             }  
             else {

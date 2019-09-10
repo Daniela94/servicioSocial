@@ -36,9 +36,10 @@
         $respuesta = $crud -> registrarTareaModel();
         if ($respuesta == "success") {
           header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=ok");
+          // print_r($_GET['action']);
+          // die();
         } else { 
-          header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=formRegistrarTarea");
-          echo "Error";
+          header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=error");
         }
       }
     }
