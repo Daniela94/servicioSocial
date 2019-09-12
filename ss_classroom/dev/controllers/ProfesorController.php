@@ -89,11 +89,14 @@
             <a href='templateProfesor.php?action=formEditarTarea&idEditar=".$id_tarea."'>
               <i class='fas fa-edit'></i>
             </a>
-            <a href='templateProfesor.php?action=misTareas&idBorrar=".$id_tarea."'>
+            <a href='#' data-toggle='modal' data-target='#exampleModal' class='borrar' idBorrar='".$id_tarea."'>
               <i class='fas fa-trash-alt'></i>
             </a>
           </td>
         </tr>";
+        // <a href='templateProfesor.php?action=misTareas&idBorrar=".$id_tarea."'>
+        //   <i class='fas fa-trash-alt'></i>
+        // </a>
 
         $_SESSION['titulo'] = $titulo;
         
@@ -111,7 +114,7 @@
       setlocale(LC_TIME, 'es_ES.UTF-8');
       // date_default_timezone_set('America/Mexico_City');
       $fecha_inicio = $respuesta['fecha_publicacion'];
-      echo $fecha_inicio;
+      // echo $fecha_inicio;
 
       $fecha = $fecha_inicio;
       $fecha = str_replace("/", "-", $fecha);			

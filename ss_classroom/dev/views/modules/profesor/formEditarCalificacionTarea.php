@@ -3,7 +3,7 @@
   <?php
     $editarCalificacion = new ProfesorController();
     $editarCalificacion -> editarCalificacionAlumnoProfesorController();
-    $editarCalificacion ->actualizarCalificacionAlumnoProfesorController();
+    $editarCalificacion -> actualizarCalificacionAlumnoProfesorController();
   ?>
 </div>
 <br /><br /><br />

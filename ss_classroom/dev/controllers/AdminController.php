@@ -26,6 +26,9 @@
             isset($_POST['email']) &&
             isset($_POST['password']) &&
             isset($_POST['rol'])) {
+              // if ($_POST['numero_cuenta'] == "") {
+              //   $_POST['numero_cuenta'] == "NULL";
+              // }
 
           if (empty($_POST['nombre']) ||
               empty($_POST['apellidos']) ||
@@ -107,7 +110,6 @@
             header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formRegistrarUsuario");
             // echo "Error";
           }
-        
       }
     }
     # Mostrar lista de profesores 
@@ -132,7 +134,7 @@
             <td>".$apellidos."</td>
             <td>".$email."</td>
             <td>
-              <a href='templateAdmin.php?action=formEditarUsuario&id=".$id_usuario."'>
+              <a href='templateAdmin.php?action=formEditarUsuario&idEditar=".$id_usuario."'>
                 <i class='fas fa-edit'></i>
               </a>
               <a href='#' data-toggle='modal' data-target='#exampleModal' class='borrar' idusuario='".$id_usuario."' idrol='".$id_rol."'>
@@ -165,10 +167,10 @@
             <td>".$email."</td>
             <td>".$numero_cuenta."</td>
             <td>
-              <a href='templateAdmin.php?action=formEditarUsuario&id=".$id_usuario."'>
+              <a href='templateAdmin.php?action=formEditarUsuario&idEditar=".$id_usuario."'>
                 <i class='fas fa-edit'></i>
               </a>
-              <a href='templateAdmin.php?action=listaAlumnos&idBorrar=".$id_usuario."&idRol=".$id_rol."'>
+              <a href='#' data-toggle='modal' data-target='#exampleModal' class='borrar' idusuario='".$id_usuario."' idrol='".$id_rol."'>
                 <i class='fas fa-trash-alt'></i>
               </a>
             </td>
@@ -210,7 +212,7 @@
               <td>".$apellidos."</td>
               <td>".$email."</td>
               <td>
-                <a href='templateAdmin.php?action=listaAdmin&idBorrar=".$id_usuario."&idRol=".$id_rol."'>
+                <a href='#' data-toggle='modal' data-target='#exampleModal' class='borrar' idusuario='".$id_usuario."' l='".$id_rol."'>
                   <i class='fas fa-trash-alt'></i>
                 </a>
               </td>
@@ -266,7 +268,7 @@
     # Editar usuario 
     # ----------------------------------------------------------
     public function editarUsuarioController() {
-      $datosController = $_GET["id"];
+      $datosController = $_GET["idEditar"];
       // echo $datosController;
       $respuesta = CrudAdminModel::editarUsuarioModel($datosController);
       // echo $respuesta[2];
@@ -338,7 +340,7 @@
         // print_r($datosController);
         // die();
         $actualizar = new CrudAdminModel($datosController);
-        $respuesta = $actualizar -> actualizarUsuarioModel();
+        $respuesta = $actualizar -> actualizarUsuarioModel($datosController);
         // echo $respuesta;
         // die();
         if ($respuesta == "success2") {
@@ -349,7 +351,7 @@
         } 
         else {
           echo "Error al intentar actualizar el usuario";
-          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario.php");
+          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario");
           }
         } 
     }

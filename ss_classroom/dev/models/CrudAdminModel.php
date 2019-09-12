@@ -14,7 +14,7 @@
     # Constructor
     # -------------------------------------------------
     public function __construct($datosModel) {
-      // $this->id_usuario = $datosModel['id_usuario'];
+      $this->id_usuario = $datosModel['id_usuario'];
       $this->nombre = $datosModel['nombre'];
       $this->apellidos = $datosModel['apellidos'];
       if ($datosModel['numero_cuenta'] == "") {

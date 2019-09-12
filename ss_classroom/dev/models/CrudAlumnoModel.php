@@ -32,12 +32,12 @@
       $queryCont = mysqli_query($cnx->getCnx(), $sqlCont);
       var_dump(mysqli_num_rows($queryCont));
       // die();
-      if(mysqli_num_rows($queryCont)<0) {
+      if(mysqli_num_rows($queryCont)>0) {
         $sql = "UPDATE alumno_tareas SET archivo = '$archivo', status = 1 WHERE id_tarea = $id_tarea AND id_usuario = $id_usuario";
       } else {
         $sql = "INSERT INTO alumno_tareas(id_usuario,id_tarea,calificacion,archivo,status) VALUES ($id_usuario,$id_tarea,0,'$archivo',1)";
       }
-      echo $sql.'<br />';
+      // echo $sql.'<br />';
       // die();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if ($query == true)

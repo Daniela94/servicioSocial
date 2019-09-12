@@ -4,11 +4,11 @@
   if (isset($_GET['action'])) {
     # MENSAJE ACTUALIZACIÓN EXITOSA
     if($_GET['action'] == "actualizacionProfesor") {
-      echo "<br><br><div class='alert alert-success' role='alert'>Actualizacion exitosa</div>";
+      echo "<br><div class='alert alert-success' role='alert'>Actualizacion exitosa</div>";
     }
     # MENSAJE ELIMINACIÓN EXITOSA
     if($_GET['action'] == "eliminacionProfesor") {
-      echo "<br><br><div class='alert alert-success' role='alert'>Eliminación exitosa</div>";
+      echo "<br><div class='alert alert-success' role='alert'>Eliminación exitosa</div>";
     }
   }
 ?>

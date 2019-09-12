@@ -109,6 +109,8 @@ body {
   --white-eee: #eee;
   --box-shadow: 0 5px 15px #1b1b1b;
   --gray-1: rgba(145, 145, 145,0.5);
+  --success: #155724;
+  --danger: #721c24;
 }
 .red {
   color: var(--red);

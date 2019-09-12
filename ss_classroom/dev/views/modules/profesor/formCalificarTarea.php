@@ -1,3 +1,13 @@
+<?php
+  $calificar = new ProfesorController();
+  $calificar -> calificarTareaAlumnoProfesorController();
+  if (isset($_GET['action'])) {
+    # MENSAJE ACTUALIZACIÓN EXITOSA
+    if ($_GET['action'] == "tareaCalificada") {
+      echo "Tarea calificada con exito";
+    }
+  }
+?>
 <h4 class="h-subtitle">Calificar tarea</h4>
 <div class="form-calificar">
   <p>Del 1 al 10 donde 10 es el 100% del valor de la tarea.</p>
@@ -27,13 +37,3 @@
     </div>
   </form>
 </div>
-<?php
-  $calificar = new ProfesorController();
-  $calificar -> calificarTareaAlumnoProfesorController();
-  if (isset($_GET['action'])) {
-    # MENSAJE ACTUALIZACIÓN EXITOSA
-    if ($_GET['action'] == "tareaCalificada") {
-      echo "Tarea calificada con exito";
-    }
-  }
-?>

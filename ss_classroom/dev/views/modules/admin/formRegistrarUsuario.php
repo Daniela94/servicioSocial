@@ -11,7 +11,7 @@
 <div class="hw-1"></div>
 <h4 class="h-subtitle">REGISTRAR USUARIO</h4>
 <div class="square-form-cx form-registro ubuntu">
-  <form action="" method="POST" onsubmit="return validarRegistro()">
+  <form action="" method="POST">
     <div class="row">
       <div class="col">
         <label for="nombreRegistro">Nombre<span></span></label>
@@ -35,11 +35,11 @@
     <div class="row">
       <div class="col">
         <label for="">Contraseña</label>
-        <input type="password" class="input-form" placeholder="Letras, mayúsculas y números.(8)">
+        <input type="password" name="pass1" class="input-form" placeholder="Letras, mayúsculas y números.(8)">
       </div>
       <div class="col">
         <label for="">Confirmar contraseña</label>
-        <input type="password" name="password" class="input-form" placeholder="Letras, mayúsculas y números.(8)">
+        <input type="password" name="pass2" name="password" class="input-form" placeholder="Letras, mayúsculas y números.(8)">
       </div>
     </div>
     <div class="row">

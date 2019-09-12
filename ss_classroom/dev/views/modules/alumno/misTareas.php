@@ -2,7 +2,7 @@
 <?php
   if (isset($_GET['action'])) {
     if($_GET['action'] == "envioExitoso") {
-      echo "<div class='alert alert-success' role='alert'>Se subió la tarea con éxito</div>";
+      echo "<br><div class='alert alert-success' role='alert'>Se subió la tarea con éxito.</div>";
     }
   }
 ?>
@@ -24,9 +24,4 @@
       $listaTareas -> listaTareasAlumnoController();
     ?>
   </tbody>
-</table>
-<script>
-  $(document).ready( function () {
-    $('#table_id').DataTable();
-  });
-</script>
+</table><br>

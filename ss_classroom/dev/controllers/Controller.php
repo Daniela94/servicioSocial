@@ -20,8 +20,8 @@
           }
           else {
             $expresionCorreo = '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/';
-            $expresionNoCuenta = '/^[0-9]{8}*$/';
-            $expresionPassword = '/^[a-zA-Z0-9]{1-8}*$/';
+            $expresionNoCuenta = '/^[0-9]{8}$/';
+            $expresionPassword = '/^[a-zA-Z0-9]*$/';
             // echo preg_match($expresionPassword, $_POST['password']);
             // die();
             if (preg_match($expresionCorreo, $_POST['usuario']) != 0 || 

@@ -24,20 +24,31 @@ function validarLogin() {
 
   // return true;
 }
-// function validarRegistro() {
+$(document).ready(function() {
+  var pass1 = $('[name=pass1]');
+  var pass2 = $('[name=pass2]');
+  var confirmacion = "Las contraseñas coinciden";
+  var negacion = "Las contraseñas no coinciden";
+  //ocultar por defecto el elemento div
+  var alert = $('<div></div>').insertAfter(pass2);
+  alert.hide();
+  //función que comprueba las dos contraseñas
+  function coincidePassword(){
+    var valor1 = pass1.val();
+    var valor2 = pass2.val();
+    //mostrar el div
+    alert.show().removeClass();
+    //condiciones dentro de la función
+    if(valor1==valor2){
+      alert.text(confirmacion).addClass('alert alert-success');
+    }
+    else {
+      alert.text(negacion).removeClass('alert alert-success').addClass('alert alert-danger');
+    }
+  }
+  //ejecutar la función al soltar la tecla
+  pass2.keyup(function(){
+  coincidePassword();
+  });
+})
 
-//   var expresionCorreo = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-//   var expresionNoCuenta = /^[0-9]*$/;
-//   var expresionPassword = /^[a-zA-Z0-9]*$/;
-
-//   var usuario = document.querySelector("#usuarioLogin").val  ;
-//   // Mostrar el value del input: console.log('usuario', usuario);
-//   var password = document.querySelector("#passwordLogin").value;
-
-//   /* ==== validar extensión de caracteres ==== */
-//   var caracteres = usuario.length;
-//   if(caracteres > 8) {
-//   document.querySelector("label[for='usuarioLogin']".innerHTML += "<br>No se permiten más de 6 caracteres.")
-//   return false;
-//   }
-// }

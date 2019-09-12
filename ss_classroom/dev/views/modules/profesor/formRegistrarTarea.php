@@ -3,7 +3,7 @@
   $registro -> registrarTareaController();
   if (isset($_GET['action'])) {
     if($_GET['action'] == "ok") {
-      echo "<br><br><div class='alert alert-success' role='alert'>Registro exitoso.</div>";
+      echo "<br><div class='alert alert-success' role='alert'>Registro exitoso.</div>";
     }
     if($_GET['action'] == "error") {
       echo "<br><br><div class='alert alert-danger' role='alert'>No se hizo el registro :(</div>";
