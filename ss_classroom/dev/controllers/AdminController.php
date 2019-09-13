@@ -24,16 +24,15 @@
             isset($_POST['apellidos']) &&
             isset($_POST['numero_cuenta']) &&
             isset($_POST['email']) &&
+            isset($_POST['pass']) &&
             isset($_POST['password']) &&
             isset($_POST['rol'])) {
-              // if ($_POST['numero_cuenta'] == "") {
-              //   $_POST['numero_cuenta'] == "NULL";
-              // }
 
           if (empty($_POST['nombre']) ||
               empty($_POST['apellidos']) ||
               empty($_POST['numero_cuenta']) ||
               empty($_POST['email']) ||
+              empty($_POST['pass']) ||
               empty($_POST['password'])) {
                 echo "<br><div class='alert alert-warning' role='alert'>Conteste todos los campos.</div>";
           }
@@ -48,29 +47,37 @@
                 preg_match($expresionApellidos, $_POST['apellidos']) != 0 &&
                 preg_match($expresionNoCuenta, $_POST['numero_cuenta']) != 0 &&
                 preg_match($expresionCorreo, $_POST['email']) != 0 &&
+                preg_match($expresionPassword, $_POST['pass']) != 0 &&
                 preg_match($expresionPassword, $_POST['password']) != 0) {
+                
+                if ($_POST['pass'] == $_POST['password']) {
 
-                $datosController = array( "nombre"=>$_POST['nombre'],
-                                          "apellidos"=>$_POST['apellidos'],
-                                          "numero_cuenta"=>$_POST['numero_cuenta'], 
-                                          "email"=>$_POST['email'],
-                                          "password"=>$_POST['password'],
-                                          "rol"=>$_POST['rol']);
-                $verificar = new CrudAdminModel($datosController);
-                $respuesta = $verificar -> verificarRegistroUsuarioModel($datosController);
-                if ($respuesta == NULL) {
-                  // echo "No existe";
-                  $insertar = $verificar -> registrarUsuarioModel($datosController);
-                  if ($insertar == "success") {
-                    header("location: ".DIR_MODULES."admin/templateAdmin.php?action=usuarioRegistrado");
+                  $datosController = array( "nombre"=>$_POST['nombre'],
+                                            "apellidos"=>$_POST['apellidos'],
+                                            "numero_cuenta"=>$_POST['numero_cuenta'], 
+                                            "email"=>$_POST['email'],
+                                            "password"=>$_POST['password'],
+                                            "rol"=>$_POST['rol']);
+                  $verificar = new CrudAdminModel($datosController);
+                  $respuesta = $verificar -> verificarRegistroUsuarioModel($datosController);
+                  if ($respuesta == NULL) {
+                    // echo "No existe";
+                    $insertar = $verificar -> registrarUsuarioModel($datosController);
+                    if ($insertar == "success") {
+                      header("location: ".DIR_MODULES."admin/templateAdmin.php?action=usuarioRegistrado");
+                    }
+                    else {
+                      echo "<br><div class='alert alert-danger' role='alert'>No se pudo registrar ;(</div>";
+                    }
                   }
                   else {
-                    echo "<br><div class='alert alert-danger' role='alert'>No se pudo registrar ;(</div>";
+                    echo "<br><div class='alert alert-danger' role='alert'>Este usuario ya existe</div>";
                   }
                 }
                 else {
-                  echo "<br><div class='alert alert-danger' role='alert'>Este usuario ya existe</div>";
+                  echo "<br><div class='alert alert-danger' role='alert'>Las contraseñas no coinciden.</div>";
                 }
+
             }
             else {
               echo "<br><div class='alert alert-danger' role='alert'>Caracteres especiales no válidos.</div>";

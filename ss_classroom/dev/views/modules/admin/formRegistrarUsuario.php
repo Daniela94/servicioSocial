@@ -35,11 +35,11 @@
     <div class="row">
       <div class="col">
         <label for="">Contraseña</label>
-        <input type="password" name="pass1" class="input-form" placeholder="Letras, mayúsculas y números.(8)">
+        <input type="password" name="pass" class="input-form" placeholder="Letras, mayúsculas y números.(8)">
       </div>
       <div class="col">
         <label for="">Confirmar contraseña</label>
-        <input type="password" name="pass2" name="password" class="input-form" placeholder="Letras, mayúsculas y números.(8)">
+        <input type="password" name="password" class="input-form" placeholder="Letras, mayúsculas y números.(8)">
       </div>
     </div>
     <div class="row">

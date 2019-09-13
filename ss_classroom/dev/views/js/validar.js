@@ -25,17 +25,17 @@ function validarLogin() {
   // return true;
 }
 $(document).ready(function() {
-  var pass1 = $('[name=pass1]');
-  var pass2 = $('[name=pass2]');
+  var pass = $('[name=pass]');
+  var password = $('[name=password]');
   var confirmacion = "Las contraseñas coinciden";
   var negacion = "Las contraseñas no coinciden";
   //ocultar por defecto el elemento div
-  var alert = $('<div></div>').insertAfter(pass2);
+  var alert = $('<div></div>').insertAfter(password);
   alert.hide();
   //función que comprueba las dos contraseñas
   function coincidePassword(){
-    var valor1 = pass1.val();
-    var valor2 = pass2.val();
+    var valor1 = pass.val();
+    var valor2 = password.val();
     //mostrar el div
     alert.show().removeClass();
     //condiciones dentro de la función
@@ -47,7 +47,7 @@ $(document).ready(function() {
     }
   }
   //ejecutar la función al soltar la tecla
-  pass2.keyup(function(){
+  password.keyup(function(){
   coincidePassword();
   });
 })
