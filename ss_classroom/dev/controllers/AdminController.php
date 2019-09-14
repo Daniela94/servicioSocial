@@ -28,9 +28,13 @@
             isset($_POST['password']) &&
             isset($_POST['rol'])) {
 
+              // if ($_POST['numero_cuenta'] == "") {
+              //   $_POST['numero_cuenta'] = "NULL";
+              // }
+
           if (empty($_POST['nombre']) ||
               empty($_POST['apellidos']) ||
-              empty($_POST['numero_cuenta']) ||
+              empty($_POST['numero_cuenta']) && $_POST['rol'] == '3' ||
               empty($_POST['email']) ||
               empty($_POST['pass']) ||
               empty($_POST['password'])) {
@@ -48,7 +52,7 @@
                 preg_match($expresionNoCuenta, $_POST['numero_cuenta']) != 0 &&
                 preg_match($expresionCorreo, $_POST['email']) != 0 &&
                 preg_match($expresionPassword, $_POST['pass']) != 0 &&
-                preg_match($expresionPassword, $_POST['password']) != 0) {
+                preg_match($expresionPassword, $_POST['password']) != 0){
                 
                 if ($_POST['pass'] == $_POST['password']) {
 

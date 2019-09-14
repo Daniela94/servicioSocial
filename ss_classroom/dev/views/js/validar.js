@@ -17,7 +17,7 @@ function validarLogin() {
     expresionNoCuenta = false;
   else  
     expresionNoCuenta = true;
-  if(!expresionPassword.test($("#password").val()))
+  if(!expresionPassword.test($("#passwordLogin").val()))
     expresionPassword = false;
   else 
     expresionPassword = true;
@@ -25,8 +25,8 @@ function validarLogin() {
   // return true;
 }
 $(document).ready(function() {
-  var pass = $('[name=pass]');
-  var password = $('[name=password]');
+  var pass = $('#pass');
+  var password = $('#password');
   var confirmacion = "Las contraseñas coinciden";
   var negacion = "Las contraseñas no coinciden";
   //ocultar por defecto el elemento div

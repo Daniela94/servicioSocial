@@ -15,9 +15,9 @@
   <div class="square-form-login form-index ubuntu">
     <form id="form-login" method="POST" onsubmit="return validarLogin()">
       <label for="usuario">Número de cuenta / Correo</label>
-      <input type="text" name="usuario" class="input-form" id="usuario" placeholder="Ingrese su no. de cuenta o correo" required>
+      <input type="text" name="usuario" class="input-form" id="usuario" required>
       <label for="password">Contraseña</label>
-      <input type="password" name="password" class="input-form" id="password" placeholder="Ingresa tu contraseña" required>
+      <input type="password" name="password" class="input-form" id="passwordLogin" required>
       <!-- Botón envío-->
       <?php
         $login = new Controller();
