@@ -21,6 +21,13 @@
       $id_usuario = $_SESSION['id_usuario'];
       // var_dump($id_usuario);
       $respuesta = CrudAlumnoModel::listaTareasAlumnoModel($id_usuario);
+
+      setlocale(LC_TIME, 'es_ES.UTF-8');
+      $default_local_date = ucwords(utf8_encode(strftime("%a %d %b, %Y a las %H:%M")));
+      $date_connectors_capital = array('A', 'Las');
+      $date_connectors_lower = array('a', 'las');
+      $hoy = str_replace($date_connectors_capital, $date_connectors_lower, $default_local_date);
+
       while ($fila = mysqli_fetch_object($respuesta)) {
         // var_dump($fila);
         // die();
@@ -61,7 +68,7 @@
           <td>".$titulo."</td>
           <td>".$descripcion."</td>
           <td class='date'>".$fecha_publicacion."</td>
-          <td class='date'>".$fecha_entrega."</td>
+          <td class='date "; if ($fecha_entrega > $hoy) echo 'late'; echo "'>".$fecha_entrega."</td>
           <td>".$profesor."</td>
           <td class='
         ";

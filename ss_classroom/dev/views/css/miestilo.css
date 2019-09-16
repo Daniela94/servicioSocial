@@ -236,9 +236,7 @@ body {
   font-size: 14px;
 }
 .status, .entregado, .no-entregado, .calificado {
-  /* font-style: italic; */
   opacity: 0.6;
-  /* font-weight: 550; */
 }
 .entregado {
   color: var(--entregado);
@@ -510,4 +508,8 @@ body {
 .date {
   font-size: 14px;
   color: var(--date);
+}
+.late {
+  font-size: 14px;
+  color: var(--no-entregado);
 }

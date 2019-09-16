@@ -28,10 +28,6 @@
             isset($_POST['password']) &&
             isset($_POST['rol'])) {
 
-              // if ($_POST['numero_cuenta'] == "") {
-              //   $_POST['numero_cuenta'] = "NULL";
-              // }
-
           if (empty($_POST['nombre']) ||
               empty($_POST['apellidos']) ||
               empty($_POST['numero_cuenta']) && $_POST['rol'] == '3' ||

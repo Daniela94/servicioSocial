@@ -47,6 +47,14 @@
     # ---------------------------------------------------------------
     public function listaTareasProfesorController() {
       $respuesta = CrudProfesorModel::listaTareasProfesorModel();
+
+      setlocale(LC_TIME, 'es_ES.UTF-8');
+      $default_local_date = ucwords(utf8_encode(strftime("%a %d %b, %Y a las %H:%M")));
+      $date_connectors_capital = array('A', 'Las');
+      $date_connectors_lower = array('a', 'las');
+      $hoy = str_replace($date_connectors_capital, $date_connectors_lower, $default_local_date);
+      // echo $local_date;
+
       while ($fila = mysqli_fetch_object($respuesta)) {
         $id_tarea = $fila->id_tarea;
         $titulo = $fila->titulo;
@@ -54,15 +62,11 @@
         $fecha_publicacion = $fila->fecha_publicacion;
         $fecha_entrega = $fila->fecha_entrega;
 
-        // echo $fecha_publicacion.'<hr>';
-        // die();
-        setlocale(LC_TIME, 'es_ES.UTF-8');
-        // date_default_timezone_set('America/Mexico_City');
         $fecha = $fecha_publicacion;
         $fecha = str_replace("/", "-", $fecha);			
         $newDate = date("Y-m-d H:i", strtotime($fecha));			
         $conector = " a las ";
-        $fechaFormato = ucfirst("%a %b, %Y");
+        $fechaFormato = ucfirst("%a %d %b, %Y");
         $horaFormato = "%H:%M";
         $strFecha = $fechaFormato.$conector.$horaFormato;
         $fecha_publicacion = ucfirst(strftime($strFecha, strtotime($newDate)));
@@ -81,7 +85,7 @@
         <td>".$titulo."</td>
         <td>".$descripcion."</td>
         <td class='date'>".$fecha_publicacion."</td>
-          <td class='date'>".$fecha_entrega."</td>
+          <td class='date "; if ($fecha_entrega > $hoy) echo 'late'; echo "'>".$fecha_entrega."</td>
           <td>
             <a href='templateProfesor.php?".htmlentities($url_string_link)."'>
               <i class='fas fa-external-link-alt'></i>

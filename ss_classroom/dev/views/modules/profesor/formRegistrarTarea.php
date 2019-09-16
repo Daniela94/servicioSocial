@@ -24,7 +24,7 @@
   $default_local_date = ucwords(utf8_encode(strftime("%a %d %b, %Y a las %H:%M")));
   $date_connectors_capital = array('A', 'Las');
   $date_connectors_lower = array('a', 'las');
-  $loca_date = str_replace($date_connectors_capital, $date_connectors_lower, $default_local_date);
+  $local_date = str_replace($date_connectors_capital, $date_connectors_lower, $default_local_date);
 ?>
   <form action="" method="POST">
     <div class="row">
@@ -42,7 +42,7 @@
     <div class="row">
       <div class="col">
         <label for="">Fecha de publicación</label>
-        <p><?=$loca_date?></p>
+        <p><?=$local_date?></p>
         <input type="hidden" name="fecha_publicacion" value="<?=$fecha_publicacion?>">
       </div>
       <div class="col">
