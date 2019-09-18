@@ -23,6 +23,11 @@
       $respuesta = CrudAlumnoModel::listaTareasAlumnoModel($id_usuario);
 
       setlocale(LC_TIME, 'es_ES.UTF-8');
+      date_default_timezone_set('America/Mexico_City');
+      $fechaHoy = date("Y-m-d H:i");
+      $strFechaHoy = date("Y-m-d");
+      $hora = date("H:i");
+
       $default_local_date = ucwords(utf8_encode(strftime("%a %d %b, %Y a las %H:%M")));
       $date_connectors_capital = array('A', 'Las');
       $date_connectors_lower = array('a', 'las');
@@ -48,19 +53,25 @@
         // $profesor = $fila->id_usuario;
 
         setlocale(LC_TIME, 'es_ES.UTF-8');
-        // date_default_timezone_set('America/Mexico_City');
+        date_default_timezone_set('America/Mexico_City');
+        $fechaHoy = date("Y-m-d H:i");
+
         $fecha = $fecha_publicacion;
         $fecha = str_replace("/", "-", $fecha);			
         $newDate = date("Y-m-d H:i", strtotime($fecha));			
         $conector = " a las ";
-        $fechaFormato = ucfirst("%a %b, %Y");
+        $fechaFormato = ucfirst("%a %d %b, %Y");
         $horaFormato = "%H:%M";
         $strFecha = $fechaFormato.$conector.$horaFormato;
         $fecha_publicacion = ucfirst(strftime($strFecha, strtotime($newDate)));
 
         $fechaEntrega = $fecha_entrega;
         $fechaEntrega = str_replace("/", "-", $fechaEntrega);			
-        $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));				
+        $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));	
+
+        $strFechaEntrega = date("Y-m-d", strtotime($fechaEntrega));        
+        $horaEntrega = date("H:i", strtotime($fechaEntrega));
+
         $fecha_entrega =ucfirst(strftime($strFecha, strtotime($newDate2)));
 
         echo "
@@ -68,7 +79,7 @@
           <td>".$titulo."</td>
           <td>".$descripcion."</td>
           <td class='date'>".$fecha_publicacion."</td>
-          <td class='date "; if ($fecha_entrega > $hoy) echo 'late'; echo "'>".$fecha_entrega."</td>
+          <td class='date "; if ($strFechaEntrega == $strFechaHoy && $horaEntrega < $hora && $status == "No entregado") echo 'late'; echo "'>".$fecha_entrega."</td>
           <td>".$profesor."</td>
           <td class='
         ";
@@ -82,11 +93,8 @@
           else if ($status == "Rechazado") echo "<i class='fas fa-times'></i> "; echo $status."</td>
           <td";
             if ($status == "Calificado: ".$calificacion) echo " class='disabled-color'><i class='fas fa-file-upload'></i> Subir";
-              else 
-                echo ">
-                  <a href='templateAlumno.php?action=formSubirTarea&titulo=".$titulo."&idUsuario=".$id_usuario."&idTarea=".$id_tarea."'>
-                    <i class='fas fa-file-upload'></i> Subir
-                  </a>";
+            else if ($strFechaEntrega == $strFechaHoy && $horaEntrega < $hora && $status == "No entregado") echo " class='disabled-color'><i class='fas fa-file-upload'></i> Subir";
+            else echo "><a href='templateAlumno.php?action=formSubirTarea&titulo=".$titulo."&idUsuario=".$id_usuario."&idTarea=".$id_tarea."'><i class='fas fa-file-upload'></i> Subir</a>";
             echo "
           </td>
         </tr>";
@@ -126,7 +134,7 @@
                                     "id_tarea"=>$_POST['idTarea'],
                                     "archivo"=>$archivoNombre);
           echo "<hr>";
-          print_r($datosController);
+          // print_r($datosController);
           // die();
           $respuesta = CrudAlumnoModel::subirTareaAlumnoModel($datosController);
           // print_r($respuesta);

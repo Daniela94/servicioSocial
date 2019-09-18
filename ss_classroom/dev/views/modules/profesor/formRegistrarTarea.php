@@ -15,9 +15,8 @@
 <div class="square-form-cx form-registro ubuntu">
 <?php
   setlocale(LC_TIME, 'es_ES.UTF-8');
-
   date_default_timezone_set('America/Mexico_City');
-  $fecha_publicacion = date("Y:m:d\TH:i");
+  $fecha_publicacion = date("Y-m-d H:i");
   // echo $fecha_publicacion;
   // die();
 

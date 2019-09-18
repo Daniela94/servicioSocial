@@ -18,13 +18,15 @@
     # Subir tarea
     # ---------------------------------------------
     public function subirTareaAlumnoModel($datosModel) {
-      var_dump($datosModel);
+      // var_dump($datosModel);
       // die();
       // $titulo = $datosModel['titulo'];
       $id_usuario = $datosModel['id_usuario'];
       $id_tarea = $datosModel['id_tarea'];
       $archivo = $datosModel['archivo'];
-      $sqlCont = "SELECT COUNT(*) FROM alumno_tareas WHERE id_tarea = $id_tarea AND id_usuario = $id_usuario";
+      // echo $id_tarea;
+      // die();
+      $sqlCont = "SELECT * FROM alumno_tareas WHERE id_tarea = $id_tarea AND id_usuario = $id_usuario";
       echo $sqlCont;
       // die();
       $cnx = new Conexion();
@@ -37,7 +39,7 @@
       } else {
         $sql = "INSERT INTO alumno_tareas(id_usuario,id_tarea,calificacion,archivo,status) VALUES ($id_usuario,$id_tarea,0,'$archivo',1)";
       }
-      // echo $sql.'<br />';
+      echo $sql.'<br />';
       // die();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if ($query == true)

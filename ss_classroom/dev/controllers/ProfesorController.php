@@ -30,7 +30,6 @@
                                   "fecha_entrega"=>$_POST['fecha_entrega']);
         // var_dump($datosController);
         // die();
-        // var_dump($datosController);
         // echo "entra <br />";
         $crud = new CrudProfesorModel($datosController);
         $respuesta = $crud -> registrarTareaModel();
@@ -49,11 +48,18 @@
       $respuesta = CrudProfesorModel::listaTareasProfesorModel();
 
       setlocale(LC_TIME, 'es_ES.UTF-8');
+      date_default_timezone_set('America/Mexico_City');
+      $fechaHoy = date("Y-m-d H:i");
+
+      $strFechaHoy = date("Y-m-d");
+      $hora = date("H:i");
+      // echo "Fecha: ".$fechaHoy."<br /> Hora: ".$hora."<br /><br />";
+
       $default_local_date = ucwords(utf8_encode(strftime("%a %d %b, %Y a las %H:%M")));
       $date_connectors_capital = array('A', 'Las');
       $date_connectors_lower = array('a', 'las');
       $hoy = str_replace($date_connectors_capital, $date_connectors_lower, $default_local_date);
-      // echo $local_date;
+      // echo $hoy;
 
       while ($fila = mysqli_fetch_object($respuesta)) {
         $id_tarea = $fila->id_tarea;
@@ -73,8 +79,17 @@
 
         $fechaEntrega = $fecha_entrega;
         $fechaEntrega = str_replace("/", "-", $fechaEntrega);			
-        $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));				
-        $fecha_entrega =ucfirst(strftime($strFecha, strtotime($newDate2)));
+        $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));
+
+        $strFechaEntrega = date("Y-m-d", strtotime($fechaEntrega));        
+        $horaEntrega = date("H:i", strtotime($fechaEntrega));
+        // echo "Hora de entrega tarea: ".$horaEntrega."<br />";				
+        $fecha_entrega = ucfirst(strftime($strFecha, strtotime($newDate2)));
+        // if ($horaEntrega < $hora) echo "Entrega: ".$horaEntrega."<br />"."Hora actual: ".$hora."<br />"."Status: TARDE <br />";
+        // else echo "Entrega: ".$horaEntrega."<br />"."Hora actual: ".$hora."<br />"."Status: A TIEMPO <br /><br />";
+        // if ($strFechaEntrega < $strFechaHoy) echo "Entrega: ".$strFechaEntrega."<br />"."Fecha actual: ".$strFechaHoy."<br />"."Status: TARDE <br />";
+        // else echo "Entrega: ".$strFechaEntrega."<br />"."Fecha actual: ".$strFechaHoy."<br />"."Status: A TIEMPO <br /><br />";
+        
 
         // $query_string = 'foo=' . urlencode($foo) . '&bar=' . urlencode($bar);
         // echo '<a href="mycgi?' . htmlentities($url_string) . '">';
@@ -85,7 +100,7 @@
         <td>".$titulo."</td>
         <td>".$descripcion."</td>
         <td class='date'>".$fecha_publicacion."</td>
-          <td class='date "; if ($fecha_entrega > $hoy) echo 'late'; echo "'>".$fecha_entrega."</td>
+          <td class='date "; if ($strFechaEntrega == $strFechaHoy && $horaEntrega < $hora) echo 'late'; echo "'>".$fecha_entrega."</td>
           <td>
             <a href='templateProfesor.php?".htmlentities($url_string_link)."'>
               <i class='fas fa-external-link-alt'></i>
@@ -244,15 +259,17 @@
           echo "
           <tr>
             <td>".$nombre."</td>
-            <td>".$apellidos."</td><td";
-            if($archivo=="") echo " class='disabled-color'> Vacío"; else echo "><a href='".DIR_VIEWS."assets/tareas/".$archivo."' target='_blank'><i class='fas fa-file-pdf'></a>";
-            echo "</td><td";
-
+            <td>".$apellidos."</td>
+            <td"; if($archivo=="") echo " class='disabled-color'> Vacío"; else echo "><a href='".DIR_VIEWS."assets/tareas/".$archivo."' target='_blank'>".$archivo." <i class='fas fa-file-pdf'></a>";
+            echo 
+            "</td>
+            <td";
             if($status==0) echo " class='status'>No entregada";
             if($status==1) echo " class='status'>No calificada";
             if($status==2) echo ">" .$calificacion;
             if($status==3) echo " class='status no-entregado'>Rechazada";
-            echo "</td>
+            echo 
+            "</td>
             <td";
             if($status==0) echo " class='disabled-color'>".$accionesNE;
             if($status==1) echo ">".$accionesE;

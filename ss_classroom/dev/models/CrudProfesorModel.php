@@ -28,7 +28,7 @@
       // die();
       $cnx = new Conexion();
       $cnx -> conectar();
-      $query =mysqli_query($cnx->getCnx(), $sql);
+      $query = mysqli_query($cnx->getCnx(), $sql);
       if ($query == true) 
         return "success";
       else
