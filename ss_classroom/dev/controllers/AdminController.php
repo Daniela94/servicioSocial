@@ -317,7 +317,7 @@
           </div>
           <div class='col'>
             <label for=''>Correo electrónico</label>
-            <input type='email' value='".$respuesta['email']."' name='email' class='input-form'>
+            <input type='email' value='".$respuesta['email']."' name='email' class='input-form' readonly='readonly'>
           </div>
         </div>
         <div class='row'>
@@ -406,28 +406,21 @@
                                             "email"=>$_POST["email"],
                                             "password"=>$_POST["password"],
                                             "rol"=>$_POST["rol"]);
-                  $verificar = new CrudAdminModel($datosController);
-                  $respuesta = $verificar -> verificarRegistroUsuarioModel($datosController);
-                  if ($respuesta == NULL) {
-                    // echo "No existe";
-                    $actualizar = new CrudAdminModel($datosController);
-                    $respuesta = $actualizar -> actualizarUsuarioModel($datosController);
-                    // echo $respuesta;
-                    // die();
-                    if ($respuesta == "success2") {
-                      header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
-                    }
-                    else if ($respuesta == "success3") {
-                      header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionAlumno");
-                    } 
-                    else {
-                      echo "Error al intentar actualizar el usuario";
-                      header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario");
-                    }
+                  $actualizar = new CrudAdminModel($datosController);
+                  $respuesta = $actualizar -> actualizarUsuarioModel($datosController);
+                  // echo $respuesta;
+                  // die();
+                  if ($respuesta == "success2") {
+                    header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
                   }
+                  else if ($respuesta == "success3") {
+                    header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionAlumno");
+                  } 
                   else {
-                    echo "<br><div class='alert alert-danger' role='alert'>Este usuario ya existe</div>";
+                    echo "Error al intentar actualizar el usuario";
+                    header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario");
                   }
+                  
                 }
                 else {
                   echo "<br><div class='alert alert-danger' role='alert'>Las contraseñas no coinciden.</div>";
@@ -482,29 +475,18 @@
                                   "id_rol" => $_GET['idRol']);
         // print_r($datosController);
         // die();
-        $id_btnPg = $_GET['btnpg'];
-        // print_r($id_btnPg);
-        // die();
         $respuesta = CrudAdminModel::eliminarUsuarioModel($datosController);
 
         if ($respuesta == "success1") {
           header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAdmin");
         }
         if ($respuesta == "success2") {
-          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionProfesor&btnpg=".$id_btnPg);
+          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionProfesor");
         }
         if ($respuesta == "success3") {
           header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAlumno");
         }
       }
     }
-    # VALIDAR USUARIO EXISTENTE
-    # -------------------------------------------------------------
-    // public function validarNombreRegistroController($validarNombre) {
-    //   $datosController = $validarNombre;
-
-    //   $respuesta = CrudAdminModel::validarNombreRegistroModel($datosController);
-
-    // }
   }
 ?>

@@ -3,10 +3,14 @@
   $listaTareas -> eliminarTareaProfesorController();
   if (isset($_GET['action'])) {
     if ($_GET['action'] == "actualizacionTarea") {
-      echo "<br><div class='alert alert-success' role='alert'>Actualizacion exitosa</div>";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Actualización exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
     if ($_GET['action'] == "eliminacionTarea") {
-      echo "<br><div class='alert alert-success' role='alert'>Eliminación exitosa</div>";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Eliminación exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
   }
 ?>

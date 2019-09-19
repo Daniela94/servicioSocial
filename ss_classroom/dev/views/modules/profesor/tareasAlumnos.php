@@ -2,19 +2,27 @@
   if (isset($_GET['action'])) {
     # MENSAJE CALIFICACIÓN EXITOSA
     if ($_GET['action'] == "tareaCalificada") {
-      echo "<br><div class='alert alert-success' role='alert'>Tarea calificada con exito</div>";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Tarea calificada con éxito <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
     # MENSAJE ACTUALIZACIÓN EXITOSA
     if ($_GET['action'] == "tareaActualizada") {
-      echo "<br><div class='alert alert-success' role='alert'>Calificación actualizada con exito</div>";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Tarea actualizada con éxito <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
     # MENSAJE TAREA RECHAZADA
     if ($_GET['action'] == "tareaRechazada") {
-      echo "<br><div class='alert alert-danger' role='alert'>Tarea rechazada</div>";
+      echo "<br><div class='alert alert-danger alert-dismissible fade show' role='alert'>Tarea rechazada <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
     #  MENSAJE CALIFICACIÓN ACTUALIZADA
     if($_GET['action'] == "calificacionActualizada") {
-      echo "<br><div class='alert alert-success' role='alert'>Calificación actualizada.</div>";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Calificación actualizada con éxito <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
   }
 ?>

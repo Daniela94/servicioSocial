@@ -4,7 +4,9 @@
   if (isset($_GET['action'])) {
     # MENSAJE ELIMINACIÓN EXITOSA
     if($_GET['action'] == "eliminacionAdmin") {
-      echo "<br><div class='alert alert-success' role='alert'>Eliminación exitosa</div>";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Eliminación exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
   }
 ?>

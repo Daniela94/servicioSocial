@@ -154,20 +154,6 @@
         echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
       mysqli_close($query);
     }
-    # VALIDAR USUARIO EXISTENTE
-    # ---------------------------------------------------
-    // public function validarNombreRegistroModel($datosModel) {
-    //   $sql = "SELECT * FROM usuario WHERE nombre = $datosModel";
-    //   echo $sql;
-    //   // die();
-    //   $cnx = new Conexion();
-    //   $cnx -> conectar();
-    //   $query = mysqli_query($cnx->getCnx(), $sql);
-    //   $row = mysqli_fetch_array($query);
-    //   if (!$query)
-    //     echo "Error: ".mysqli_error($cnx->getCnx());
-    //   return $row;
-    //   mysqli_close($query);
-    // }
+    
   }
 ?>

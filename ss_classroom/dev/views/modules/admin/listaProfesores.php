@@ -4,11 +4,15 @@
   if (isset($_GET['action'])) {
     # MENSAJE ACTUALIZACIÓN EXITOSA
     if($_GET['action'] == "actualizacionProfesor") {
-      echo "<br><div class='alert alert-success' role='alert'>Actualizacion exitosa</div>";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Actualización exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
     # MENSAJE ELIMINACIÓN EXITOSA
     if($_GET['action'] == "eliminacionProfesor") {
-      echo "<br><div class='alert alert-success' role='alert'>Eliminación exitosa</div>";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Eliminación exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
   }
 ?>
@@ -69,11 +73,6 @@
         document.getElementById('btneliminar_').setAttribute('href','templateAdmin.php?action=eliminacionProfesor&idBorrar='+id_usuario+'&idRol='+id_rol+'&btnpg='+id_btnPg);
       });
     };    
-    
-    //if(btnpg!=null) 
-    // $('[data-dt-idx="'+btnpg+'"]').trigger('click');
   };
   
 </script>
-<!-- <a href="#modal">Eliminar</a> -->
-<!-- s -->

@@ -2,7 +2,9 @@
 <?php
   if (isset($_GET['action'])) {
     if($_GET['action'] == "envioExitoso") {
-      echo "<br><div class='alert alert-success' role='alert'>Se subió la tarea con éxito.</div>";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Se subió la tarea con éxito <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div></div>";
     }
   }
 ?>

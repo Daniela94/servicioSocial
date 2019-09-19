@@ -4,7 +4,9 @@
   if (isset($_GET['action'])) {
     # MENSAJE ACTUALIZACIÓN EXITOSA
     if ($_GET['action'] == "tareaCalificada") {
-      echo "Tarea calificada con exito";
+      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Tarea calificada con éxito <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button></div>";
     }
   }
 ?>
