@@ -37,21 +37,35 @@
                 echo "<br><div class='alert alert-warning' role='alert'>Conteste todos los campos.</div>";
           }
           else {
-            $expresionNombre = '/^[a-zA-Z]*$/';
-            $expresionApellidos = '/^[a-zA-Z]*$/';
-            $expresionNoCuenta = '/^[0-9]*$/';
+            // $expresionNombre = '/^[a-zA-Z]*$/';
+            // $expresionApellidos = '/^[a-zA-Z]*$/';
+            $expresionNombre = '/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/';
+            $expresionApellidos = '/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/';
+            $expresionNoCuenta = '/^[0-9]{8}$/';
+            $expresionVacio = '/^[ ]{0}$/';
             $expresionCorreo = '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/';
             $expresionPassword = '/^[a-zA-Z0-9]*$/';
+            // print_r(preg_match($expresionNoCuenta, $_POST['numero_cuenta']));
+            // print_r(preg_match($expresionVacio, $_POST['numero_cuenta']));
+            // die();
+            if (preg_match($expresionNoCuenta, $_POST['numero_cuenta']) != 0 || preg_match($expresionVacio, $_POST['numero_cuenta']) != 0) {
 
-            if (preg_match($expresionNombre, $_POST['nombre']) != 0 &&
-                preg_match($expresionApellidos, $_POST['apellidos']) != 0 &&
-                preg_match($expresionNoCuenta, $_POST['numero_cuenta']) != 0 &&
-                preg_match($expresionCorreo, $_POST['email']) != 0 &&
-                preg_match($expresionPassword, $_POST['pass']) != 0 &&
-                preg_match($expresionPassword, $_POST['password']) != 0){
+              if (preg_match($expresionNombre, $_POST['nombre']) != 0 &&
+                  preg_match($expresionApellidos, $_POST['apellidos']) != 0 &&
+                  preg_match($expresionCorreo, $_POST['email']) != 0 &&
+                  preg_match($expresionPassword, $_POST['pass']) != 0 &&
+                  preg_match($expresionPassword, $_POST['password']) != 0){
+
+
                 
+                // print_r(preg_match($expresionNombre, $_POST['nombre']));
+                // print_r(preg_match($expresionApellidos, $_POST['apellidos']));
+                // // print_r(preg_match($expresionNoCuenta, $_POST['numero_cuenta']));
+                // print_r(preg_match($expresionCorreo, $_POST['email']));
+                // die();
+  
                 if ($_POST['pass'] == $_POST['password']) {
-
+  
                   $datosController = array( "nombre"=>$_POST['nombre'],
                                             "apellidos"=>$_POST['apellidos'],
                                             "numero_cuenta"=>$_POST['numero_cuenta'], 
@@ -77,10 +91,14 @@
                 else {
                   echo "<br><div class='alert alert-danger' role='alert'>Las contraseñas no coinciden.</div>";
                 }
-
+  
+              }
+              else {
+                echo "<br><div class='alert alert-danger' role='alert'>Caracteres especiales no válidos.</div>";
+              } 
             }
             else {
-              echo "<br><div class='alert alert-danger' role='alert'>Caracteres especiales no válidos.</div>";
+              echo "<br><div class='alert alert-danger' role='alert'>Número de cuenta incompleta.</div>";
             } 
           }
         }
@@ -285,11 +303,11 @@
           <div class='col'>
             <input type='hidden' value='".$respuesta['id_usuario']."' name='id_usuario'>
             <label for=''>Nombre</label>
-            <input type='text' value='".$respuesta['nombre']."' name='nombre' class='input-form'>
+            <input type='text' value='".$respuesta['nombre']."' name='nombre' class='input-form' id='nombreRegistro'>
           </div>
           <div class='col'>
             <label for=''>Apellidos</label>
-            <input type='text' value='".$respuesta['apellidos']."' name='apellidos' class='input-form'>
+            <input type='text' value='".$respuesta['apellidos']."' name='apellidos' class='input-form' id='apellidosRegistro'>
           </div>
         </div>
         <div class='row'>
@@ -305,11 +323,11 @@
         <div class='row'>
           <div class='col'>
             <label for=''>Contraseña</label>
-            <input type='text' value='".$respuesta['password']."' class='input-form'>
+            <input type='password' name='pass' value='".$respuesta['password']."' class='input-form' id='pass'>
           </div>
           <div class='col'>
             <label for=''>Confirmar contraseña</label>
-            <input type='text' value='".$respuesta['password']."' name='password' class='input-form'>
+            <input type='password' value='".$respuesta['password']."' name='password' class='input-form' id='password'>
           </div>
         </div>
         <div class='row'>
@@ -335,32 +353,126 @@
     # Actualizar usuario
     # -----------------------------------------------------
     public function actualizarUsuarioController() {
-      if (isset($_POST["editarUsuario"])) {
-        // print_r($_POST);
-        $datosController = array( "id_usuario"=>$_POST["id_usuario"],
-                                  "nombre"=>$_POST["nombre"],
-                                  "apellidos"=>$_POST["apellidos"],
-                                  "numero_cuenta"=>$_POST["numero_cuenta"],
-                                  "email"=>$_POST["email"],
-                                  "password"=>$_POST["password"],
-                                  "rol"=>$_POST["rol"]);
-        // print_r($datosController);
-        // die();
-        $actualizar = new CrudAdminModel($datosController);
-        $respuesta = $actualizar -> actualizarUsuarioModel($datosController);
-        // echo $respuesta;
-        // die();
-        if ($respuesta == "success2") {
-          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
-        }
-        else if ($respuesta == "success3") {
-          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionAlumno");
-        } 
-        else {
-          echo "Error al intentar actualizar el usuario";
-          header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario");
+      if (isset($_POST['editarUsuario'])) {
+
+        if (isset($_POST['nombre']) &&
+            isset($_POST['apellidos']) &&
+            isset($_POST['numero_cuenta']) &&
+            isset($_POST['email']) &&
+            isset($_POST['pass']) &&
+            isset($_POST['password']) &&
+            isset($_POST['rol'])) {
+
+          if (empty($_POST['nombre']) ||
+              empty($_POST['apellidos']) ||
+              empty($_POST['numero_cuenta']) && $_POST['rol'] == '3' ||
+              empty($_POST['email']) ||
+              empty($_POST['pass']) ||
+              empty($_POST['password'])) {
+                echo "<br><div class='alert alert-warning' role='alert'>Conteste todos los campos.</div>";
           }
-        } 
+          else {
+            // $expresionNombre = '/^[a-zA-Z]*$/';
+            // $expresionApellidos = '/^[a-zA-Z]*$/';
+            $expresionNombre = '/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/';
+            $expresionApellidos = '/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/';
+            $expresionNoCuenta = '/^[0-9]{8}$/';
+            $expresionVacio = '/^[ ]{0}$/';
+            $expresionCorreo = '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/';
+            $expresionPassword = '/^[a-zA-Z0-9]*$/';
+            // print_r(preg_match($expresionNoCuenta, $_POST['numero_cuenta']));
+            // print_r(preg_match($expresionVacio, $_POST['numero_cuenta']));
+            // die();
+            if (preg_match($expresionNoCuenta, $_POST['numero_cuenta']) != 0 || preg_match($expresionVacio, $_POST['numero_cuenta']) != 0) {
+
+              if (preg_match($expresionNombre, $_POST['nombre']) != 0 &&
+                  preg_match($expresionApellidos, $_POST['apellidos']) != 0 &&
+                  preg_match($expresionCorreo, $_POST['email']) != 0 &&
+                  preg_match($expresionPassword, $_POST['pass']) != 0 &&
+                  preg_match($expresionPassword, $_POST['password']) != 0){
+                
+                // print_r(preg_match($expresionNombre, $_POST['nombre']));
+                // print_r(preg_match($expresionApellidos, $_POST['apellidos']));
+                // // print_r(preg_match($expresionNoCuenta, $_POST['numero_cuenta']));
+                // print_r(preg_match($expresionCorreo, $_POST['email']));
+                // die();
+  
+                if ($_POST['pass'] == $_POST['password']) {
+  
+                  $datosController = array( "id_usuario"=>$_POST["id_usuario"],
+                                            "nombre"=>$_POST["nombre"],
+                                            "apellidos"=>$_POST["apellidos"],
+                                            "numero_cuenta"=>$_POST["numero_cuenta"],
+                                            "email"=>$_POST["email"],
+                                            "password"=>$_POST["password"],
+                                            "rol"=>$_POST["rol"]);
+                  $verificar = new CrudAdminModel($datosController);
+                  $respuesta = $verificar -> verificarRegistroUsuarioModel($datosController);
+                  if ($respuesta == NULL) {
+                    // echo "No existe";
+                    $actualizar = new CrudAdminModel($datosController);
+                    $respuesta = $actualizar -> actualizarUsuarioModel($datosController);
+                    // echo $respuesta;
+                    // die();
+                    if ($respuesta == "success2") {
+                      header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
+                    }
+                    else if ($respuesta == "success3") {
+                      header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionAlumno");
+                    } 
+                    else {
+                      echo "Error al intentar actualizar el usuario";
+                      header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario");
+                    }
+                  }
+                  else {
+                    echo "<br><div class='alert alert-danger' role='alert'>Este usuario ya existe</div>";
+                  }
+                }
+                else {
+                  echo "<br><div class='alert alert-danger' role='alert'>Las contraseñas no coinciden.</div>";
+                }
+  
+              }
+              else {
+                echo "<br><div class='alert alert-danger' role='alert'>Caracteres especiales no válidos.</div>";
+              } 
+            }
+            else {
+              echo "<br><div class='alert alert-danger' role='alert'>Número de cuenta incompleta.</div>";
+            } 
+          }
+        }
+        else {
+          echo "<br><div class='alert alert-warning' role='alert'>Debe enviar todos los campos.</div>";
+        }
+      }
+      // if (isset($_POST["editarUsuario"])) {
+      //   // print_r($_POST);
+      //   $datosController = array( "id_usuario"=>$_POST["id_usuario"],
+      //                             "nombre"=>$_POST["nombre"],
+      //                             "apellidos"=>$_POST["apellidos"],
+      //                             "numero_cuenta"=>$_POST["numero_cuenta"],
+      //                             "email"=>$_POST["email"],
+      //                             "password"=>$_POST["password"],
+      //                             "rol"=>$_POST["rol"]);
+      //   // print_r($datosController);
+      //   // die();
+      //   $actualizar = new CrudAdminModel($datosController);
+      //   $respuesta = $actualizar -> actualizarUsuarioModel($datosController);
+      //   // echo $respuesta;
+      //   // die();
+      //   if ($respuesta == "success2") {
+      //     header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
+      //   }
+      //   else if ($respuesta == "success3") {
+      //     header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionAlumno");
+      //   } 
+      //   else {
+      //     echo "Error al intentar actualizar el usuario";
+      //     header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario");
+      //   }
+      // } 
     }
     # Eliminar usuario
     # ------------------------------------------------------------------

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-08-2019 a las 14:37:51
+-- Tiempo de generación: 18-09-2019 a las 20:14:05
 -- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
 -- Versión de PHP: 7.2.19-0ubuntu0.18.04.2
 
@@ -36,16 +36,6 @@ CREATE TABLE `alumno_tareas` (
   `archivo` varchar(50) DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `alumno_tareas`
---
-
-INSERT INTO `alumno_tareas` (`id_alumno_tareas`, `id_usuario`, `id_tarea`, `calificacion`, `archivo`, `status`) VALUES
-(17, 39, 15, '9', 'generate_tickets.pdf', 1),
-(19, 39, 17, '9', 'microkernel.png', 2),
-(20, 39, 18, '8', 'MINIX_1.jpg', 2),
-(21, 39, 19, '9', 'El_papel_de_la_heuristica_en_IA.pdf', 3);
 
 -- --------------------------------------------------------
 
@@ -87,12 +77,10 @@ CREATE TABLE `tarea` (
 --
 
 INSERT INTO `tarea` (`id_tarea`, `id_usuario`, `titulo`, `descripcion`, `fecha_publicacion`, `fecha_entrega`) VALUES
-(15, 81, 'Sistema de ventas', '¿Qué es?, ejemplos, usos.', '2019-08-12 05:00:00', '2019-08-13 05:00:00'),
-(16, 3, 'Contruir un robot asistente', 'Utiliza las herramientas futuristas que  compraste en amazon', '2019-08-15 05:00:00', '2019-08-23 05:00:00'),
-(17, 3, 'Ver ep1. de \"Altered carbon\"', 'Hacer un ensayo sobre el tema de la película', '2019-08-15 05:00:00', '2019-08-16 05:00:00'),
-(18, 3, 'Limpieza', 'Limpiar su computadora de los archivos que ya no utilicen', '2019-08-15 05:00:00', '2019-08-14 05:00:00'),
-(19, 3, 'Investigación', 'Agentes inteligentes\r\n- Características\r\n- Utilidades', '2019-08-15 05:00:00', '2019-08-16 05:00:00'),
-(36, 3, 'Ver \"Historias de miedo\"', 'Hacer un resumen de 1 cuartilla mínimo.', '2019-08-27 20:27:00', '2019-08-29 04:59:00');
+(25, 3, 'Cantar canción de Florence + The Machine', 'Only if for a night', '2019-09-18 20:30:00', '2019-09-19 21:00:00'),
+(26, 3, 'Limpiar su casa', 'Barrer y trapear la cocina y la sala.', '2019-09-18 20:51:00', '2019-09-18 22:20:00'),
+(27, 3, 'Visitar el museo de Riplay', 'Hacer apuntes de lo que más te gustó.', '2019-09-18 21:14:00', '2019-09-18 21:50:00'),
+(28, 3, 'Comer galletas', '1 paquete de Chokis', '2019-09-18 21:23:00', '2019-09-18 23:50:00');
 
 -- --------------------------------------------------------
 
@@ -119,16 +107,27 @@ INSERT INTO `usuario` (`id_usuario`, `id_rol`, `nombre`, `apellidos`, `numero_cu
 (3, 2, 'Omar', 'Olivera', NULL, 'oolivera@email.com', 'omar123'),
 (39, 3, 'Avril', 'Lavigne', '20097851', 'alavigne@email.com', 'avril123'),
 (42, 1, 'Jarvis', 'Stark', NULL, 'jstark@email.com', 'jarvis123'),
-(81, 2, 'Barry', 'Allen', NULL, 'ballen@email.com', 'barry123'),
-(82, 2, 'Eidi', 'Hernand', NULL, 'ehernand@email.com', 'eidi123'),
-(83, 2, 'Alex', 'Danvers', NULL, 'adanvers@email.com', 'alex123'),
-(86, 2, 'Gabriela', 'Rodríguez', NULL, 'grodriguez@email.com', 'gabriela123'),
 (87, 3, 'Kara', 'Danvers', '20097852', 'kdanvers@email.com', 'kara123'),
 (88, 3, 'Cisco', 'Ramon', '20097853', 'cramon@email.com', 'cisco123'),
 (89, 3, 'Caitlin', 'Snow', '20097854', 'csnow@email.com', 'caitlin123'),
 (90, 3, 'Margarita', 'Pérez', '20097855', 'mperez@email.com', 'margarit123'),
 (91, 3, 'Carlos', 'Olivera', '20097856', 'colivera@email.com', 'carlos123'),
-(92, 3, 'Óscar', 'Cortés', '20097857', 'ocortes@email.com', 'oscar123');
+(108, 2, 'Mac', 'Henry', NULL, 'mhenry@email.com', 'mac123'),
+(110, 2, 'burrito', 'gris', NULL, 'bgris@email.com', 'burrito123'),
+(112, 2, 'doña', 'tota', NULL, 'dtota@email.com', 'doña123'),
+(115, 2, 'carlos', 'junior', NULL, 'cjunior@email.com', 'carlos123'),
+(129, 3, 'cafe', 'latte', '20097858', 'clatte@email.com', 'cafe123'),
+(144, 2, 'ariana', 'grande', NULL, 'agrande@email.com', 'ariana123'),
+(145, 2, 'Hayley', 'Williams', NULL, 'hwilliams@emai.com', 'ayley123'),
+(147, 2, 'It', 'Pennywise', NULL, 'ipennywise@email.com', 'it123'),
+(150, 2, 'Buzz', 'Lightyear', NULL, 'blightyear@email.com', 'buzz123'),
+(152, 2, 'Audio', 'slave', NULL, 'aslave@email.com', 'audio123'),
+(157, 2, 'Samsung', 'Galaxy', NULL, 'sgalaxy@email.com', 'samsung123'),
+(158, 3, 'Katy', 'Perry', '20097861', 'kperry@email.com', 'katy123'),
+(159, 3, 'Nicki', 'Minaj', '20097862', 'nminaj@email.com', 'nicki123'),
+(160, 3, 'Taylor', 'Swift', '20097863', 'tswift@email.com', 'taylor123'),
+(161, 2, 'Blake', 'Neely', NULL, 'bneely@email.com', 'blake123'),
+(162, 3, 'Danielle', 'Haim', '20097868', 'dhaim@email.com', 'danielle123');
 
 --
 -- Índices para tablas volcadas
@@ -170,7 +169,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alumno_tareas`
 --
 ALTER TABLE `alumno_tareas`
-  MODIFY `id_alumno_tareas` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_alumno_tareas` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -182,13 +181,13 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `id_tarea` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_tarea` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- Restricciones para tablas volcadas
