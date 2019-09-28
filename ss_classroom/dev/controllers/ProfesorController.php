@@ -22,23 +22,60 @@
     # ------------------------------------------------------
     public function registrarTareaController() {
       if (isset($_POST['enviar'])) {
-        // recibir el POST en un array
-        $datosController = array( "id_usuario"=>$_SESSION['id_usuario'],
-                                  "titulo"=>$_POST['titulo'],
-                                  "descripcion"=>$_POST['descripcion'],
-                                  "fecha_publicacion"=>$_POST['fecha_publicacion'],
-                                  "fecha_entrega"=>$_POST['fecha_entrega']);
-        // var_dump($datosController);
-        // die();
-        // echo "entra <br />";
-        $crud = new CrudProfesorModel($datosController);
-        $respuesta = $crud -> registrarTareaModel();
-        if ($respuesta == "success") {
-          header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=ok");
-          // print_r($_GET['action']);
-          // die();
-        } else { 
-          header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=error");
+
+        if (isset($_POST['titulo']) &&
+            isset($_POST['descripcion']) &&
+            isset($_POST['fecha_publicacion']) &&
+            isset($_POST['fecha_entrega'])) {
+
+          if (empty($_POST['titulo']) ||
+              empty($_POST['descripcion']) ||
+              empty($_POST['fecha_publicacion']) ||
+              empty($_POST['fecha_entrega'])) {
+                echo "<br><div class='alert alert-warning' role='alert'>Conteste todos los campos.</div>";
+          }
+          else {
+            // $expresionTitulo = '/^[\w,.:¡!¿?()_]+$/';
+            // $expresionDescripcion = '/^[\w,.:¡!¿?()_]+$/';
+            // $expresionFecha = '/^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})(\s)([0-1][0-9]|2[0-3])(:)([0-5][0-9])$/';
+
+              // print_r(preg_match($expresionFecha, $_POST['fecha_entrega']));
+              // die();
+
+            // if (preg_match($expresionFecha, $_POST['fecha_publicacion']) !=0 &&
+            //     preg_match($expresionFecha, $_POST['fecha_entrega']) !=0) {
+
+                  // recibir el POST en un array
+                  // print_r($_SESSION['id_usuario']);
+
+                  // $strTitulo = "A 'quote' is <b>bold</b>";
+                  // echo htmlspecialchars($strTitulo, ENT_QUOTES);
+                  $datosController = array( "id_usuario"=>$_SESSION['id_usuario'],
+                                            "titulo"=>htmlspecialchars($_POST['titulo'], ENT_QUOTES),
+                                            "descripcion"=>htmlspecialchars($_POST['descripcion'], ENT_QUOTES),
+                                            "fecha_publicacion"=>$_POST['fecha_publicacion'],
+                                            "fecha_entrega"=>htmlspecialchars($_POST['fecha_entrega'], ENT_QUOTES));
+                    var_dump($datosController);
+                    // die();   
+                    // echo "entra <br  />";
+                    $crud = new CrudProfesorModel($datosController); 
+                    $respuesta = $crud -> registrarTareaModel();
+                  if ($respuesta == "success") {
+                    header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=ok");
+                    // print_r($_G ET['action']);
+                    // die();  
+                  } else { 
+                    header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=error");
+                  }
+            // }
+            // else {
+            //   echo "<br><div class='alert alert-danger' role='alert'>Caracteres especiales no válidos.</div>";
+            // } 
+            
+          }
+        }
+        else {
+          echo "<br><div class='alert alert-warning' role='alert'>Debe enviar todos los campos.</div>";
         }
       }
     }
@@ -52,8 +89,11 @@
       $fechaHoy = date("Y-m-d H:i");
 
       $strFechaHoy = date("Y-m-d");
+      $diaHoy = date("d");
+      $mesHoy = date("m");
+      $yearHoy = date("Y");
       $hora = date("H:i");
-      // echo "Fecha: ".$fechaHoy."<br /> Hora: ".$hora."<br /><br />";
+      // echo "Día: ".$diaHoy."<br /> Mes: ".$mesHoy."<br /> Año: ".$yearHoy."<br /> Hora: ".$hora."<br /><br />";
 
       $default_local_date = ucwords(utf8_encode(strftime("%a %d %b, %Y a las %H:%M")));
       $date_connectors_capital = array('A', 'Las');
@@ -81,9 +121,14 @@
         $fechaEntrega = str_replace("/", "-", $fechaEntrega);			
         $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));
 
-        $strFechaEntrega = date("Y-m-d", strtotime($fechaEntrega));        
+        $strFechaEntrega = date("Y-m-d", strtotime($fechaEntrega));
+        $diaEntrega = date("d", strtotime($fechaEntrega));
+        $mesEntrega = date("m", strtotime($fechaEntrega));        
+        $yearEntrega = date("Y", strtotime($fechaEntrega));        
         $horaEntrega = date("H:i", strtotime($fechaEntrega));
-        // echo "Hora de entrega tarea: ".$horaEntrega."<br />";				
+        // echo "Hora de entrega tarea: ".$horaEntrega."<br />";
+        // echo "Hora de entrega tarea: ".$strFechaEntrega."<br />";	
+        // echo "Día de entrega: ".$diaEntrega."<br /> Mes entrega: ".$mesEntrega."<br /> Año: ".$yearEntrega."<br /> Hora: ".$horaEntrega."<br /><br />";			
         $fecha_entrega = ucfirst(strftime($strFecha, strtotime($newDate2)));
         // if ($horaEntrega < $hora) echo "Entrega: ".$horaEntrega."<br />"."Hora actual: ".$hora."<br />"."Status: TARDE <br />";
         // else echo "Entrega: ".$horaEntrega."<br />"."Hora actual: ".$hora."<br />"."Status: A TIEMPO <br /><br />";
@@ -100,7 +145,19 @@
         <td>".$titulo."</td>
         <td>".$descripcion."</td>
         <td class='date'>".$fecha_publicacion."</td>
-          <td class='date "; if ($strFechaEntrega == $strFechaHoy && $horaEntrega < $hora) echo 'late'; echo "'>".$fecha_entrega."</td>
+          <td class='date ";  if ($diaEntrega < $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora || $yearEntrega < $yearHoy) { 
+                                echo 'late';
+                              }
+                              else if ($diaEntrega < $diaHoy && $mesEntrega == $mesHoy && $horaEntrega > $hora) {
+                                echo 'late';
+                              }
+                              else if ($diaEntrega < $diaHoy && $mesEntrega < $mesHoy && $horaEntrega < $hora) {
+                                echo 'late';
+                              }
+                              else if ($diaEntrega == $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora) {
+                                echo 'late';
+                              }
+                              echo "'>".$fecha_entrega."</td>
           <td>
             <a href='templateProfesor.php?".htmlentities($url_string_link)."'>
               <i class='fas fa-external-link-alt'></i>
@@ -207,7 +264,8 @@
         $respuesta = CrudProfesorModel::eliminarTareaProfesorModel($datosController);
 
         if ($respuesta == "success") {
-          header("location:".DIR_MODULES."profesor/templateProfesor.php?action=eliminacionTarea");
+          
+          echo '<script>localStorage.setItem("action","eliminacionTarea"); window.location.href="templateProfesor.php?action=misTareas";</script>';
         }
 
       }

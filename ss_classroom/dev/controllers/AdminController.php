@@ -317,7 +317,7 @@
           </div>
           <div class='col'>
             <label for=''>Correo electrónico</label>
-            <input type='email' value='".$respuesta['email']."' name='email' class='input-form' readonly='readonly'>
+            <input type='email' value='".$respuesta['email']."' name='email' class='input-form'>
           </div>
         </div>
         <div class='row'>

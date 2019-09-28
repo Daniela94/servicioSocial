@@ -14,7 +14,7 @@
     # ------------------------------------------
     public function __construct($datosModel) {
       $this->id_usuario = $datosModel['id_usuario'];
-      $this->id_tarea = $datosModel['id_tarea'];
+      // $this->id_tarea = $datosModel['id_tarea'];
       $this->titulo = $datosModel['titulo'];
       $this->descripcion = $datosModel['descripcion'];
       $this->fecha_publicacion = $datosModel['fecha_publicacion'];
@@ -24,15 +24,19 @@
     # ----------------------------------------------
     public function registrarTareaModel() {
       $sql = "INSERT INTO tarea(id_usuario,titulo, descripcion, fecha_publicacion, fecha_entrega) VALUES ($this->id_usuario,'$this->titulo','$this->descripcion','$this->fecha_publicacion','$this->fecha_entrega')";
-      // echo $sql;
+      // var_dump($sql);
       // die();
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
+      // var_dump($query);
+      // var_dump(mysqli_affected_rows($cnx->getCnx()));
+      // var_dump(mysqli_error($cnx->getCnx()));
+      // die();
       if ($query == true) 
         return "success";
       else
-        echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx).'<br />'.$sql;
+        echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
       mysqli_close($query);
     }
     # Mostrar lista de tareas
