@@ -35,43 +35,27 @@
                 echo "<br><div class='alert alert-warning' role='alert'>Conteste todos los campos.</div>";
           }
           else {
-            // $expresionTitulo = '/^[\w,.:¡!¿?()_]+$/';
-            // $expresionDescripcion = '/^[\w,.:¡!¿?()_]+$/';
-            // $expresionFecha = '/^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})(\s)([0-1][0-9]|2[0-3])(:)([0-5][0-9])$/';
+                // recibir el POST en un array
+                // print_r($_SESSION['id_usuario']);
 
-              // print_r(preg_match($expresionFecha, $_POST['fecha_entrega']));
-              // die();
-
-            // if (preg_match($expresionFecha, $_POST['fecha_publicacion']) !=0 &&
-            //     preg_match($expresionFecha, $_POST['fecha_entrega']) !=0) {
-
-                  // recibir el POST en un array
-                  // print_r($_SESSION['id_usuario']);
-
-                  // $strTitulo = "A 'quote' is <b>bold</b>";
-                  // echo htmlspecialchars($strTitulo, ENT_QUOTES);
-                  $datosController = array( "id_usuario"=>$_SESSION['id_usuario'],
-                                            "titulo"=>htmlspecialchars($_POST['titulo'], ENT_QUOTES),
-                                            "descripcion"=>htmlspecialchars($_POST['descripcion'], ENT_QUOTES),
-                                            "fecha_publicacion"=>$_POST['fecha_publicacion'],
-                                            "fecha_entrega"=>htmlspecialchars($_POST['fecha_entrega'], ENT_QUOTES));
-                    var_dump($datosController);
-                    // die();   
-                    // echo "entra <br  />";
-                    $crud = new CrudProfesorModel($datosController); 
-                    $respuesta = $crud -> registrarTareaModel();
-                  if ($respuesta == "success") {
-                    header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=ok");
-                    // print_r($_G ET['action']);
-                    // die();  
-                  } else { 
-                    header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=error");
-                  }
-            // }
-            // else {
-            //   echo "<br><div class='alert alert-danger' role='alert'>Caracteres especiales no válidos.</div>";
-            // } 
-            
+                // $strTitulo = "A 'quote' is <b>bold</b>";
+                // echo htmlspecialchars($strTitulo, ENT_QUOTES);
+                $datosController = array( "id_usuario"=>$_SESSION['id_usuario'],
+                                          "titulo"=>htmlspecialchars($_POST['titulo'], ENT_QUOTES),
+                                          "descripcion"=>htmlspecialchars($_POST['descripcion'], ENT_QUOTES),
+                                          "fecha_publicacion"=>$_POST['fecha_publicacion'],
+                                          "fecha_entrega"=>htmlspecialchars($_POST['fecha_entrega'], ENT_QUOTES));
+                  // var_dump($datosController);
+                  // die();   
+                  // echo "entra <br  />";
+                  $crud = new CrudProfesorModel($datosController); 
+                  $respuesta = $crud -> registrarTareaModel();
+                if ($respuesta == "success") {
+                  echo '<script>localStorage.setItem("action","registrarTarea"); window.location.href="templateProfesor.php?action=formRegistrarTarea";</script>';
+                } else { 
+                  echo '<script>localStorage.setItem("action","error"); window.location.href="templateProfesor.php?action=formRegistrarTarea";</script>';
+                }
+        
           }
         }
         else {
@@ -129,12 +113,7 @@
         // echo "Hora de entrega tarea: ".$horaEntrega."<br />";
         // echo "Hora de entrega tarea: ".$strFechaEntrega."<br />";	
         // echo "Día de entrega: ".$diaEntrega."<br /> Mes entrega: ".$mesEntrega."<br /> Año: ".$yearEntrega."<br /> Hora: ".$horaEntrega."<br /><br />";			
-        $fecha_entrega = ucfirst(strftime($strFecha, strtotime($newDate2)));
-        // if ($horaEntrega < $hora) echo "Entrega: ".$horaEntrega."<br />"."Hora actual: ".$hora."<br />"."Status: TARDE <br />";
-        // else echo "Entrega: ".$horaEntrega."<br />"."Hora actual: ".$hora."<br />"."Status: A TIEMPO <br /><br />";
-        // if ($strFechaEntrega < $strFechaHoy) echo "Entrega: ".$strFechaEntrega."<br />"."Fecha actual: ".$strFechaHoy."<br />"."Status: TARDE <br />";
-        // else echo "Entrega: ".$strFechaEntrega."<br />"."Fecha actual: ".$strFechaHoy."<br />"."Status: A TIEMPO <br /><br />";
-        
+        $fecha_entrega = ucfirst(strftime($strFecha, strtotime($newDate2)));        
 
         // $query_string = 'foo=' . urlencode($foo) . '&bar=' . urlencode($bar);
         // echo '<a href="mycgi?' . htmlentities($url_string) . '">';
@@ -252,7 +231,7 @@
         $respuesta = $actualizar -> actualizarTareaProfesorModel();
   
         if ($respuesta == "success") {
-          header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=actualizacionTarea");
+          echo '<script>localStorage.setItem("action","actualizacionTarea"); window.location.href="templateProfesor.php?action=misTareas";</script>';
         }
       }
     }
@@ -264,7 +243,6 @@
         $respuesta = CrudProfesorModel::eliminarTareaProfesorModel($datosController);
 
         if ($respuesta == "success") {
-          
           echo '<script>localStorage.setItem("action","eliminacionTarea"); window.location.href="templateProfesor.php?action=misTareas";</script>';
         }
 

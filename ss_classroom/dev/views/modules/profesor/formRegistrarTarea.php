@@ -1,18 +1,22 @@
+<script>
+  var action = localStorage.getItem('action');
+</script>
 <?php 
   $registro = new ProfesorController();
   $registro -> registrarTareaController();
-  if (isset($_GET['action'])) {
-    if($_GET['action'] == "ok") {
-      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Registro exitoso <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-      <span aria-hidden='true'>&times;</span>
-    </button></div>";
-    }
-    if($_GET['action'] == "error") {
-      echo "<br><div class='alert alert-danger alert-dismissible fade show' role='alert'>No se hizo el registro <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-      <span aria-hidden='true'>&times;</span>
-    </button></div>";
-    }
-  }
+  $action = '<script>'.
+              'var alertRegistro = \'<br><div class="alert alert-success  alert-dismissible fade show" role="alert">Registro exitoso <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
+              'var alertError = \'<br><div class="alert alert-danger  alert-dismissible fade show" role="alert">Error al registrar<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
+              'if(action=="registrarTarea"){'.
+                'document.write(alertRegistro);'.
+                'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
+              '}'.
+              'if(action=="error"){'.
+                'document.write(alertError);'.
+                'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
+              '}'.
+            '</script>';
+  echo $action;
 ?>
 <div class="hw-1"></div>
 <h4 class="h-subtitle">REGISTRAR TAREA</h4>

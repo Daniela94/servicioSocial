@@ -5,29 +5,18 @@
   $listaTareas = new ProfesorController();
   $listaTareas -> eliminarTareaProfesorController();
   $action = '<script>'.
-  'var alertEliminar = \'<br><div class="alert alert-success  alert-dismissible fade show" role="alert">Eliminación exitosa <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
-                'if(action=="eliminacionTarea"){'.
-                  'document.write(alertEliminar);'.
-                  'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
-                '}'.
+              'var alertEliminar = \'<br><div class="alert alert-success  alert-dismissible fade show" role="alert">Eliminación exitosa <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
+              'var alertActualizacion = \'<br><div class="alert alert-success  alert-dismissible fade show" role="alert">Actualización exitosa <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
+              'if(action=="eliminacionTarea"){'.
+                'document.write(alertEliminar);'.
+                'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
+              '}'.
+              'if(action=="actualizacionTarea"){'.
+                'document.write(alertActualizacion);'.
+                'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
+              '}'.
             '</script>';
   echo $action;
-  // if ($action!='') {
-    // echo $action;
-  // if ($action=="eliminacionTarea"){
-  //     echo '<script>document.write(alertEliminar)</script>';
-  // }
-    // if ($action == "actualizacionTarea") {
-    //   echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Actualización exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    //   <span aria-hidden='true'>&times;</span>
-    // </button></div>";
-    // }
-    // if ($action == 'eliminacionTarea') {
-    //   echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Eliminación exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    //   <span aria-hidden='true'>&times;</span>
-    // </button></div>";
-    // }
-  // }
 ?>
 <h4 class="h-subtitle">TAREAS REGISTRADAS</h4>
 <!-- Modal -->

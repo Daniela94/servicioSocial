@@ -14,7 +14,7 @@
     # ------------------------------------------
     public function __construct($datosModel) {
       $this->id_usuario = $datosModel['id_usuario'];
-      // $this->id_tarea = $datosModel['id_tarea'];
+      $this->id_tarea = $datosModel['id_tarea'];
       $this->titulo = $datosModel['titulo'];
       $this->descripcion = $datosModel['descripcion'];
       $this->fecha_publicacion = $datosModel['fecha_publicacion'];
