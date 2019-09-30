@@ -54,7 +54,7 @@
       </div>
       <div class="col">
         <label for="">Fecha de entrega</label>
-        <input type="datetime-local" name=" fecha_entrega" class="input-form">
+        <input id="datetimepicker" type="text" name=" fecha_entrega" class="input-form">
       </div>
     </div>
     <div class="row">

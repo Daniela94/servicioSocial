@@ -201,7 +201,7 @@
           </div>
           <div class='col'>
             <label for=''>Fecha de entrega</label>
-            <input type='datetime' name='fecha_entrega' value='".$fecha_entrega."' class='input-form'>
+            <input id='datetimepicker' type='text' name='fecha_entrega' value='".$fecha_entrega."' class='input-form'>
           </div>
         </div>
         <div class='row'>
@@ -227,8 +227,7 @@
                                   "fecha_entrega"=>$_POST['fecha_entrega']);
         // var_dump($datosController);
         // die();
-        $actualizar = new CrudProfesorModel($datosController);
-        $respuesta = $actualizar -> actualizarTareaProfesorModel();
+        $respuesta = CrudProfesorModel::actualizarTareaProfesorModel($datosController);
   
         if ($respuesta == "success") {
           echo '<script>localStorage.setItem("action","actualizacionTarea"); window.location.href="templateProfesor.php?action=misTareas";</script>';

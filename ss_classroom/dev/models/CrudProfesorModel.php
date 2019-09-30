@@ -14,7 +14,7 @@
     # ------------------------------------------
     public function __construct($datosModel) {
       $this->id_usuario = $datosModel['id_usuario'];
-      $this->id_tarea = $datosModel['id_tarea'];
+      // $this->id_tarea = $datosModel['id_tarea'];
       $this->titulo = $datosModel['titulo'];
       $this->descripcion = $datosModel['descripcion'];
       $this->fecha_publicacion = $datosModel['fecha_publicacion'];
@@ -67,8 +67,15 @@
     }
     # Actualizar tarea
     # ---------------------------------------------------------
-    public function actualizarTareaProfesorModel() {
-      $sql = "UPDATE tarea SET titulo = '$this->titulo', descripcion = '$this->descripcion', fecha_publicacion = '$this->fecha_publicacion', fecha_entrega = '$this->fecha_entrega' WHERE id_tarea = $this->id_tarea";
+    public function actualizarTareaProfesorModel($datosModel) {
+      $id_usuario = $datosModel['id_usuario'];
+      $id_tarea = $datosModel['id_tarea'];
+      $titulo = $datosModel['titulo'];
+      $descripcion = $datosModel['descripcion'];
+      $fecha_publicacion = $datosModel['fecha_publicacion'];
+      $fecha_entrega = $datosModel['fecha_entrega'];
+
+      $sql = "UPDATE tarea SET titulo = '$titulo', descripcion = '$descripcion', fecha_publicacion = '$fecha_publicacion', fecha_entrega = '$fecha_entrega' WHERE id_tarea = $id_tarea";
       // print_r($sql);
       // die();
       $cnx = new Conexion();
