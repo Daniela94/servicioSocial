@@ -107,8 +107,8 @@
 
         $strFechaEntrega = date("Y-m-d", strtotime($fechaEntrega));
         $diaEntrega = date("d", strtotime($fechaEntrega));
-        $mesEntrega = date("m", strtotime($fechaEntrega));        
-        $yearEntrega = date("Y", strtotime($fechaEntrega));        
+        $mesEntrega = date("m", strtotime($fechaEntrega));
+        $yearEntrega = date("Y", strtotime($fechaEntrega));
         $horaEntrega = date("H:i", strtotime($fechaEntrega));
         // echo "Hora de entrega tarea: ".$horaEntrega."<br />";
         // echo "Hora de entrega tarea: ".$strFechaEntrega."<br />";	
@@ -219,19 +219,37 @@
     # --------------------------------------------------------------
     public function actualizarTareaProfesorController() {
       if (isset($_POST['editarTarea'])) {
-        $datosController = array( "id_usuario"=>$_SESSION['id_usuario'],
-                                  "id_tarea"=>$_POST['id_tarea'],
-                                  "titulo"=>$_POST['titulo'],
-                                  "descripcion"=>$_POST['descripcion'],
-                                  "fecha_publicacion"=>$_POST['fecha_publicacion'],
-                                  "fecha_entrega"=>$_POST['fecha_entrega']);
-        // var_dump($datosController);
-        // die();
-        $respuesta = CrudProfesorModel::actualizarTareaProfesorModel($datosController);
-  
-        if ($respuesta == "success") {
-          echo '<script>localStorage.setItem("action","actualizacionTarea"); window.location.href="templateProfesor.php?action=misTareas";</script>';
+
+        if (isset($_POST['titulo']) &&
+            isset($_POST['descripcion']) &&
+            isset($_POST['fecha_publicacion']) &&
+            isset($_POST['fecha_entrega'])) {
+
+              if (empty($_POST['titulo']) ||
+                  empty($_POST['descripcion']) ||
+                  empty($_POST['fecha_publicacion']) ||
+                  empty($_POST['fecha_entrega'])) {
+                    echo "<br><div class='alert alert-warning' role='alert'>Conteste todos los campos.</div>";
+              }
+              else {
+
+                $datosController = array( "id_usuario"=>$_SESSION['id_usuario'],
+                                          "id_tarea"=>$_POST['id_tarea'],
+                                          "titulo"=>htmlspecialchars($_POST['titulo'], ENT_QUOTES),
+                                          "descripcion"=>htmlspecialchars($_POST['descripcion'], ENT_QUOTES),
+                                          "fecha_publicacion"=>$_POST['fecha_publicacion'],
+                                          "fecha_entrega"=>htmlspecialchars($_POST['fecha_entrega'], ENT_QUOTES));
+                // var_dump($datosController);
+                // die();
+                $respuesta = CrudProfesorModel::actualizarTareaProfesorModel($datosController);
+          
+                if ($respuesta == "success") {
+                  echo '<script>localStorage.setItem("action","actualizacionTarea"); window.location.href="templateProfesor.php?action=misTareas";</script>';
+                }
+              }
+
         }
+
       }
     }
     # Eliminar tareas 

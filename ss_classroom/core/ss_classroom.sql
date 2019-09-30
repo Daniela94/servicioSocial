@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-09-2019 a las 20:14:05
+-- Tiempo de generación: 30-09-2019 a las 14:30:11
 -- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
 -- Versión de PHP: 7.2.19-0ubuntu0.18.04.2
 
@@ -66,7 +66,7 @@ INSERT INTO `rol` (`id_rol`, `rol`) VALUES
 CREATE TABLE `tarea` (
   `id_tarea` bigint(20) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
-  `titulo` varchar(50) DEFAULT NULL,
+  `titulo` varchar(100) DEFAULT NULL,
   `descripcion` varchar(250) DEFAULT NULL,
   `fecha_publicacion` timestamp NULL DEFAULT NULL,
   `fecha_entrega` timestamp NULL DEFAULT NULL
@@ -77,10 +77,17 @@ CREATE TABLE `tarea` (
 --
 
 INSERT INTO `tarea` (`id_tarea`, `id_usuario`, `titulo`, `descripcion`, `fecha_publicacion`, `fecha_entrega`) VALUES
-(25, 3, 'Cantar canción de Florence + The Machine', 'Only if for a night', '2019-09-18 20:30:00', '2019-09-19 21:00:00'),
-(26, 3, 'Limpiar su casa', 'Barrer y trapear la cocina y la sala.', '2019-09-18 20:51:00', '2019-09-18 22:20:00'),
-(27, 3, 'Visitar el museo de Riplay', 'Hacer apuntes de lo que más te gustó.', '2019-09-18 21:14:00', '2019-09-18 21:50:00'),
-(28, 3, 'Comer galletas', '1 paquete de Chokis', '2019-09-18 21:23:00', '2019-09-18 23:50:00');
+(60, 3, 'Comprar una SmarTV', 'Sony', '2019-09-28 00:13:00', '2019-09-28 17:12:00'),
+(64, 3, 'A &#039;quote&#039; is &lt;b&gt;bold&lt;/b&gt;', 'A &#039;quote&#039; is &lt;b&gt;bold&lt;/b&gt;', '2019-09-28 01:16:00', '2019-09-28 17:12:00'),
+(65, 3, '&lt;script&gt;alert(&quot;Te rompí&quot;)&lt;/script&gt;', '&lt;script&gt;alert(&quot;Te rompí&quot;)&lt;/script&gt;', '2019-09-28 01:18:00', '2019-09-28 17:12:00'),
+(66, 3, '&lt;script&gt;alert(&quot;Te rompí&quot;)&lt;/script&gt;', '&lt;script&gt;alert(&quot;Te rompí&quot;)&lt;/script&gt;', '2019-09-28 01:25:00', '2019-09-27 17:12:00'),
+(67, 3, '&quot; or &quot;&quot;=&quot;', '&quot; or &quot;&quot;=&quot;', '2019-09-28 04:47:00', '2019-09-30 17:12:00'),
+(69, 3, '&lt;body onload=alert(&#039;test1&#039;)&gt;', '&lt;body onload=alert(&#039;test1&#039;)&gt;', '2019-09-28 04:49:00', '2019-10-01 17:12:00'),
+(70, 3, 'Comprar un teclado gamer', 'Marca Cooler Master', '2019-09-28 04:59:00', '2019-10-05 04:23:00'),
+(71, 3, 'Felicitar a Avril Lavigne por su cumpleaños.', 'Comprarle un pastel y comérselo usted.', '2019-09-28 05:06:00', '2019-09-29 17:12:00'),
+(73, 3, 'comer palomitas de doritos', 'una bolsa', '2019-09-30 18:47:00', '2019-10-04 18:50:00'),
+(75, 3, 'asdasd', 'asdasdasdasdasdasd', '2019-09-30 18:57:00', '2019-10-23 19:01:00'),
+(76, 3, '&lt;script&gt;alert(&quot;Mira lo que puedo hacer&quot;)&lt;/script&gt;', '&lt;script&gt;alert(&quot;Mira lo que puedo hacer&quot;)&lt;/script&gt;', '2019-09-30 19:28:00', '2019-10-03 19:29:00');
 
 -- --------------------------------------------------------
 
@@ -110,24 +117,24 @@ INSERT INTO `usuario` (`id_usuario`, `id_rol`, `nombre`, `apellidos`, `numero_cu
 (87, 3, 'Kara', 'Danvers', '20097852', 'kdanvers@email.com', 'kara123'),
 (88, 3, 'Cisco', 'Ramon', '20097853', 'cramon@email.com', 'cisco123'),
 (89, 3, 'Caitlin', 'Snow', '20097854', 'csnow@email.com', 'caitlin123'),
-(90, 3, 'Margarita', 'Pérez', '20097855', 'mperez@email.com', 'margarit123'),
 (91, 3, 'Carlos', 'Olivera', '20097856', 'colivera@email.com', 'carlos123'),
-(108, 2, 'Mac', 'Henry', NULL, 'mhenry@email.com', 'mac123'),
-(110, 2, 'burrito', 'gris', NULL, 'bgris@email.com', 'burrito123'),
+(108, 2, 'Enrique', 'Rosas', NULL, 'erosas@email.com', 'enrique123'),
+(110, 2, 'Juan Gabriel', 'Cruz', NULL, 'jcruz@email.com', 'juan123'),
 (112, 2, 'doña', 'tota', NULL, 'dtota@email.com', 'doña123'),
-(115, 2, 'carlos', 'junior', NULL, 'cjunior@email.com', 'carlos123'),
-(129, 3, 'cafe', 'latte', '20097858', 'clatte@email.com', 'cafe123'),
-(144, 2, 'ariana', 'grande', NULL, 'agrande@email.com', 'ariana123'),
-(145, 2, 'Hayley', 'Williams', NULL, 'hwilliams@emai.com', 'ayley123'),
-(147, 2, 'It', 'Pennywise', NULL, 'ipennywise@email.com', 'it123'),
+(129, 3, 'café', 'latte', '20097858', 'clatte@email.com', 'cafe123'),
 (150, 2, 'Buzz', 'Lightyear', NULL, 'blightyear@email.com', 'buzz123'),
 (152, 2, 'Audio', 'slave', NULL, 'aslave@email.com', 'audio123'),
 (157, 2, 'Samsung', 'Galaxy', NULL, 'sgalaxy@email.com', 'samsung123'),
-(158, 3, 'Katy', 'Perry', '20097861', 'kperry@email.com', 'katy123'),
+(158, 2, 'Karina', 'Perry', NULL, 'kperry@email.com', 'katy123'),
 (159, 3, 'Nicki', 'Minaj', '20097862', 'nminaj@email.com', 'nicki123'),
 (160, 3, 'Taylor', 'Swift', '20097863', 'tswift@email.com', 'taylor123'),
 (161, 2, 'Blake', 'Neely', NULL, 'bneely@email.com', 'blake123'),
-(162, 3, 'Danielle', 'Haim', '20097868', 'dhaim@email.com', 'danielle123');
+(162, 3, 'Daniela', 'Haim', '20097868', 'dhaim@email.com', 'danielle123'),
+(163, 2, 'Florence', 'Welch', NULL, 'fwelch@email.com', 'florence123'),
+(164, 2, 'Black', 'Sabbath', NULL, 'bsabbath@email.com', 'black123'),
+(166, 2, 'Pedro', 'Fernández', NULL, 'pfernandez@email.com', 'pedro123'),
+(168, 3, 'Iron', 'Man', '20197851', 'iman@email.com', 'iron123'),
+(169, 2, 'Ángel', 'Salvador', NULL, 'asalvador@email.com', 'angel123');
 
 --
 -- Índices para tablas volcadas
@@ -181,13 +188,13 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `id_tarea` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_tarea` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- Restricciones para tablas volcadas

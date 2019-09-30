@@ -25,8 +25,13 @@
       setlocale(LC_TIME, 'es_ES.UTF-8');
       date_default_timezone_set('America/Mexico_City');
       $fechaHoy = date("Y-m-d H:i");
+
       $strFechaHoy = date("Y-m-d");
+      $diaHoy = date("d");
+      $mesHoy = date("m");
+      $yearHoy = date("Y");
       $hora = date("H:i");
+      // echo "Día: ".$diaHoy."<br /> Mes: ".$mesHoy."<br /> Año: ".$yearHoy."<br /> Hora: ".$hora."<br /><br />";
 
       $default_local_date = ucwords(utf8_encode(strftime("%a %d %b, %Y a las %H:%M")));
       $date_connectors_capital = array('A', 'Las');
@@ -38,7 +43,6 @@
         // die();
         // $id_usuario = $fila->id_usuario;
         $id_tarea = $fila->id_tarea;
-        
         $titulo = $fila->titulo;
         $descripcion = $fila->descripcion;
         $fecha_publicacion = $fila->fecha_publicacion;
@@ -52,13 +56,9 @@
         $profesor = $fila->nombre.' '.$fila->apellidos;
         // $profesor = $fila->id_usuario;
 
-        setlocale(LC_TIME, 'es_ES.UTF-8');
-        date_default_timezone_set('America/Mexico_City');
-        $fechaHoy = date("Y-m-d H:i");
-
         $fecha = $fecha_publicacion;
         $fecha = str_replace("/", "-", $fecha);			
-        $newDate = date("Y-m-d H:i", strtotime($fecha));			
+        $newDate = date("Y-m-d H:i", strtotime($fecha));
         $conector = " a las ";
         $fechaFormato = ucfirst("%a %d %b, %Y");
         $horaFormato = "%H:%M";
@@ -66,10 +66,14 @@
         $fecha_publicacion = ucfirst(strftime($strFecha, strtotime($newDate)));
 
         $fechaEntrega = $fecha_entrega;
-        $fechaEntrega = str_replace("/", "-", $fechaEntrega);			
+        $fechaEntrega = str_replace("/", "-", $fechaEntrega);	
+        		
         $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));	
 
         $strFechaEntrega = date("Y-m-d", strtotime($fechaEntrega));        
+        $diaEntrega = date("d", strtotime($fechaEntrega));
+        $mesEntrega = date("m", strtotime($fechaEntrega));
+        $yearEntrega = date("Y", strtotime($fechaEntrega));
         $horaEntrega = date("H:i", strtotime($fechaEntrega));
 
         $fecha_entrega =ucfirst(strftime($strFecha, strtotime($newDate2)));
@@ -79,7 +83,21 @@
           <td>".$titulo."</td>
           <td>".$descripcion."</td>
           <td class='date'>".$fecha_publicacion."</td>
-          <td class='date "; if ($strFechaEntrega == $strFechaHoy && $horaEntrega < $hora && $status == "No entregado") echo 'late'; echo "'>".$fecha_entrega."</td>
+          <td class='date "; if ($diaEntrega < $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora || $yearEntrega < $yearHoy) { 
+                                echo 'late';
+                              }
+                              else if ($diaEntrega < $diaHoy && $mesEntrega == $mesHoy && $horaEntrega > $hora) {
+                                echo 'late';
+                              }
+                              else if ($diaEntrega < $diaHoy && $mesEntrega < $mesHoy && $horaEntrega < $hora) {
+                                echo 'late';
+                              }
+                              else if ($diaEntrega == $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora) {
+                                echo 'late';
+                              }
+                              else if ($diaEntrega == $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora) {
+                                echo 'late';
+                              } echo "'>".$fecha_entrega."</td>
           <td>".$profesor."</td>
           <td class='
         ";
@@ -93,7 +111,10 @@
           else if ($status == "Rechazado") echo "<i class='fas fa-times'></i> "; echo $status."</td>
           <td";
             if ($status == "Calificado: ".$calificacion) echo " class='disabled-color'><i class='fas fa-file-upload'></i> Subir";
-            else if ($strFechaEntrega == $strFechaHoy && $horaEntrega < $hora && $status == "No entregado") echo " class='disabled-color'><i class='fas fa-file-upload'></i> Subir";
+              else if ($diaEntrega < $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora && $status == "No entregado" || $yearEntrega < $yearHoy) echo " class='disabled-color'><i class='fas fa-file-upload'></i> Subir";
+              else if ($diaEntrega < $diaHoy && $mesEntrega == $mesHoy && $horaEntrega > $hora && $status == "No entregado") echo " class='disabled-color'><i class='fas fa-file-upload'></i> Subir";
+              else if ($diaEntrega < $diaHoy && $mesEntrega < $mesHoy && $horaEntrega < $hora && $status == "No entregado") echo " class='disabled-color'><i class='fas fa-file-upload'></i> Subir";
+              else if ($diaEntrega == $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora && $status == "No entregado") echo " class='disabled-color'><i class='fas fa-file-upload'></i> Subir";
             else echo "><a href='templateAlumno.php?action=formSubirTarea&titulo=".$titulo."&idUsuario=".$id_usuario."&idTarea=".$id_tarea."'><i class='fas fa-file-upload'></i> Subir</a>";
             echo "
           </td>
