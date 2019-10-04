@@ -1,20 +1,25 @@
+<script>
+  var action = localStorage.getItem('action');
+</script>
 <?php
   $listaProfesores = new AdminController();
   $listaProfesores -> eliminarUsuarioController();
-  if (isset($_GET['action'])) {
-    # MENSAJE ACTUALIZACIÓN EXITOSA
-    if($_GET['action'] == "actualizacionProfesor") {
-      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Actualización exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-      <span aria-hidden='true'>&times;</span>
-    </button></div>";
-    }
-    # MENSAJE ELIMINACIÓN EXITOSA
-    if($_GET['action'] == "eliminacionProfesor") {
-      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Eliminación exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-      <span aria-hidden='true'>&times;</span>
-    </button></div>";
-    }
-  }
+  $action = '<script>'.
+              'var alertEliminar = \'<br><div class="alert alert-success  alert-dismissible fade show" role="alert">Eliminación exitosa. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
+              'var alertActualizacion = \'<br><div class="alert alert-success  alert-dismissible fade show" role="alert">Actualización exitosa. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
+              'if(action=="eliminacionProfesor"){'.
+                'document.write(alertEliminar);'.
+                'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
+              '}'.
+              'if(action=="actualizacionProfesor"){'.
+                'document.write(alertActualizacion);'.
+                'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
+              '}
+              window.addEventListener("unload", function(event) {
+                localStorage.removeItem("action");
+              });'.
+            '</script>';
+  echo $action;
 ?>
 <h4 class="h-subtitle">LISTA DE PROFESORES REGISTRADOS</h4>
 
@@ -56,23 +61,15 @@
   </tbody>
 </table>
 <script>
-
   window.onload = function() {
-    var url_string = window.location;
-    var url = new URL(url_string);
-    var btnpg = url.searchParams.get("btnpg");
     var btnElim = document.getElementsByClassName('borrar');
     
     for(var i = 0; i < btnElim.length; i++) {
       btnElim[i].addEventListener('click', function(){
-        var id_btnPg = $('.paginate_button.current').attr('data-dt-idx');
-        console.log($('[data-dt-idx="'+btnpg+'"]'));
-        $('[data-dt-idx="'+id_btnPg+'"]').trigger('click');
         var id_usuario = this.getAttribute('idusuario');
         var id_rol = this.getAttribute('idrol');        
-        document.getElementById('btneliminar_').setAttribute('href','templateAdmin.php?action=eliminacionProfesor&idBorrar='+id_usuario+'&idRol='+id_rol+'&btnpg='+id_btnPg);
+        document.getElementById('btneliminar_').setAttribute('href','templateAdmin.php?action=eliminacionProfesor&idBorrar='+id_usuario+'&idRol='+id_rol);
       });
     };    
   };
-  
 </script>

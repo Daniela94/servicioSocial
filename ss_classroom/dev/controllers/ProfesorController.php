@@ -292,23 +292,21 @@
         $status = $fila->status;
 
         $url_string_E = 'action=formCalificarTarea&titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea);
-        $url_string_R = 'action=tareasAlumnos&rechazarTarea&titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea);
+        $url_string_R = 'action=tareasAlumnos&rechazarTarea&titulo='.urlencode($titulo).'&idTarea='.$id_tarea;
         $url_string_C = 'action=formEditarCalificacionTarea&titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea);
 
         $accionesNE = "Calificar | Rechazar";
         $accionesE = "<a href='templateProfesor.php?".htmlentities($url_string_E)."'> 
         Calificar | 
-        </a>
-        <a href='templateProfesor.php?".htmlentities($url_string_R)."'>
-          Rechazar
-        </a>";
+        <a href='#' data-toggle='modal' data-target='#exampleModal' class='rechazar' idTarea='".$id_tarea."'> Rechazar</a>";
         $accionesC = "<a href='templateProfesor.php?".htmlentities($url_string_C)."'>
           Editar |
         </a>
-        <a href='templateProfesor.php?".htmlentities($url_string_R)."'>
-          Rechazar
-        </a>";
-
+        <a href='#' data-toggle='modal' data-target='#exampleModal' class='rechazar' idTarea='".$id_tarea."'> Rechazar</a>
+        ";
+        // <a href='templateProfesor.php?".htmlentities($url_string_R)."'>
+        // Rechazar
+        // </a>
           echo "
           <tr>
             <td>".$nombre."</td>
@@ -346,7 +344,9 @@
         $respuesta = CrudProfesorModel::calificarTareaAlumnoProfesorModel($datosController);
 
         if ($respuesta == "success") {
-          header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=tareaCalificada");
+          echo '<script>localStorage.setItem("action","tareaCalificada"); window.location.href="templateProfesor.php?titulo='.$titulo.'&idTarea='.$id_tarea.'&action=tareaCalificada";</script>';
+
+          // header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=tareaCalificada");
         } else {
           header("location: ".DIR_MODULES."profesor/templateProfesor.php?action=formCalificarTarea");
         }
@@ -400,9 +400,14 @@
         $datosController = array( "id_tarea" => $id_tarea,
                                   "calificacion" => $_POST['calificacion']);
         $respuesta = CrudProfesorModel::actualizarCalificacionAlumnoProfesorModel($datosController);
+
+        // var_dump($respuesta);
+        // die();
   
         if ($respuesta == "success") {
-          header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=calificacionActualizada");
+          echo '<script>localStorage.setItem("action","calificacionActualizada"); window.location.href="templateProfesor.php?titulo='.$titulo.'&idTarea='.$id_tarea.'&action=calificacionActualizada";</script>';
+
+          // header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=calificacionActualizada");
         }
       }
     }
@@ -417,7 +422,9 @@
         $respuesta = CrudProfesorModel::rechazarTareaAlumnoProfesorModel($id_tarea);
 
         if($respuesta == "success") {
-          header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=tareaRechazada");
+          echo '<script>localStorage.setItem("action","tareaRechazada"); window.location.href="templateProfesor.php?titulo='.$titulo.'&idTarea='.$id_tarea.'&action=tareaRechazada";</script>';
+
+          // header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=tareaRechazada");
         }
       }
     }

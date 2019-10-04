@@ -139,14 +139,14 @@
             mkdir(VIEW_PATH.'assets/tareas', 0777, true);
             if (file_exists(VIEW_PATH.'assets/tareas')) {
               if(move_uploaded_file($archivoGuardado, VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
-                echo "Tarea almacenada con éxito";
+                // echo "Tarea almacenada con éxito";
               } else {
                 echo "No se almacenó.";
               }
             }
           } else {
             if(move_uploaded_file($archivoGuardado,VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
-              echo "Tarea almacenada con éxito.";
+              // echo "Tarea almacenada con éxito.";
             } else {
               echo "No se almacenó.";
             }
@@ -154,14 +154,14 @@
           $datosController = array( "id_usuario"=>$_POST['idUsuario'],
                                     "id_tarea"=>$_POST['idTarea'],
                                     "archivo"=>$archivoNombre);
-          echo "<hr>";
+          // echo "<hr>";
           // print_r($datosController);
           // die();
           $respuesta = CrudAlumnoModel::subirTareaAlumnoModel($datosController);
           // print_r($respuesta);
           // die();
           if ($respuesta == "success") {
-            header("location: ".DIR_MODULES."alumno/templateAlumno.php?action=envioExitoso");
+            echo '<script>localStorage.setItem("action","envioExitoso"); window.location.href="templateAlumno.php?action=envioExitoso";</script>';
           } else {
             echo "Error al intentar subir la tarea.";
           }

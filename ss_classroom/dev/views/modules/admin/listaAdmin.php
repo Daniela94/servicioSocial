@@ -1,14 +1,21 @@
+<script>
+  var action = localStorage.getItem('action');
+</script>
 <?php
   $listaAdmin = new AdminController();
   $listaAdmin -> eliminarUsuarioController();
-  if (isset($_GET['action'])) {
-    # MENSAJE ELIMINACIÓN EXITOSA
-    if($_GET['action'] == "eliminacionAdmin") {
-      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Eliminación exitosa <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-      <span aria-hidden='true'>&times;</span>
-    </button></div>";
-    }
-  }
+  $action = '<script>'.
+              'var alertEliminar = \'<br><div class="alert alert-success  alert-dismissible fade show" role="alert">Eliminación exitosa. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
+              'var alertActualizacion = \'<br><div class="alert alert-success  alert-dismissible fade show" role="alert">Actualización exitosa. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
+              'if(action=="eliminacionAdmin"){'.
+                'document.write(alertEliminar);'.
+                'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
+              '}'.
+              'window.addEventListener("unload", function(event) {
+                localStorage.removeItem("action");
+              });'.
+            '</script>';
+  echo $action;
 ?>
 <h4 class="h-subtitle">LISTA DE ADMINISTRADORES REGISTRADOS</h4>
 <!-- Modal -->

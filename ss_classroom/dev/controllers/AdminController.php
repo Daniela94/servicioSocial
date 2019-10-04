@@ -56,8 +56,6 @@
                   preg_match($expresionPassword, $_POST['pass']) != 0 &&
                   preg_match($expresionPassword, $_POST['password']) != 0){
 
-
-                
                 // print_r(preg_match($expresionNombre, $_POST['nombre']));
                 // print_r(preg_match($expresionApellidos, $_POST['apellidos']));
                 // // print_r(preg_match($expresionNoCuenta, $_POST['numero_cuenta']));
@@ -78,10 +76,10 @@
                     // echo "No existe";
                     $insertar = $verificar -> registrarUsuarioModel($datosController);
                     if ($insertar == "success") {
-                      header("location: ".DIR_MODULES."admin/templateAdmin.php?action=usuarioRegistrado");
+                      echo '<script>localStorage.setItem("action","usuarioRegistrado"); window.location.href="templateAdmin.php?action=usuarioRegistrado";</script>';
                     }
                     else {
-                      echo "<br><div class='alert alert-danger' role='alert'>No se pudo registrar ;(</div>";
+                      echo '<script>localStorage.setItem("action","error"); window.location.href="templateAdmin.php?action=formRegistrarUsuario";</script>';
                     }
                   }
                   else {
@@ -126,14 +124,12 @@
           // die();
           $crud = new CrudAdminModel($datosController);
           $respuesta = $crud -> registrarUsuarioModel($datosController);
-          var_dump($respuesta);
+          // var_dump($respuesta);
           if ($respuesta == "success") {
             header("location: ".DIR_MODULES."admin/templateAdmin.php?action=usuarioRegistrado");
           } 
           else {
-            // echo "<script>alert('lol')</script>";
             header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formRegistrarUsuario");
-            // echo "Error";
           }
       }
     }
@@ -237,7 +233,7 @@
               <td>".$apellidos."</td>
               <td>".$email."</td>
               <td>
-                <a href='#' data-toggle='modal' data-target='#exampleModal' class='borrar' idusuario='".$id_usuario."' l='".$id_rol."'>
+                <a href='#' data-toggle='modal' data-target='#exampleModal' class='borrar' idusuario='".$id_usuario."' idrol='".$id_rol."'>
                   <i class='fas fa-trash-alt'></i>
                 </a>
               </td>
@@ -406,11 +402,11 @@
                                             "email"=>$_POST["email"],
                                             "password"=>$_POST["password"],
                                             "rol"=>$_POST["rol"]);
-                  $actualizar = new CrudAdminModel($datosController);
-                  $respuesta = $actualizar -> actualizarUsuarioModel($datosController);
-                  // echo $respuesta;
-                  // die();
+                  $respuesta = CrudAdminModel::actualizarUsuarioModel($datosController);
+                  echo $respuesta;
+                  die();
                   if ($respuesta == "success2") {
+                    // echo '<script>localStorage.setItem("action","actualizacionProfesor"); window.location.href="templateAdmin.php?action=actualizacionProfesor";</script>';
                     header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
                   }
                   else if ($respuesta == "success3") {
@@ -440,32 +436,6 @@
           echo "<br><div class='alert alert-warning' role='alert'>Debe enviar todos los campos.</div>";
         }
       }
-      // if (isset($_POST["editarUsuario"])) {
-      //   // print_r($_POST);
-      //   $datosController = array( "id_usuario"=>$_POST["id_usuario"],
-      //                             "nombre"=>$_POST["nombre"],
-      //                             "apellidos"=>$_POST["apellidos"],
-      //                             "numero_cuenta"=>$_POST["numero_cuenta"],
-      //                             "email"=>$_POST["email"],
-      //                             "password"=>$_POST["password"],
-      //                             "rol"=>$_POST["rol"]);
-      //   // print_r($datosController);
-      //   // die();
-      //   $actualizar = new CrudAdminModel($datosController);
-      //   $respuesta = $actualizar -> actualizarUsuarioModel($datosController);
-      //   // echo $respuesta;
-      //   // die();
-      //   if ($respuesta == "success2") {
-      //     header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
-      //   }
-      //   else if ($respuesta == "success3") {
-      //     header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionAlumno");
-      //   } 
-      //   else {
-      //     echo "Error al intentar actualizar el usuario";
-      //     header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario");
-      //   }
-      // } 
     }
     # Eliminar usuario
     # ------------------------------------------------------------------
@@ -478,13 +448,16 @@
         $respuesta = CrudAdminModel::eliminarUsuarioModel($datosController);
 
         if ($respuesta == "success1") {
-          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAdmin");
+          echo '<script>localStorage.setItem("action","eliminacionAdmin"); window.location.href="templateAdmin.php?action=eliminacionAdmin";</script>';
+          // header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAdmin");
         }
         if ($respuesta == "success2") {
-          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionProfesor");
+          echo '<script>localStorage.setItem("action","eliminacionProfesor"); window.location.href="templateAdmin.php?action=eliminacionProfesor";</script>';
+          // header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionProfesor");
         }
         if ($respuesta == "success3") {
-          header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAlumno");
+          echo '<script>localStorage.setItem("action","eliminacionAlumno"); window.location.href="templateAdmin.php?action=eliminacionAlumno";</script>';
+          // header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAlumno");
         }
       }
     }

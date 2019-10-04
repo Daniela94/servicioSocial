@@ -14,7 +14,10 @@
               'if(action=="actualizacionTarea"){'.
                 'document.write(alertActualizacion);'.
                 'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
-              '}'.
+              '}
+              window.addEventListener("unload", function(event) {
+                localStorage.removeItem("action");
+              });'.
             '</script>';
   echo $action;
 ?>
@@ -57,22 +60,13 @@
 </table>
 <script>
   window.onload = function() {
-    var url_string = window.location;
-    var url = new URL(url_string);
-    var btnpg = url.searchParams.get("btnpg");
     var btnElim = document.getElementsByClassName('borrar');
     
     for(var i = 0; i < btnElim.length; i++) {
       btnElim[i].addEventListener('click', function(){
-        var id_btnPg = $('.paginate_button.current').attr('data-dt-idx');
-        console.log($('[data-dt-idx="'+btnpg+'"]'));
-        $('[data-dt-idx="'+id_btnPg+'"]').trigger('click');
         var id_usuario = this.getAttribute('idBorrar');   
-        document.getElementById('btneliminar_').setAttribute('href','templateProfesor.php?action=eliminacionTarea&idBorrar='+id_usuario+'&btnpg='+id_btnPg);
+        document.getElementById('btneliminar_').setAttribute('href','templateProfesor.php?action=eliminacionTarea&idBorrar='+id_usuario);
       });
     };    
-    
-    //if(btnpg!=null) 
-    // $('[data-dt-idx="'+btnpg+'"]').trigger('click');
   };
 </script>

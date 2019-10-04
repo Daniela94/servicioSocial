@@ -14,7 +14,7 @@
     # Constructor
     # -------------------------------------------------
     public function __construct($datosModel) {
-      $this->id_usuario = $datosModel['id_usuario'];
+      // $this->id_usuario = $datosModel['id_usuario'];
       $this->nombre = $datosModel['nombre'];
       $this->apellidos = $datosModel['apellidos'];
       if ($datosModel['numero_cuenta'] == "") {
@@ -56,6 +56,8 @@
       $cnx -> conectar();
       $sql = "INSERT INTO usuario(id_rol, nombre, apellidos, numero_cuenta, email, password) VALUES ($this->rol,'$this->nombre','$this->apellidos',$this->numero_cuenta,'$this->email','$this->password')";
       $query = mysqli_query($cnx->getCnx(), $sql);
+      // var_dump($query);
+      // die();
       if ($query == true) 
         return "success";
       else
@@ -118,6 +120,8 @@
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       $row = mysqli_fetch_array($query);
+      // var_dump($row);
+      // die();
       if (!$query)
       echo "Error: ".mysqli_error($cnx->getCnx());
       return $row;
@@ -125,14 +129,27 @@
     }
     # Actualizar usuario
     # -----------------------------------------------
-    public function actualizarUsuarioModel() {
-      $id_rol = $this->rol;
-      $sql = "UPDATE usuario SET id_rol = $this->rol, nombre = '$this->nombre', apellidos = '$this->apellidos', numero_cuenta = $this->numero_cuenta, email = '$this->email', password = '$this->password' WHERE id_usuario = $this->id_usuario";
-      // print_r($sql);
+    public function actualizarUsuarioModel($datosModel) {
+      var_dump($datosModel);
+      echo "<hr />";
+      // die();
+      $id_usuario = $datosModel['id_usuario'];
+      $nombre = $datosModel['nombre'];
+      $apellidos = $datosModel['apellidos'];
+      $numero_cuenta = $datosModel['numero_cuenta'];
+      $email = $datosModel['email'];
+      $password = $datosModel['password'];
+      $id_rol = $datosModel['rol'];
+      $sql = "UPDATE usuario SET id_rol = $id_rol, nombre = '$nombre', apellidos = '$apellidos', numero_cuenta = $numero_cuenta, email = '$email', password = '$password' WHERE id_usuario = $id_usuario";
+      print_r($sql);
       // die();
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
+      
+      echo "<hr />";
+      var_dump($query);
+      // die();
       if ($query == true) {
         return "success".$id_rol;
       } else

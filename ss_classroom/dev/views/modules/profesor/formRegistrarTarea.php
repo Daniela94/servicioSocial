@@ -14,7 +14,10 @@
               'if(action=="error"){'.
                 'document.write(alertError);'.
                 'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
-              '}'.
+              '} 
+              window.addEventListener("unload", function(event) {
+                localStorage.removeItem("action");
+              });'.
             '</script>';
   echo $action;
 ?>

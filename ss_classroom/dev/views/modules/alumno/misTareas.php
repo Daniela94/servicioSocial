@@ -1,12 +1,19 @@
+<script>
+  var action = localStorage.getItem('action');
+</script>
 <h4 class="h-subtitle">TAREAS ASIGNADAS</h4>
 <?php
-  if (isset($_GET['action'])) {
-    if($_GET['action'] == "envioExitoso") {
-      echo "<br><div class='alert alert-success alert-dismissible fade show' role='alert'>Se subió la tarea con éxito <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-      <span aria-hidden='true'>&times;</span>
-    </button></div></div>";
-    }
-  }
+$action = '<script>'.
+            'var alertSuccess = \'<br><div class="alert alert-success  alert-dismissible fade show" role="alert">Se envió la tarea con exitoso <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>\';'.
+            'if(action=="envioExitoso"){'.
+              'document.write(alertSuccess);'.
+              'document.getElementsByClassName("close")[0].addEventListener("click",function(){localStorage.removeItem("action")})'.
+            '}'.
+            'window.addEventListener("unload", function(event) {
+              localStorage.removeItem("action");
+            });'.
+          '</script>';
+  echo $action;
 ?>
 <table id="table_id" class="table table-lista">
   <thead>
