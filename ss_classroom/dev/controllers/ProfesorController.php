@@ -279,7 +279,7 @@
       if (isset($_GET['titulo'])) {
         $titulo = $_GET['titulo'];
       }
-      echo "Tarea: ".$titulo;
+      echo "<strong>Tarea:</strong> ".$titulo;
       // var_dump($titulo);
       // die();
       while ($fila = mysqli_fetch_object($respuesta)) {
@@ -292,17 +292,19 @@
         $status = $fila->status;
 
         $url_string_E = 'action=formCalificarTarea&titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea);
-        $url_string_R = 'action=tareasAlumnos&rechazarTarea&titulo='.urlencode($titulo).'&idTarea='.$id_tarea;
+        // $url_string_R = 'action=tareasAlumnos&rechazarTarea&titulo='.urlencode($titulo).'&idTarea='.$id_tarea;
+        // echo $url_string_R;
+        // die();
         $url_string_C = 'action=formEditarCalificacionTarea&titulo='.urlencode($titulo).'&idTarea='.urlencode($id_tarea);
 
         $accionesNE = "Calificar | Rechazar";
         $accionesE = "<a href='templateProfesor.php?".htmlentities($url_string_E)."'> 
         Calificar | 
-        <a href='#' data-toggle='modal' data-target='#exampleModal' class='rechazar' idTarea='".$id_tarea."'> Rechazar</a>";
+        <a href='#' data-toggle='modal' data-target='#exampleModal' class='rechazar' titulo='".urlencode($titulo)."' idTarea='".$id_tarea."'> Rechazar</a>";
         $accionesC = "<a href='templateProfesor.php?".htmlentities($url_string_C)."'>
           Editar |
         </a>
-        <a href='#' data-toggle='modal' data-target='#exampleModal' class='rechazar' idTarea='".$id_tarea."'> Rechazar</a>
+        <a href='#' data-toggle='modal' data-target='#exampleModal' class='rechazar' titulo='".urlencode($titulo)."' idTarea='".$id_tarea."'> Rechazar</a>
         ";
         // <a href='templateProfesor.php?".htmlentities($url_string_R)."'>
         // Rechazar
@@ -396,17 +398,21 @@
     # -----------------------------------------------------------------------------
     public function actualizarCalificacionAlumnoProfesorController() {
       if (isset($_POST['actualizarCalificacion'])) {
-        $titulo = $_POST['titulo'];
+        $titulo = $_GET['titulo'];
+        // echo $titulo;
+        // die();
         $id_tarea = $_POST['idTarea'];
         $datosController = array( "id_tarea" => $id_tarea,
                                   "calificacion" => $_POST['calificacion']);
+        // var_dump($datosController);
+        // die();
         $respuesta = CrudProfesorModel::actualizarCalificacionAlumnoProfesorModel($datosController);
 
         // var_dump($respuesta);
         // die();
   
         if ($respuesta == "success") {
-          echo '<script>localStorage.setItem("action","calificacionActualizada"); window.location.href="templateProfesor.php?titulo='.$titulo.'&idTarea='.$id_tarea.'&action=calificacionActualizada";</script>';
+          echo '<script>localStorage.setItem("action","calificacionActualizada"); window.location.href="templateProfesor.php?titulo='.urlencode($titulo).'&idTarea='.$id_tarea.'&action=calificacionActualizada";</script>';
 
           // header("location: ".DIR_MODULES."profesor/templateProfesor.php?titulo=".$titulo."&idTarea=".$id_tarea."&action=calificacionActualizada");
         }

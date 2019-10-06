@@ -99,7 +99,7 @@
     for(var i = 0; i < btnRechazar.length; i++) {
       btnRechazar[i].addEventListener('click', function(){
         var id_tarea = this.getAttribute('idTarea');
-        var titulo = <?php echo urlencode($titulo);?>
+        var titulo = this.getAttribute('titulo');
         document.getElementById('btnrechazar_').setAttribute('href','templateProfesor.php?action=tareasAlumnos&rechazarTarea&titulo='+titulo+'&idTarea='+id_tarea);
       });
     };    
