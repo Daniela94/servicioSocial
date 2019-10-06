@@ -246,6 +246,23 @@
     # ----------------------------------------------------------
     public function listaTareasController() {
       $respuesta = CrudAdminModel::listaTareasModel();
+
+      setlocale(LC_TIME, 'es_ES.UTF-8');
+      date_default_timezone_set('America/Mexico_City');
+      $fechaHoy = date("Y-m-d H:i");
+
+      $strFechaHoy = date("Y-m-d");
+      $diaHoy = date("d");
+      $mesHoy = date("m");
+      $yearHoy = date("Y");
+      $hora = date("H:i");
+      // echo "Día: ".$diaHoy."<br /> Mes: ".$mesHoy."<br /> Año: ".$yearHoy."<br /> Hora: ".$hora."<br /><br />";
+
+      $default_local_date = ucwords(utf8_encode(strftime("%a %d %b, %Y a las %H:%M")));
+      $date_connectors_capital = array('A', 'Las');
+      $date_connectors_lower = array('a', 'las');
+      $hoy = str_replace($date_connectors_capital, $date_connectors_lower, $default_local_date);
+      // echo $hoy;
       
       while ($fila = mysqli_fetch_object($respuesta)) {
         $titulo = $fila->titulo;
@@ -254,24 +271,26 @@
         $fecha_entrega = $fila->fecha_entrega;
         $profesor = $fila->nombre.' '.$fila->apellidos;
 
-        setlocale(LC_TIME, 'es_ES.UTF-8');
-        // date_default_timezone_set('America/Mexico_City');
-        // $hoy = date("Y-m-d");
-        // echo $hoy;
-        // die();
-
         $fecha = $fecha_publicacion;
         $fecha = str_replace("/", "-", $fecha);			
         $newDate = date("Y-m-d H:i", strtotime($fecha));			
         $conector = " a las ";
-        $fechaFormato = ucfirst("%a %b, %Y");
+        $fechaFormato = ucfirst("%a %d %b, %Y");
         $horaFormato = "%H:%M";
         $strFecha = $fechaFormato.$conector.$horaFormato;
         $fecha_publicacion = ucfirst(strftime($strFecha, strtotime($newDate)));
 
         $fechaEntrega = $fecha_entrega;
-        $fechaEntrega = str_replace("/", "-", $fechaEntrega);			
-        $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));				
+        $fechaEntrega = str_replace("/", "-", $fechaEntrega);	
+
+        $newDate2 = date("Y-m-d H:i", strtotime($fechaEntrega));
+        
+        $strFechaEntrega = date("Y-m-d", strtotime($fechaEntrega));
+        $diaEntrega = date("d", strtotime($fechaEntrega));
+        $mesEntrega = date("m", strtotime($fechaEntrega));
+        $yearEntrega = date("Y", strtotime($fechaEntrega));
+        $horaEntrega = date("H:i", strtotime($fechaEntrega));
+
         $fecha_entrega =ucfirst(strftime($strFecha, strtotime($newDate2)));
 
         echo "
@@ -279,7 +298,19 @@
           <td>".$titulo."</td>
           <td>".$descripcion."</td>
           <td class='date'>".$fecha_publicacion."</td>
-          <td class='date'>".$fecha_entrega."</td>
+            <td class='date ";  if ($diaEntrega < $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora || $yearEntrega < $yearHoy) { 
+              echo 'late';
+            }
+            else if ($diaEntrega < $diaHoy && $mesEntrega == $mesHoy && $horaEntrega > $hora) {
+              echo 'late';
+            }
+            else if ($diaEntrega < $diaHoy && $mesEntrega < $mesHoy && $horaEntrega < $hora) {
+              echo 'late';
+            }
+            else if ($diaEntrega == $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora) {
+              echo 'late';
+            }
+            echo "'>".$fecha_entrega."</td>
           <td>".$profesor."</td>
         </tr>
         ";
@@ -403,15 +434,17 @@
                                             "password"=>$_POST["password"],
                                             "rol"=>$_POST["rol"]);
                   $respuesta = CrudAdminModel::actualizarUsuarioModel($datosController);
-                  echo $respuesta;
-                  die();
+                  // echo $respuesta;
+                  // die();
                   if ($respuesta == "success2") {
-                    // echo '<script>localStorage.setItem("action","actualizacionProfesor"); window.location.href="templateAdmin.php?action=actualizacionProfesor";</script>';
-                    header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
+                    echo '<script>localStorage.setItem("action","actualizacionProfesor"); window.location.href="templateAdmin.php?action=actualizacionProfesor";</script>';
+                    // header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionProfesor");
                   }
                   else if ($respuesta == "success3") {
-                    header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionAlumno");
-                  } 
+                    echo '<script>localStorage.setItem("action","actualizacionAlumno"); window.location.href="templateAdmin.php?action=actualizacionAlumno";</script>';
+
+                    // header("location: ".DIR_MODULES."admin/templateAdmin.php?action=actualizacionAlumno");
+                  }
                   else {
                     echo "Error al intentar actualizar el usuario";
                     header("location: ".DIR_MODULES."admin/templateAdmin.php?action=formEditarUsuario");
@@ -449,15 +482,12 @@
 
         if ($respuesta == "success1") {
           echo '<script>localStorage.setItem("action","eliminacionAdmin"); window.location.href="templateAdmin.php?action=eliminacionAdmin";</script>';
-          // header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAdmin");
         }
         if ($respuesta == "success2") {
           echo '<script>localStorage.setItem("action","eliminacionProfesor"); window.location.href="templateAdmin.php?action=eliminacionProfesor";</script>';
-          // header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionProfesor");
         }
         if ($respuesta == "success3") {
           echo '<script>localStorage.setItem("action","eliminacionAlumno"); window.location.href="templateAdmin.php?action=eliminacionAlumno";</script>';
-          // header("location:".DIR_MODULES."admin/templateAdmin.php?action=eliminacionAlumno");
         }
       }
     }

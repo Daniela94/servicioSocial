@@ -121,9 +121,9 @@
         
         echo "
         <tr>
-        <td>".$titulo."</td>
-        <td>".$descripcion."</td>
-        <td class='date'>".$fecha_publicacion."</td>
+          <td>".$titulo."</td>
+          <td>".$descripcion."</td>
+          <td class='date'>".$fecha_publicacion."</td>
           <td class='date ";  if ($diaEntrega < $diaHoy && $mesEntrega == $mesHoy && $horaEntrega < $hora || $yearEntrega < $yearHoy) { 
                                 echo 'late';
                               }
@@ -357,6 +357,7 @@
     public function editarCalificacionAlumnoProfesorController() {
       // if (isset($_POST['actualizarCalificacion'])) {
         $datosController = $_GET['idTarea'];
+
         $respuesta = CrudProfesorModel::editarCalificacionAlumnoProfesorModel($datosController);
       // }
       

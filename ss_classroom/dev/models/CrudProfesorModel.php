@@ -81,8 +81,8 @@
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
-      var_dump($query);
-      die();
+        // var_dump($query);
+        // die();
       if ($query == true) {
         return "success";
       } else
@@ -129,6 +129,8 @@
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
+      // var_dump($query);
+      // die();
       if ($query == true) {
         return "success";
       } else

@@ -130,25 +130,28 @@
     # Actualizar usuario
     # -----------------------------------------------
     public function actualizarUsuarioModel($datosModel) {
-      var_dump($datosModel);
-      echo "<hr />";
+      // var_dump($datosModel);
+      // echo "<hr />";
       // die();
       $id_usuario = $datosModel['id_usuario'];
       $nombre = $datosModel['nombre'];
       $apellidos = $datosModel['apellidos'];
+      if ($datosModel['numero_cuenta'] == "") {
+        $datosModel['numero_cuenta'] = 'NULL';
+      }
       $numero_cuenta = $datosModel['numero_cuenta'];
       $email = $datosModel['email'];
       $password = $datosModel['password'];
       $id_rol = $datosModel['rol'];
       $sql = "UPDATE usuario SET id_rol = $id_rol, nombre = '$nombre', apellidos = '$apellidos', numero_cuenta = $numero_cuenta, email = '$email', password = '$password' WHERE id_usuario = $id_usuario";
-      print_r($sql);
+      // print_r($sql);
       // die();
       $cnx = new Conexion();
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       
-      echo "<hr />";
-      var_dump($query);
+      // echo "<hr />";
+      // var_dump($query);
       // die();
       if ($query == true) {
         return "success".$id_rol;
