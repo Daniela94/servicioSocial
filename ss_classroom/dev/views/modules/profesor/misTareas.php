@@ -48,7 +48,7 @@
       <th>Título</th>
       <th>Descripción</th>
       <th>Fecha de publicación</th>
-      <th>Fecha de entrega</th>
+      <th>Fecha límite de entrega</th>
       <th>Acciones</th>
     </tr>
   </thead>

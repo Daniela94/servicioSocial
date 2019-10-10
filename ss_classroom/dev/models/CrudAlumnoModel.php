@@ -11,7 +11,7 @@
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if (!$query)
-        echo "Error: ".mysqli_error($cnx->getCnx());
+        echo "Error al mostrar la lista.";
       return $query;
       mysqli_close($query);
     }
@@ -45,7 +45,7 @@
       if ($query == true)
         return "success";
       else
-        echo "Error al intentar subir la tarea: ".mysqli_error($cnx->getCnx());
+        echo "Error al subir la tarea. Vuelva a intentarlo.";
       mysqli_close($query);
     }
   }

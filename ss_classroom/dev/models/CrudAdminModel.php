@@ -45,8 +45,7 @@
       // var_dump($row);
       // die();
       if (!$query)
-      echo "Error: ".mysqli_error($cnx->getCnx());
-      return $row;
+      echo "Ocurrió un error. Vuelva a intentarlo.";
       mysqli_close($query);
     }
     # Método para agregar un usuario
@@ -61,7 +60,7 @@
       if ($query == true) 
         return "success";
       else
-        echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx).'<br />'.$sql;
+        echo "Error al hacer el registro. Vuelva a intentarlo.";
       mysqli_close($query);
     }
     # Mostrar lista de profesores
@@ -72,7 +71,7 @@
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if (!$query)
-        echo "Error: ".mysqli_error($cnx->getCnx());
+        echo "Error al mostrar lista.";
       return $query;
       mysqli_close($query);
     }
@@ -84,7 +83,7 @@
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if (!$query)
-        echo "Error: ".mysqli_error($cnx->getCnx());
+        echo "Error al mostrar lista.";
       return $query;
       mysqli_close($query);
     }
@@ -96,7 +95,7 @@
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if (!$query)
-        echo "Error: ".mysqli_error($cnx->getCnx());
+        echo "Error al mostrar lista.";
       return $query;
       mysqli_close($query);
     }
@@ -108,7 +107,7 @@
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if (!$query)
-        echo "Error: ".mysqli_error($cnx->getCnx());
+        echo "Error al mostrar lista.";
       return $query;
       mysqli_close($query);
     }
@@ -123,7 +122,7 @@
       // var_dump($row);
       // die();
       if (!$query)
-      echo "Error: ".mysqli_error($cnx->getCnx());
+      echo "Ocurrió un error. Vuelva a intentarlo.";
       return $row;
       mysqli_close($query);
     }
@@ -156,7 +155,7 @@
       if ($query == true) {
         return "success".$id_rol;
       } else
-        echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+        echo "Error al actualizar el registro. Vuelva a intentarlo.";
       mysqli_close($query);
     }
     # Eliminar usuario
@@ -171,7 +170,7 @@
       if ($query == true) {
         return "success".$id_rol;
       } else
-        echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+        echo "Error al eliminar el registro. Vuelva a intentarlo.";
       mysqli_close($query);
     }
     

@@ -5,9 +5,14 @@
 
   <script>
     jQuery('#datetimepicker').datetimepicker({
-      step: 1
+      step: 1,
+      minDate: 0,
+      minTime: 0
     });
     $.datetimepicker.setLocale('es');
+    // jQuery("input.input-form.dateFrom").datetimepicker({
+    //   minDate: 0
+    // });
   </script>
 
 </body>

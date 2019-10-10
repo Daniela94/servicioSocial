@@ -52,3 +52,7 @@ $(document).ready(function() {
   });
 })
 
+// Contar caracteres ingresados en input form
+function countChars(obj){
+  document.getElementById("charNum").innerHTML = obj.value.length+' / 250';
+}

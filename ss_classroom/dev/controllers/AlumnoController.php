@@ -128,45 +128,51 @@
     public function subirTareaAlumnoController() {
       // $titulo = $_POST['titulo'];
       if (isset($_POST['enviarTarea'])) {
-        // print_r($_FILES);
+        //  print_r($_FILES);
+        //  die();
         // echo "<hr>";
-        $archivoNombre = $_FILES['archivo']['name'];
-        $archivoGuardado = $_FILES['archivo']['tmp_name'];
-        $extension = explode(".", $archivoNombre)[1];
-        $allowedfileExtensions = array('jpg', 'jpeg', 'png', 'pdf', 'zip', 'txt', 'docs', 'docx');
-        if (in_array($extension, $allowedfileExtensions)) {
-          if (!file_exists(VIEW_PATH.'assets/tareas')) {
-            mkdir(VIEW_PATH.'assets/tareas', 0777, true);
-            if (file_exists(VIEW_PATH.'assets/tareas')) {
-              if(move_uploaded_file($archivoGuardado, VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
-                // echo "Tarea almacenada con éxito";
+        if (is_array($_FILES['archivo']['name'])) {
+          echo "No se permite más de un archivo. Intente subir uno.";
+        }
+        else {
+          $archivoNombre = $_FILES['archivo']['name'];
+          $archivoGuardado = $_FILES['archivo']['tmp_name'];
+          $extension = explode(".", $archivoNombre)[1];
+          $allowedfileExtensions = array('jpg', 'jpeg', 'png', 'pdf', 'zip', 'txt', 'docs', 'docx');
+          if (in_array($extension, $allowedfileExtensions)) {
+            if (!file_exists(VIEW_PATH.'assets/tareas')) {
+              mkdir(VIEW_PATH.'assets/tareas', 0777, true);
+              if (file_exists(VIEW_PATH.'assets/tareas')) {
+                if(move_uploaded_file($archivoGuardado, VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
+                  // echo "Tarea almacenada con éxito";
+                } else {
+                  echo "No se almacenó.";
+                }
+              }
+            } else {
+              if(move_uploaded_file($archivoGuardado,VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
+                // echo "Tarea almacenada con éxito.";
               } else {
                 echo "No se almacenó.";
               }
             }
-          } else {
-            if(move_uploaded_file($archivoGuardado,VIEW_PATH.'assets/tareas/'.$archivoNombre)) {
-              // echo "Tarea almacenada con éxito.";
+            $datosController = array( "id_usuario"=>$_POST['idUsuario'],
+                                      "id_tarea"=>$_POST['idTarea'],
+                                      "archivo"=>$archivoNombre);
+            // echo "<hr>";
+            // print_r($datosController);
+            // die();
+            $respuesta = CrudAlumnoModel::subirTareaAlumnoModel($datosController);
+            // print_r($respuesta);
+            // die();
+            if ($respuesta == "success") {
+              echo '<script>localStorage.setItem("action","envioExitoso"); window.location.href="templateAlumno.php?action=envioExitoso";</script>';
             } else {
-              echo "No se almacenó.";
+              echo "Error al intentar subir la tarea.";
             }
-          }
-          $datosController = array( "id_usuario"=>$_POST['idUsuario'],
-                                    "id_tarea"=>$_POST['idTarea'],
-                                    "archivo"=>$archivoNombre);
-          // echo "<hr>";
-          // print_r($datosController);
-          // die();
-          $respuesta = CrudAlumnoModel::subirTareaAlumnoModel($datosController);
-          // print_r($respuesta);
-          // die();
-          if ($respuesta == "success") {
-            echo '<script>localStorage.setItem("action","envioExitoso"); window.location.href="templateAlumno.php?action=envioExitoso";</script>';
           } else {
-            echo "Error al intentar subir la tarea.";
+            echo "No puedes subir archivos con esa extensión.";
           }
-        } else {
-          echo "No puedes subir archivos con esa extensión.";
         }
       }
     }

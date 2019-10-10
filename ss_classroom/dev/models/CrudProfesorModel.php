@@ -36,7 +36,7 @@
       if ($query == true) 
         return "success";
       else
-        echo "Error al intentar hacer el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+        echo "Error al intentar hacer el registro. Vuelva a intentarlo";
       mysqli_close($query);
     }
     # Mostrar lista de tareas
@@ -48,7 +48,7 @@
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if (!$query)
-        echo "Error: ".mysqli_error($cnx->getCnx());
+        echo "Error al mostrar lista.";
       return $query;
       mysqli_close($query);
     }
@@ -61,7 +61,7 @@
       $query = mysqli_query($cnx->getCnx(), $sql);
       $row = mysqli_fetch_array($query);
       if (!$query)
-      echo "Error: ".mysqli_error($cnx->getCnx());
+      echo "Ocurrió un error. Vuelva a intentarlo.";
       return $row;
       mysqli_close($query);
     }
@@ -86,7 +86,7 @@
       if ($query == true) {
         return "success";
       } else
-        echo "Error al intentar actualizar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+        echo "Error al actualizar el registro. Vuelva a intentarlo.";
       mysqli_close($query);
     }
     # Eliminar tarea
@@ -99,7 +99,7 @@
       if ($query == true) {
         return "success";
       } else
-        echo "Error al intentar eliminar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+        echo "Error al eliminar el registro. Vuelva a intentarlo.";
       mysqli_close($query);
     }
     # Mostrar lista de status de tareas de los alumnos
@@ -112,7 +112,7 @@
       $cnx -> conectar();
       $query = mysqli_query($cnx->getCnx(), $sql);
       if (!$query)
-      echo "Error: ".mysqli_error($cnx->getCnx());
+        echo "Error al mostrar la lista.";
       // var_dump($query);
       // die();
       return $query;
@@ -134,7 +134,7 @@
       if ($query == true) {
         return "success";
       } else
-        echo "Error al intentar eliminar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+        echo "Error al calificar la tarea. Vuelva a intentarlo.";
       mysqli_close($query);
     }
     # Cambiar calificación -----------------------------------
@@ -148,7 +148,7 @@
       $query = mysqli_query($cnx->getCnx(), $sql);
       $row = mysqli_fetch_array($query);
       if (!$query)
-      echo "Error: ".mysqli_error($cnx->getCnx());
+      echo "Ocurrió un error. Vuelva a intentarlo.";
       return $row;
       mysqli_close($query);
     }
@@ -165,7 +165,7 @@
       if ($query == true) {
         return "success";
       } else
-        echo "Error al intentar eliminar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+        echo "Error al actualizar la calificación. Vuelva a intentarlo.";
       mysqli_close($query);
     }
     # Rechazar tarea
@@ -182,7 +182,7 @@
       if ($query == true) {
         return "success";
       } else
-        echo "Error al intentar eliminar el registro. ¿Le tiene miedo al éxito?.<br />".mysqli_error($cnx->getCnx()).'<br />'.$sql;
+        echo "Error al rechazar la tarea. Vuelva a intentarlo.";
       mysqli_close($query);
     }
   }

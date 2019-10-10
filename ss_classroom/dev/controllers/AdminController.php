@@ -92,7 +92,7 @@
   
               }
               else {
-                echo "<br><div class='alert alert-danger' role='alert'>Caracteres especiales no válidos.</div>";
+                echo "<br><div class='alert alert-danger' role='alert'>El email no es correcto o ingresó caracteres especiales no válidos.</div>";
               } 
             }
             else {

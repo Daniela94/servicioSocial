@@ -39,14 +39,15 @@
   <form action="" method="POST">
     <div class="row">
       <div class="col">
-        <label for="">Título</label>
-        <input type="text" name="titulo" class="input-form">
+        <label for="">Título</label> <span id="charNum"> / 250</span>
+        <input type="text" maxlength = "250" name="titulo" class="input-form" onkeyup="countChars(this)" placeholder="Máximo 250 caracteres">
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <label for="">Descripción</label>
-        <textarea rows="4" cols="50" name="descripcion" class="input-form"></textarea>
+        <label for="">Descripción</label> <span id="charNum"> / 250</span>
+        <textarea rows="4" cols="50" maxlength = "250"  name="descripcion" class="input-form" placeholder="Máximo 250 caracteres"></textarea>
+        
       </div>
     </div>
     <div class="row">
@@ -57,7 +58,7 @@
       </div>
       <div class="col">
         <label for="">Fecha de entrega</label>
-        <input id="datetimepicker" type="text" name=" fecha_entrega" class="input-form">
+        <input id="datetimepicker" type="text" name="fecha_entrega" class="input-form dateFrom">
       </div>
     </div>
     <div class="row">

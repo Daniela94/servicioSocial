@@ -204,7 +204,7 @@ body {
   background-color: var(--red);
 }
 .form-btn-red:hover {
-  border: 1px solid var(--red-loco);
+  border-color: var(--red-loco);
   color: white;
   box-shadow: 0 0 25px var(--red-loco);
 }
@@ -215,7 +215,7 @@ body {
   transition: .1s ease-out;
 }
 .form-btn-green:hover {
-  border: 2px solid var(--green-loco);
+  border-color: var(--green-loco);
   box-shadow: 0 0 25px var(--green-loco);
 }
 .school-bg {
@@ -512,4 +512,7 @@ body {
 .late {
   font-size: 14px;
   color: var(--no-entregado);
+}
+#charNum {
+  float: right;
 }

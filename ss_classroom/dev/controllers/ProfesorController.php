@@ -35,6 +35,10 @@
                 echo "<br><div class='alert alert-warning' role='alert'>Conteste todos los campos.</div>";
           }
           else {
+               $_POST['titulo'] = substr($_POST['titulo'], 0, 250);
+               $_POST['descripcion'] = substr($_POST['descripcion'], 0, 250);
+              //  var_dump(substr($_POST['titulo'], 0, 200));
+              //  die();
                 // recibir el POST en un array
                 // print_r($_SESSION['id_usuario']);
 
@@ -232,6 +236,8 @@
                     echo "<br><div class='alert alert-warning' role='alert'>Conteste todos los campos.</div>";
               }
               else {
+                $_POST['titulo'] = substr($_POST['titulo'], 0, 250);
+                $_POST['descripcion'] = substr($_POST['descripcion'], 0, 250);
 
                 $datosController = array( "id_usuario"=>$_SESSION['id_usuario'],
                                           "id_tarea"=>$_POST['id_tarea'],
