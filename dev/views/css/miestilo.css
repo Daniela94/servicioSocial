@@ -1,0 +1,518 @@
+html,body {
+  height: 100%;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  border-style: none;
+}
+a:link {
+  text-decoration: none;
+}
+body {
+  overflow-x: hidden;
+}
+/* FONTS */
+@font-face {
+  font-family: 'Comfortaa';
+  src: url(../assets/fonts/Comfortaa-Regular.ttf);
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(../assets/fonts/Ubuntu-R.ttf);
+}
+@font-face {
+  font-family: 'Crayon-Hand';
+  src: url(../assets/fonts/CrayonHand.ttf);
+}
+@font-face {
+  font-family: 'Merge-Bold';
+  src: url(../assets/fonts/Merge-Bold.ttf)
+}
+@font-face {
+  font-family: 'MergePro-Condensed-Regular';
+  src: url(../assets/fonts/MergePro-Condensed-Regular.ttf);
+}
+@font-face {
+  font-family: 'Merge-Light';
+  src: url(../assets/fonts/Merge-Light.otf);
+}
+@font-face {
+  font-family: 'Catamaran-Light';
+  src: url(../assets/fonts/Catamaran-Light.ttf);
+}
+@font-face {
+  font-family: 'Catamaran-Regular';
+  src: url(../assets/fonts/Catamaran-Regular.ttf);
+}
+@font-face {
+  font-family: 'Catamaran-SemiBold';
+  src: url(../assets/fonts/Catamaran-SemiBold.ttf);
+}
+@font-face {
+  font-family: 'Catamaran-Bold';
+  src: url(../assets/fonts/Catamaran-Bold.ttf);
+}
+.ubuntu {
+  font-family: 'Ubuntu';
+}
+.comfortaa {
+  font-family: 'Comfortaa';
+}
+.crayon-hand {
+  font-family: 'Crayon-Hand';
+}
+.merge-bold {
+  font-family: 'Merge-Bold';
+}
+.mergepro-condensed-regular {
+  font-family: 'MergePro-Condensed-Regular';
+}
+.merge-light {
+  font-family: 'Merge-Light';
+}
+.catamaran-regular {
+  font-family: 'Catamaran-Regular';
+}
+.catamaran-semibold {
+  font-family: 'Catamaran-SemiBold';
+}
+.catamaran-bold {
+  font-family: 'Catamaran-Bold';
+}
+/* COLORES */
+:root {
+  --grey-black-333: #333;
+  --black-343: #343a40;
+  --black-111: #111111;
+  --green-udc: #693;
+  --blue-loco: #00e6e6;
+  --green-loco: #66cc03;
+  --grey-light: #dee2e6;
+  --grey-blue: #bccedd;
+  --shadow-light: #b3b3b3;
+  --red: #D11010;
+  --red-loco: #ff3e3e;
+  --blue: #106ad1;
+  --blue-loco-2: #2dc3ff;
+  --blue-sky: #5db2cc;
+  --grey-black-t: rgba(51, 51, 51,0.5);
+  --blue-light: #e3f2fd;
+  --disabled: #808080;
+  --light-blue:#d3e6ff;
+  --white-gray: #f3f3f3;
+  --entregado: #ecaf2c; 
+  --no-entregado: #c53023;
+  --calificado: #3c874c;
+  --date:#677583;
+  --white-eee: #eee;
+  --box-shadow: 0 5px 15px #1b1b1b;
+  --gray-1: rgba(145, 145, 145,0.5);
+  --success: #155724;
+  --danger: #721c24;
+}
+.red {
+  color: var(--red);
+}
+.blue {
+  color: var(--blue);
+}
+.blue-sky {
+  color: var(--blue-sky);
+}
+.black {
+  color: black;
+}
+.disabled-color {
+  color: var(--disabled);
+}
+#error-login {
+  color:#ff0000;
+  display: block;
+}
+._header {
+  height: 60px;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: fixed;
+  z-index: 10;
+}
+.titulo-crud {
+  color: white;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+.square-form-cx{
+  position: relative;
+  padding: 25px;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  box-shadow: 0 5px 10px #000;
+  border-radius: 5px;
+}
+.square-form-login {
+  position: relative;
+  padding: 20px;
+  left: 50%;
+  transform: translate(-50%, 70%);
+  box-shadow: 0 5px 10px #000;
+  border-radius: 4px;
+}
+.form-index {
+  width: 270px;
+  /* height: 280px; */
+  color: var(--black-343);
+  background-color: var(--white-gray);
+}
+.form-index label {
+  margin-bottom: .25rem;
+}
+.input-form {
+  width: 100%;
+  min-height: 33px;
+  margin-bottom: .5rem;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px solid var(--grey-blue);
+}
+::-webkit-input-placeholder {
+  font-size: .85rem;
+}
+.form-index input:focus, .form-registro input:focus {
+  border: 2px solid var(--blue-loco);
+  box-shadow: 0 0 10px var(--blue-loco);
+  outline: 0 none;
+}
+.form-btn-red, .form-btn-blue {
+  margin-top: 10px;
+  transition: .1s ease-out;  
+}
+.form-btn-blue {
+  color: white;
+  background-color: var(--blue);
+}
+.form-btn-blue:hover {
+  border: 1px solid var(--blue-loco-2);
+  color: white;
+  box-shadow: 0 0 25px var(--blue-loco-2);
+}
+.form-btn-red {
+  color: white;
+  background-color: var(--red);
+}
+.form-btn-red:hover {
+  border-color: var(--red-loco);
+  color: white;
+  box-shadow: 0 0 25px var(--red-loco);
+}
+.form-btn-green {
+  margin-top: 10px;
+  color: white;
+  background-color: var(--green-udc);
+  transition: .1s ease-out;
+}
+.form-btn-green:hover {
+  border-color: var(--green-loco);
+  box-shadow: 0 0 25px var(--green-loco);
+}
+.school-bg {
+  background-image: url(../assets/img/board3.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+}
+[class*="h-mnsj-"] {
+  color: white;
+  position: absolute;
+}
+.h-mnsj-i {
+  top: 100px;
+}
+.form-index span, .form-registro span {
+  font-size: 14px;
+}
+.status, .entregado, .no-entregado, .calificado {
+  opacity: 0.6;
+}
+.entregado {
+  color: var(--entregado);
+}
+.calificado {
+  color: var(--calificado);
+}
+.no-entregado {
+  color: var(--no-entregado);
+}
+/* CSS REGISTRO.PHP */
+.form-registro {
+  width: 50%;
+  /* background-color: var(--grey-black); */
+  background-color: var(--grey-black-333);
+  transform: translate(-50%, 5%);
+  color: white;
+}
+.h-mnsj-r {
+  top: 50px;
+}
+.Modal {
+  background-color: var(--gray-1);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.Modal-box {
+  background-color: var(--white-eee);
+  box-shadow: var(--box-shadow);
+  color: var(--grey-black-333);
+  width: 50%;
+  height: 50vh;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Modal:target {
+  display: flex;
+}
+
+/* ==== listaAlumnosAdmin.css ==== */
+.p-table-alumnos {
+  position: relative;
+}
+.table_d td, .table_d th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 2px solid var(--blue-loco);
+}
+.table-alumnos {
+  position: relative;
+  left: 0;
+  top: 30%;
+  padding: 25px;   
+}
+.thead-light_d {
+  background-color: var(--grey-light); 
+  color: var(--grey-black);
+}
+.table_d tbody {
+  background-color: var(--grey-light);
+}
+.hw-100 {
+  height: 100%;
+  width: 100%;
+}
+.navbar_ {
+  display: flex;
+  background-color: transparent;
+  /* border-bottom: 1px solid var(--grey-light); */
+  /* height: 50px; */
+  padding: 10px 20px;
+}
+.nav_ {
+  display: flex;
+  font-family: 'Catamaran-Regular';
+  margin: 0 0 0 auto;
+  padding: 0;
+  color: white;
+}
+.nav_ li {
+  align-self: center;
+  font-size: 1.2em;
+  margin-left: 5px;
+  margin-right: 5px;
+  line-height: normal;
+}
+.h-title-white { 
+  font-family: 'Catamaran-Regular';
+  margin-top: 10px;
+  margin-bottom: 40px;
+  color: white;
+  text-shadow: 2px 2px 3px black;
+}
+.logo-txt {
+  font: 1.25em / 1.3 Crayon-Hand;
+  color: white;
+  text-shadow: 2px 2px 3px black;
+}
+.table-style {
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0 3px 6px var(--black-111);
+}
+.table-style thead th {
+  font-family: 'Catamaran-Semibold';
+  font-size: 1.2em;
+  padding: .75rem;
+  border-top: 1px solid var(--grey-light);
+  border-bottom: 2px solid var(--grey-light);
+}
+.table-style td {
+  font-family: 'Catamaran-Light';
+  font-size: 1.1em;
+}
+.table-style td, .table-style th {
+  padding: .75rem;
+  border-top: 1px solid var(--grey-light);
+}
+/* ==== formAgregarProfesor.php ==== */
+.img-bg-personas {
+  background-image: url(../assets/img/personas.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+  z-index: -10;
+}
+/* ==== adminView.php ==== */
+/* .img-bg-paper {
+  background: url(../img/paper.jpg) center / cover no-repeat;
+  position: fixed;
+  z-index: -10;
+}
+.img-bg-paper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--grey-black);
+  opacity: .02;
+} */
+.img-bg-board3 {
+  background: url(../assets/img/board3.jpg) center / cover no-repeat;
+  position: fixed;
+  z-index: -10;
+}
+.img-bg-board3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--grey-black);
+  opacity: .02;
+}
+.btn-opc-lista {
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid var(--blue-loco);
+  margin: 10px;
+}
+.btn-opc-lista:hover {
+  background-color: var(--black-111);
+  color: white;
+  border-left: 1px solid var(--blue-loco);
+  border-top: 1px solid var(--blue-loco);
+  border-right: 1px solid var(--blue-loco);
+  box-shadow: 0 0 10px var(--blue-loco);
+}
+
+/* templateAdmin.css */
+.Header {
+  padding: 5px 50px;
+  display: inline-flex;
+  height: 60px;
+  width: 100%;
+  align-items: center;
+}
+.a-logo {
+  height: 80%;
+}
+.logo {
+  background-image: url(../assets/img/crud-logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 60px;
+  height: 100%;
+}
+.Nav {
+  margin: 0 auto;
+}
+.Nav ul {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.Nav ul li {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.Nav a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: red;
+  transform: scale(0,1);
+  transform-origin: center;
+  transition: transform .25s;
+}
+.Nav a:hover::after {
+  transform: scale(1,1);
+}
+.navbar-blue-light {
+  background-color: var(--blue-light);
+  color: black;
+  box-shadow: 0 2px 10px var(--shadow-light);
+}
+.Nav a {
+  color: black;
+}
+.h-title, .h-subtitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding-top: 20px;
+}
+.h-title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  font-style: italic;
+  color: gray;
+}
+.user-txt {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* templateProfesor */
+.form-calificar {
+  position: relative;
+  padding: 25px;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  box-shadow: 0 5px 10px #000;
+  border-radius: 5px;
+  max-width: 450px;
+}
+.form-calificar input[type="number"] {
+  border: 1px solid var(--grey-blue);
+}
+.form-calificar p {
+  display: flex;
+  justify-content: center;
+  color: var(--grey-black-t);
+}
+.date {
+  font-size: 14px;
+  color: var(--date);
+}
+.late {
+  font-size: 14px;
+  color: var(--no-entregado);
+}
+#charNum {
+  float: right;
+}

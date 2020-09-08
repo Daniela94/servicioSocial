@@ -1,0 +1,38 @@
+.flex {
+  display: flex;
+}
+.center_y {
+  align-items: center;
+}
+.center_x {
+  justify-content: center;
+}
+.center_xy {
+  align-items: center;
+  justify-content: center;
+}
+.center_y_right {
+  align-items: center;
+  justify-content: flex-end;
+}
+.center_y_left {
+  align-items: center;
+  justify-content: flex-start;
+}
+.column {
+  flex-direction: column;
+}
+.left {
+  justify-content: flex-start;
+}
+.right {
+  justify-content: flex-end;
+}
+.flex-center_x {
+  display: flex;
+  justify-content: center;
+}
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+}
